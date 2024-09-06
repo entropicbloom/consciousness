@@ -110,6 +110,28 @@ By achieving a decoding accuracy significantly higher than random guessing, we s
 Our experimental setup could easily be extended to decode other representational content of neural networks. For instance, staying with MNIST, given randomly permuted input neurons, one could try to decode their position in pixel space based on their connectivity to the next layer. Or, for natural image tasks, given randomly permuted color channels, one could try to decode the color from an input neuron based on their connectivity to the next layer. Moreover, the same decoding scheme might be applicable to neural data: X′ could be chosen as the correlation matrix of recorded neural activity.
 In the ideal case, self-attention based decoders could generalize to decode representational content across different domains of inputs and across different network architectures, thus presenting a potential avenue for not just a ’consciousness meter’, but a ’conscious content decoder’.
 
+## Hyperparameters
+In the following we list all hyperparameters that were chosen for the underlying networks to generate the dataset (Table 1), and for the self-attention based decoder (Table 2). Note that none of these hyperparameters were optimized using gridsearch or similar schemes, most of them were chosen quite arbitrarily, since this is only supposed to be a proof of concept.
+
+| Name                                                   | Value |
+|--------------------------------------------------------|-------|
+| learning rate                                          | 0.001 |
+| batch size                                             | 256   |
+| epochs (except for the non-train paradigm)             | 2     |
+| hidden dimensionalities                                | 50, 50|
+| dropout rate (only for the dropout paradigm)           | 0.2   |
+*Table 1: Hyperparameters for underlying, MNIST-trained networks used to generate the training and validation data for the decoder. Note that the number of epochs in the ’untrained’ paradigm was set to 0, and the dropout rate only applies to the ’dropout’ paradigm.*
+
+| Name                                                 | Value |
+|------------------------------------------------------|-------|
+| learning rate                                        | 0.001 |
+| batch size                                           | 64    |
+| epochs (except for the non-train paradigm)           | 100   |
+| hidden dimensionality                                | 64    |
+| number of attention heads per MSA layer              | 4     |
+| number of MSA layers                                 | 2     |
+*Table 2: Hyperparameters for decoder. MSA is short for multi-head self-attention*
+
 
 [About me](https://www.flaessig.com)
 
