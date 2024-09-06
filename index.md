@@ -1,3 +1,8 @@
+<script
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+  type="text/javascript">
+</script>
+
 # Consciousness and Unambiguous Representations
 
 
@@ -47,4 +52,4 @@ Tim Bayne, Anil K Seth, and Marcello Massimini. Are there islands of awareness? 
 
 [^5]: [What is Neurorepresentationalism?](https://www.sciencedirect.com/science/article/pii/S0166432822002376) - Cyriel MA Pennartz. What is neurorepresentationalism? from neural activity and predictive processing to multi-level representations and consciousness. Behavioural Brain Research, 432:113969, 2022.
 
-[^6] [Mathematical Structure of Conscious Experience](https://link.springer.com/article/10.1007/s11229-024-04503-4) - Johannes Kleiner and Tim Ludwig. What is a mathematical structure of conscious experi- ence?, 2023.
+[^6]: [Mathematical Structure of Conscious Experience](https://link.springer.com/article/10.1007/s11229-024-04503-4) - Johannes Kleiner and Tim Ludwig. What is a mathematical structure of conscious experi- ence?, 2023.
