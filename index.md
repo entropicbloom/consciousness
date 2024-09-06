@@ -156,7 +156,8 @@ In the following we list all hyperparameters that were chosen for the underlying
 
 *Table 1: Hyperparameters for underlying, MNIST-trained networks used to generate the training and validation data for the decoder. Note that the number of epochs in the ’untrained’ paradigm was set to 0, and the dropout rate only applies to the ’dropout’ paradigm.*
 
-- 
+<br />
+<br />
 
 | Name                                                 | Value |
 |------------------------------------------------------|-------|
