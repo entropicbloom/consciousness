@@ -87,10 +87,8 @@ To train a decoder to predict which class a given output neuron represents based
 While the dataset we described above should contain all the information the decoder needs to predict the class of an output neuron by identifying its relations to other output neurons (if this relational structure does indeed exist), in practice we found that the decoder does not naturally learn to identify these relations (at least not within the limited training time we used to fit the decoder). To point the decoder into the right direction, we applied the following preprocessing step to X.
 
 $$
-X' = XX^T \oslash \frac{\|X\|_{row} \|X\|_{col}^T}
+X' = XX^T \oslash {\|X\|_{row} \|X\|_{col}^T}
 $$
-
--
 
 $$
 (X')_{i,j} = \frac{(X_{i,:})^T (X_{:,j})}{\|X_{i,:}\| \|X_{:,j}\|}
@@ -129,6 +127,8 @@ In the following we list all hyperparameters that were chosen for the underlying
 | dropout rate (only for the dropout paradigm)           | 0.2   |
 
 *Table 1: Hyperparameters for underlying, MNIST-trained networks used to generate the training and validation data for the decoder. Note that the number of epochs in the ’untrained’ paradigm was set to 0, and the dropout rate only applies to the ’dropout’ paradigm.*
+
+
 
 | Name                                                 | Value |
 |------------------------------------------------------|-------|
