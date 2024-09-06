@@ -36,7 +36,7 @@ An unambiguous representation conveys content as well as how to decode that cont
 
 $$\text{Ambiguity} = H(I|R)$$
 
-where $$H$$ denotes the entropy function and $$(I|R)$$ the probability distribution of all possible interpretations given a certain representation. Of course, despite the mathematical formulation, without further assumptions this is not a computable quantity. In addition to the set of interpretations being intractable, the relationship between representations and possible interpretations is not clear, although relation-preservation might be a good candidate [^6]. Still, this definition of representational ambiguity should help the reader get a sense for what I mean with ‘ambiguity’.
+where $$H$$ denotes the entropy function and $$(I|R)$$ the probability distribution of all possible interpretations given a certain representation. Of course, despite the mathematical formulation, without further assumptions this is not a computable quantity. In addition to the set of interpretations being intractable, the relationship between representations and possible interpretations is not clear, although relation-preservation might be a good candidate [^6]. Still, this definition of representational ambiguity should help the reader get a sense for what I mean with 'ambiguity'.
 
 ## Relational structures as unambiguous representations
 
