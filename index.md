@@ -86,9 +86,13 @@ To train a decoder to predict which class a given output neuron represents based
 ## Preprocessing
 While the dataset we described above should contain all the information the decoder needs to predict the class of an output neuron by identifying its relations to other output neurons (if this relational structure does indeed exist), in practice we found that the decoder does not naturally learn to identify these relations (at least not within the limited training time we used to fit the decoder). To point the decoder into the right direction, we applied the following preprocessing step to X.
 
-$$X' = XX^T \oslash \frac{\|X\|_{row} \|X\|_{col}^T}$$
+$$
+X' = XX^T \oslash \frac{\|X\|_{row} \|X\|_{col}^T}
+$$
 
-$$(X')_{i,j} = \frac{(X_{i,:})^T (X_{:,j})}{\|X_{i,:}\| \|X_{:,j}\|}$$
+$$
+(X')_{i,j} = \frac{(X_{i,:})^T (X_{:,j})}{\|X_{i,:}\| \|X_{:,j}\|}
+$$
 
 $$\oslash$$ denotes the element-wise Hadamard division between two matrices, $$\|X\|_{row}$$ and $$\|X\|_{col}$$ denote the operation that takes the row and column-wise L2-norm of a matrix, respectively, resulting in a vector of scalar norms. Like X, the rows of X′ all correspond to one of the output neurons and the first row corresponds to the output neuron whose class index should be predicted by the decoder (Figure 2c). However, instead of representing the incoming weights of an output neuron, a row now represents the cosine similarities between that neuron’s incoming weights with all other output neuron’s incoming weights. In other words, the value $$(X')_{i,j}$$ represents the cosine similarity between the incoming weights of output neuron i and output neuron j. Note that i and j correspond to the indices within X, which was created from a random permutation of WL. In other words, i and j are not informative of the class indices. However, X′ now encodes the output neurons in terms of their input weights in a much more explicitly relational fashion. In addition to facilitating better decoding accuracy, this has the advantage that the decoder, if successful, identifies classes of output neurons exclusively based on relational information.
 
