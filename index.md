@@ -146,6 +146,8 @@ In the ideal case, self-attention based decoders could generalize to decode repr
 ## Hyperparameters
 In the following we list all hyperparameters that were chosen for the underlying networks to generate the dataset (Table 1), and for the self-attention based decoder (Table 2). Note that none of these hyperparameters were optimized using gridsearch or similar schemes, most of them were chosen quite arbitrarily, since this is only supposed to be a proof of concept.
 
+<br />
+
 | Name                                                   | Value |
 |--------------------------------------------------------|-------|
 | learning rate                                          | 0.001 |
