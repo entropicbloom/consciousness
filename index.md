@@ -144,6 +144,9 @@ In the ideal case, self-attention based decoders could generalize to decode repr
 ## Hyperparameters
 In the following we list all hyperparameters that were chosen for the underlying networks to generate the dataset (Table 1), and for the self-attention based decoder (Table 2). Note that none of these hyperparameters were optimized using gridsearch or similar schemes, most of them were chosen quite arbitrarily, since this is only supposed to be a proof of concept.
 
+
+<div style="text-align: center; margin-bottom: 30px;">
+
 | Name                                                   | Value |
 |--------------------------------------------------------|-------|
 | learning rate                                          | 0.001 |
@@ -152,9 +155,11 @@ In the following we list all hyperparameters that were chosen for the underlying
 | hidden dimensionalities                                | 50, 50|
 | dropout rate (only for the dropout paradigm)           | 0.2   |
 
-*Table 1: Hyperparameters for underlying, MNIST-trained networks used to generate the training and validation data for the decoder. Note that the number of epochs in the ’untrained’ paradigm was set to 0, and the dropout rate only applies to the ’dropout’ paradigm.*
+</div>
 
+<p style="text-align: center; font-style: italic;">Table 1: Hyperparameters for underlying, MNIST-trained networks used to generate the training and validation data for the decoder. Note that the number of epochs in the 'untrained' paradigm was set to 0, and the dropout rate only applies to the 'dropout' paradigm.</p>
 
+<div style="text-align: center; margin-top: 50px; margin-bottom: 30px;">
 
 | Name                                                 | Value |
 |------------------------------------------------------|-------|
@@ -165,7 +170,9 @@ In the following we list all hyperparameters that were chosen for the underlying
 | number of attention heads per MSA layer              | 4     |
 | number of MSA layers                                 | 2     |
 
-*Table 2: Hyperparameters for decoder. MSA is short for multi-head self-attention*
+</div>
+
+<p style="text-align: center; font-style: italic;">Table 2: Hyperparameters for decoder. MSA is short for multi-head self-attention</p>
 
 
 [About me](https://www.flaessig.com)
