@@ -3,9 +3,10 @@
   type="text/javascript">
 </script>
 # Contents
+{: .no_toc}
+
 * TOC
 {:toc}
-
 
 # Theory
 
