@@ -150,6 +150,12 @@ _Table 1: Hyperparameters for underlying, MNIST-trained networks used to generat
 
 _Table 2: Hyperparameters for decoder. MSA is short for multi-head self-attention_
 
+<br />
+<br />
+
+
+[Back to contents](#Contents)
+
 
 ## References
 
