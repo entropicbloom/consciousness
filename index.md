@@ -3,31 +3,9 @@
   type="text/javascript">
 </script>
 
-# Contents
+* TOC
+{:toc}
 
-- [Theory](#theory)
-  - [Ambiguous representations](#ambiguous-representations)
-  - [Representational accounts of consciousness](#representational-accounts-of-consciousness)
-  - [Conscious content is determined](#conscious-content-is-determined)
-  - [Conscious content is not determined by a decoder](#conscious-content-is-not-determined-by-a-decoder)
-  - [Conscious representations are unambiguous](#conscious-representations-are-unambiguous)
-  - [Defining ambiguity](#defining-ambiguity)
-  - [Relational structures as unambiguous representations](#relational-structures-as-unambiguous-representations)
-  - [Two types of structuralism](#two-types-of-structuralism)
-  - [Structure of conscious experience needs to emerge unambiguously from substrate](#structure-of-conscious-experience-needs-to-emerge-unamiguously-from-substrate)
-  - [Neural Networks as mathematical structures of consciousness](#neural-networks-as-mathematical-structures-of-consciousness)
-
-- [Proof-of-Concept](#proof-of-concept)
-  - [Idea](#idea)
-  - [Machine learning setup](#machine-learning-setup)
-  - [Dataset](#dataset)
-  - [Preprocessing](#preprocessing)
-  - [Decoder architecture](#decoder-architecture)
-  - [Results](#results)
-  - [Discussion](#discussion)
-  - [Hyperparameters](#hyperparameters)
-
-- [References](#references)
 
 # Theory
 
