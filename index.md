@@ -173,8 +173,6 @@ In the following we list all hyperparameters that were chosen for the underlying
 *Table 2: Hyperparameters for decoder. MSA is short for multi-head self-attention*
 
 
-[About me](https://www.flaessig.com)
-
 ## References
 
 [^1]: [Representational Theories of Consciousness](https://plato.stanford.edu/entries/consciousness-representational/) - William Lycan. Representational Theories of Consciousness. In Edward N. Zalta, editor, The Stanford Encyclopedia of Philosophy. Metaphysics Research Lab, Stanford University, Fall 2019 edition, 2019.
