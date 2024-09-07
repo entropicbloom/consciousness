@@ -197,4 +197,4 @@ In the following we list all hyperparameters that were chosen for the underlying
 
 [^10]: [Understanding dropout](https://proceedings.neurips.cc/paper/2013/hash/71f6278d140af599e06ad9bf1ba03cb0-Abstract.html) - Pierre Baldi and Peter J Sadowski. Understanding dropout. Advances in neural information processing systems, 26, 2013.
 
-Background image: [Buddhhabrot](http://nebula.scottandmichelle.net/nebula/about.html)
+Background image: [Buddhabrot](http://nebula.scottandmichelle.net/nebula/about.html)
