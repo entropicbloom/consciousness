@@ -177,8 +177,6 @@ In the following we list all hyperparameters that were chosen for the underlying
 
 ## References
 
-Background image: http://nebula.scottandmichelle.net/nebula/about.html
-
 [^1]: [Representational Theories of Consciousness](https://plato.stanford.edu/entries/consciousness-representational/) - William Lycan. Representational Theories of Consciousness. In Edward N. Zalta, editor, The Stanford Encyclopedia of Philosophy. Metaphysics Research Lab, Stanford University, Fall 2019 edition, 2019.
 
 [^2]: [Are there islands of awareness?](https://www.cell.com/trends/neurosciences/fulltext/S0166-2236(19)30216-4) - Tim Bayne, Anil K Seth, and Marcello Massimini. Are there islands of awareness? Trends in Neurosciences, 43(1):6–16, 2020.
@@ -198,3 +196,5 @@ Background image: http://nebula.scottandmichelle.net/nebula/about.html
 [^9]: [Attention is all you need](https://arxiv.org/abs/1706.03762) - Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez,L􏰀ukaszKaiser,andIlliaPolosukhin.Attentionisallyouneed.Advancesinneural information processing systems, 30, 2017.
 
 [^10]: [Understanding dropout](https://proceedings.neurips.cc/paper/2013/hash/71f6278d140af599e06ad9bf1ba03cb0-Abstract.html) - Pierre Baldi and Peter J Sadowski. Understanding dropout. Advances in neural information processing systems, 26, 2013.
+
+Background image: [Buddhhabrot](http://nebula.scottandmichelle.net/nebula/about.html)
