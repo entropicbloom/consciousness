@@ -176,6 +176,9 @@ In the following we list all hyperparameters that were chosen for the underlying
 [About me](https://www.flaessig.com)
 
 ## References
+
+Background image: http://nebula.scottandmichelle.net/nebula/about.html
+
 [^1]: [Representational Theories of Consciousness](https://plato.stanford.edu/entries/consciousness-representational/) - William Lycan. Representational Theories of Consciousness. In Edward N. Zalta, editor, The Stanford Encyclopedia of Philosophy. Metaphysics Research Lab, Stanford University, Fall 2019 edition, 2019.
 
 [^2]: [Are there islands of awareness?](https://www.cell.com/trends/neurosciences/fulltext/S0166-2236(19)30216-4) - Tim Bayne, Anil K Seth, and Marcello Massimini. Are there islands of awareness? Trends in Neurosciences, 43(1):6–16, 2020.

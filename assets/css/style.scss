@@ -9,10 +9,13 @@ body {
 }
 
 h1, h2, h3 {
-  color: #333;
+  color: #fffdfd;
 }
 
 .page-header {
-    background-color: #159957;
-    background-image: none; // Remove the default gradient
+    background-color: #000000;
+    background-image: url('/assets/images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
