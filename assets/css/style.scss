@@ -10,16 +10,8 @@ body {
 
 h1, h2, h3 {
   color: #fffdfd;
-  text-shadow: none;
 }
 
-.page-header h1, .page-header h2 {
-  text-shadow: 
-    -0.5px -0.5px 0 #000,
-    0.5px -0.5px 0 #000,
-    -0.5px 0.5px 0 #000,
-    0.5px 0.5px 0 #000;
-}
 
 .page-header {
     background-color: #000000;
