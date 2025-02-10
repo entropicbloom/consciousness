@@ -3,9 +3,9 @@
   type="text/javascript">
 </script>
 
-[Original pdf](https://www.flaessig.com/uploads/consciousness-and-unambigous-representations.pdf)
-
-[Code](https://github.com/pennfranc/intentionality)
+### Links
+- [Original pdf](https://www.flaessig.com/uploads/consciousness-and-unambigous-representations.pdf)
+- [Code](https://github.com/pennfranc/intentionality)
 
 # Contents
 {: .no_toc}
