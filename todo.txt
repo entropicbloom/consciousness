@@ -1,2 +1,2 @@
-- add some indication about underlying networks converging / mnist valid acc. at the end of training?
+- add cross-network decoding paradigm (i.e. validation set has different underlying model architecture than training set)
 - input pixel neuron decoding
