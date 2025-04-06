@@ -198,14 +198,14 @@ Preliminary visualizations using UMAP on the cosine similarity matrix between in
 
 ## Machine learning setup
 
-To operationalize this idea, we cast it as a supervised learning problem. We define a function $f(i, j)$ that extracts some form of positional information from an input neuron's location $(i, j)$ in the 28x28 grid. The decoder's task is not to learn the function $f$ itself, but to predict the value of $f(i, j)$ **given only the relational representation** of that neuron relative to all other neurons. In other words, the decoder must infer $f(i, j)$ **without knowing the values of $i$ or $j$**, purely from the context provided by connectivity structure.
+To operationalize this idea, we cast it as a supervised learning problem. We define a function $$f(i, j)$$ that extracts some form of positional information from an input neuron's location $$(i, j)$$ in the 28x28 grid. The decoder's task is not to learn the function $$f$$ itself, but to predict the value of $$f(i, j)$$ **given only the relational representation** of that neuron relative to all other neurons. In other words, the decoder must infer $$f(i, j)$$ **without knowing the values of $$i$$ or $$j$$**, purely from the context provided by connectivity structure.
 
-Example functions $f(i, j)$ include:
+Example functions $$f(i, j)$$ include:
 
-- $f(i, j) = (i / 27, j / 27)$ for normalized 2D position.
-- $f(i, j) = i / 27$ for normalized horizontal position.
-- $f(i, j) = j / 27$ for normalized vertical position.
-- $f(i, j) = \sqrt{(i - 13.5)^2 + (j - 13.5)^2}$ for distance from center.
+- $$f(i, j) = (i / 27, j / 27)$$ for normalized 2D position.
+- $$f(i, j) = i / 27$$ for normalized horizontal position.
+- $$f(i, j) = j / 27$$ for normalized vertical position.
+- $$f(i, j) = \sqrt{(i - 13.5)^2 + (j - 13.5)^2}$$ for distance from center.
 
 This formulation lets us probe different levels of representational structure and ambiguity.
 
@@ -215,26 +215,27 @@ Note that this contrasts with Exhibit 1, where the decoder predicted output neur
 
 ## Dataset
 
-To create training examples, we generate multiple neural networks with the same architecture but different initialization seeds. For each network, we extract the input weight matrix $W$ of shape (784, H), where 784 corresponds to input neurons (pixels), and H is the number of hidden units in the first layer.
+To create training examples, we generate multiple neural networks with the same architecture but different initialization seeds. For each network, we extract the input weight matrix $$W$$ of shape (784, H), where 784 corresponds to input neurons (pixels), and H is the number of hidden units in the first layer.
 
 To build one training example:
 
-- We permute the columns of $W$, destroying any trivial positional information.
+- We permute the columns of $$W$$, destroying any trivial positional information.
 - We select one of the columns (i.e., one input neuron) and place it in the first position.
-- The input $X$ to the decoder is then the full permuted weight matrix.
-- The label $y$ is $f(i, j)$ for the input neuron that ended up in the first column.
+- The input $$X$$ to the decoder is then the full permuted weight matrix.
+- The label $$y$$ is $$f(i, j)$$ for the input neuron that ended up in the first column.
 
-Crucially, the decoder is never given access to the coordinates $(i, j)$ directly—it only sees the connectivity patterns between neurons (encoded in the similarity matrix), and must infer positional information from those alone.
+Crucially, the decoder is never given access to the coordinates $$(i, j)$$ directly—it only sees the connectivity patterns between neurons (encoded in the similarity matrix), and must infer positional information from those alone.
 
 ## Preprocessing
 
-To make the decoder task explicitly relational, we compute a cosine similarity matrix $X'$ from the **column vectors** of $W$. This differs from Exhibit 1, where similarities were computed between row vectors (i.e., incoming weights to output neurons). Here, each column represents the outgoing weights of an input neuron into the hidden layer, and their pairwise similarities define a relational structure over input neurons:
+To make the decoder task explicitly relational, we compute a cosine similarity matrix $$X'$$ from the **column vectors** of $$W$$. This differs from Exhibit 1, where similarities were computed between row vectors (i.e., incoming weights to output neurons). Here, each column represents the outgoing weights of an input neuron into the hidden layer, and their pairwise similarities define a relational structure over input neurons:
 
 $$
 X_{norm} = \frac{X}{\|X\|_{col}}, \quad\quad X' = X_{norm}^T X_{norm}
 $$
 
-We feed the similarity matrix $X'$ to a Set Transformer-based decoder. This preprocessing emphasizes relational structure by encoding how similar each input neuron is to every other in terms of their effect on the next layer.
+We feed the similarity matrix $$X'$$ to a Set Transformer-based decoder. This preprocessing emphasizes relational structure by encoding how similar each input neuron is to every other in terms of their effect on the next layer.
+
 
 
 
