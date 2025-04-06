@@ -104,11 +104,7 @@ To train a decoder to predict which class a given output neuron represents based
 While the dataset we described above should contain all the information the decoder needs to predict the class of an output neuron by identifying its relations to other output neurons (if this relational structure does indeed exist), in practice we found that the decoder does not naturally learn to identify these relations well (at least not within the limited training time we used to fit the decoder). To point the decoder into the right direction, we applied the following preprocessing step to X.
 
 $$
-X_{norm} = \frac{X}{\|X\|_{row}}
-$$
-
-$$
-X' = X_{norm} X_{norm}^T
+X_{norm} = \frac{X}{\|X\|_{row}}, \quad\quad  X' = X_{norm} X_{norm}^T
 $$
 
 $$
