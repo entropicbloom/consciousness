@@ -50,7 +50,7 @@ where $$H$$ denotes the entropy function and $$(I\vert R)$$ the probability dist
 
 To illustrate this formulation with a concrete example, consider a simple case where a representation $$R$$ can have three possible interpretations $$I = \{i_1, i_2, i_3\}$$. For a completely ambiguous representation (like a random bit string), the conditional probability distribution would be uniform: $$p(i_1 \vert R) = p(i_2 \vert R) = p(i_3 \vert R) = 1/3$$, yielding $$H(I \vert R) = \log_2(3) \approx 1.58$$ bits. For a partially unambiguous representation that strongly suggests one interpretation over others, we might have $$p(i_1 \vert R) = 0.7$$, $$p(i_2 \vert R) = 0.2$$, $$p(i_3 \vert R) = 0.1$$, yielding $$H(I \vert R) = 0.9$$ bits. Finally, for a completely unambiguous representation like those postulated for consciousness, we would have $$p(i_1 \vert R) = 1$$, $$p(i_2 \vert R) = p(i_3 \vert R) = 0$$, yielding $$H(I \vert R) = 0$$ bits. This illustrates how the ambiguity measure captures the uncertainty about the correct interpretation given a representation.
 
-If you think you lack the intuition of how the shape of a probability distribution affects entropy, check out [this interactive web app](https://claude.site/artifacts/75b1c575-4e8b-404b-af6a-8029007d16c7){:target="_blank"}.
+If you think you lack the intuition of how the shape of a probability distribution affects entropy, check out [this interactive web app](https://claude.site/artifacts/fc5e20cc-2a3f-472a-ab20-13ff022e10fc){:target="_blank"}.
 
 ## Relational structures as unambiguous representations
 
