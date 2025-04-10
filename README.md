@@ -1,2 +1,2 @@
-[Consciousness and Unambiguous Representations](https://pennfranc.github.io/consciousness/)
+[Consciousness and Unambiguous Representations](https://entropicbloom.github.io/consciousness/)
 

@@ -5,7 +5,7 @@
 
 ### Links
 - [Original pdf](https://www.flaessig.com/uploads/consciousness-and-unambigous-representations.pdf)
-- [Code](https://github.com/pennfranc/intentionality)
+- [Code](https://github.com/entropicbloom/intentionality)
 
 # Contents
 {: .no_toc}
