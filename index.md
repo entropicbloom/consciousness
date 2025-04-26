@@ -299,11 +299,11 @@ $$
 
 ### Exhibit 1 – Class-ID decoding
 
-| Training paradigm | Accuracy&nbsp;(mean ± SD) | ARS&nbsp;(mean ± SD) |
-|-------------------|---------------------------|----------------------|
-| Dropout           | 0.743 ± 0.011             | 0.507 ± 0.015        |
-| No Dropout        | 0.238 ± 0.009             | 0.035 ± 0.004        |
-| Untrained         | 0.094 ± 0.007             | 0.000 ± 0.000        |
+| Training paradigm | Accuracy&nbsp;(mean ± SD) | ARS&nbsp;(lower bound, mean ± SD) |
+|-------------------|---------------------------|-----------------------------------|
+| Dropout           | 0.743 ± 0.011             | 0.507 ± 0.015                     |
+| No Dropout        | 0.238 ± 0.009             | 0.035 ± 0.004                     |
+| Untrained         | 0.094 ± 0.007             | 0.000 ± 0.000                     |
 
 *Dropout lifts accuracy four-fold and halves the theoretical ambiguity compared with a chance-level network.*
 
