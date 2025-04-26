@@ -237,7 +237,7 @@ We feed the similarity matrix $$X'$$ to a Set Transformer-based decoder. This pr
 ![Figure 7](figures/fig7.png)
 First, we can establish that this task is also solvable, suggesting that relational information encoded in the input neuron outgoing weights is sufficient to determine distance from the center of the pixel they represent (except for the untrained control networks, which serve as a sanity check for our experimental setup). The next most salient observation is that, unlike in the output layer experiment, adding dropout to the underlying network degrades decoding performance in this case. 
 
-# Quantifying Ambiguity with Information-Theoretic Bounds
+# Model Accuracy -> Representational Ambiguity
 We showed that a decoder can be trained to recover representational content by looking at a set of relations between neurons. The metrics we obtained in the experiments are: accuracy for output neuron class identity, and R2 score for input neuron distance from center. To link this more directly to the concept of _ambiguity_, we want to come back to the idea discussed in [Defining ambiguity](#defining-ambiguity).
 
 We defined representational ambiguity as $$H(I \vert R)$$: the entropy over all possible interpretations that remain once the representation $$R$$ is fixed. Empirically, however, we never wield a "God's eye" universal decoder. Every decoder we train is built for a specific task context. For instance "these ten labels are the MNIST digits" or "the target is the distance of a pixel from image centre."  We denote this context by $$C$$.
