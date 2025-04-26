@@ -238,7 +238,7 @@ We feed the similarity matrix $$X'$$ to a Set Transformer-based decoder. This pr
 First, we can establish that this task is also solvable, suggesting that relational information encoded in the input neuron outgoing weights is sufficient to determine distance from the center of the pixel they represent (except for the untrained control networks, which serve as a sanity check for our experimental setup). The next most salient observation is that, unlike in the output layer experiment, adding dropout to the underlying network degrades decoding performance in this case. 
 
 # Quantifying (Un-)Ambiguity with Information-Theoretic Bounds
-Our two exhibits show that training procedure strongly influences how easily a decoder can recover representational content.  In the **Theory** section we defined ambiguity as the unconditional entropy $$H(I\mid R)$$ – the number of possible interpretations that remain once the representation $$R$$ is fixed.  *Empirically, however, we never wield a "God's‑eye" universal decoder.*  Every decoder we train is built for a **specific task context** – for instance "these ten labels are the MNIST digits" or "the target is the distance of a pixel from image centre."  We denote this background knowledge by $$C$$.
+Our two exhibits show that training procedure strongly influences how easily a decoder can recover representational content.  In the **Theory** section we defined ambiguity as the unconditional entropy $$H(I\mid R)$$: the number of possible interpretations that remain once the representation $$R$$ is fixed.  *Empirically, however, we never wield a "God's eye" universal decoder.*  Every decoder we train is built for a **specific task context**. For instance "these ten labels are the MNIST digits" or "the target is the distance of a pixel from image centre."  We denote this background knowledge by C.
 
 Because $$C$$ is already baked into the trained decoder, the quantity we can bound in experiments is
 
@@ -246,7 +246,7 @@ $$
 H(I\mid R, C),
 $$
 
-the entropy that remains **given both** the relational structure encoded in R **and** the contextual constraint that interpretations must come from the *known* label set defined by C.  By translating decoding performance into an upper bound on $$H(I\mid R, C)$$ we obtain a lower bound on how much ambiguity the training process has eliminated *within that context*.  This shifts the theory–experiment link from $$H(I\mid R)$$ to $$H(I\mid R, C)$$ but preserves the central idea: better‑structured representations are those that admit fewer alternative interpretations even when the task is specified.
+the entropy that remains **given both** the relational structure encoded in R **and** the contextual constraint that interpretations must come from the *known* label set defined by C.  By translating decoding performance into an upper bound on $$H(I\mid R, C)$$ we obtain a lower bound on how much ambiguity the training process has eliminated *within that context*.  This shifts the theory-experiment link from $$H(I\mid R)$$ to $$H(I\mid R, C)$$ but preserves the central idea: better-structured representations are those that admit fewer alternative interpretations even when the task is specified.
 
 
 ## Ambiguity-Reduction Score (ARS)
