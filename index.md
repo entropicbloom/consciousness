@@ -246,7 +246,7 @@ $$
 H(I\mid R, C),
 $$
 
-the entropy that remains **given both** the relational structure encoded in R **and** the contextual constraint that interpretations must come from the *known* label set defined by C.  By translating decoding performance into an upper bound on $$H(I\mid R, C)$$ we obtain a lower bound on how much ambiguity the training process has eliminated *within that context*.  This shifts the theory-experiment link from $$H(I\mid R)$$ to $$H(I\mid R, C)$$ but preserves the central idea: better-structured representations are those that admit fewer alternative interpretations even when the task is specified.
+the entropy that remains **given both** the relational structure encoded in R **and** the contextual constraint that interpretations must come from the *known* label set defined by C.  By translating decoding performance into an upper bound on $$H(I\mid R, C)$$ we obtain a lower bound on how much ambiguity the training process has eliminated *within that context*.  This shifts the theory-experiment link from $$H(I\mid R)$$ to $$H(I\mid R, C)$$ but preserves the central idea: less ambiguous representations are those that admit fewer alternative interpretations even when the task is specified.
 
 
 ## Ambiguity-Reduction Score (ARS)
@@ -301,7 +301,7 @@ $$
 
 | Training paradigm | Accuracy&nbsp;(mean ± SD) | ARS&nbsp;(mean ± SD) |
 |-------------------|---------------------------|----------------------|
-| **Dropout**       | **0.743 ± 0.011**         | **0.507 ± 0.015**    |
+| Dropout           | 0.743 ± 0.011             | 0.507 ± 0.015        |
 | No Dropout        | 0.238 ± 0.009             | 0.035 ± 0.004        |
 | Untrained         | 0.094 ± 0.007             | 0.000 ± 0.000        |
 
@@ -311,7 +311,7 @@ $$
 
 | Training paradigm | $$R^{2}$$ | ARS (lower bound) |
 |-------------------|-----------|-------------------|
-| **Dropout**       | **0.695** | **0.419** |
+| Dropout           | 0.695     | 0.419     |
 | No Dropout        | 0.844     | 0.654     |
 | Untrained         | −0.008    | 0.000     |
 
