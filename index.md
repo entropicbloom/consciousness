@@ -237,16 +237,18 @@ We feed the similarity matrix $$X'$$ to a Set Transformer-based decoder. This pr
 ![Figure 7](figures/fig7.png)
 First, we can establish that this task is also solvable, suggesting that relational information encoded in the input neuron outgoing weights is sufficient to determine distance from the center of the pixel they represent (except for the untrained control networks, which serve as a sanity check for our experimental setup). The next most salient observation is that, unlike in the output layer experiment, adding dropout to the underlying network degrades decoding performance in this case. 
 
-# Quantifying (Un-)Ambiguity with Information-Theoretic Bounds
-Our two exhibits show that training procedure strongly influences how easily a decoder can recover representational content.  In the **Theory** section we defined ambiguity as the unconditional entropy $$H(I\mid R)$$: the number of possible interpretations that remain once the representation $$R$$ is fixed.  *Empirically, however, we never wield a "God's eye" universal decoder.*  Every decoder we train is built for a **specific task context**. For instance "these ten labels are the MNIST digits" or "the target is the distance of a pixel from image centre."  We denote this background knowledge by C.
+# Quantifying Ambiguity with Information-Theoretic Bounds
+We showed that a decoder can be trained to recover representational content by looking at a set of relations between neurons. The metrics we obtained in the experiments are: accuracy for output neuron class identity, and R2 score for input neuron distance from center. To link this more directly to the concept of _ambiguity_, we want to come back to the idea discussed in [Defining ambiguity](#defining-ambiguity).
+
+We defined representational ambiguity as $$H(I \vert R)$$: the entropy over all possible interpretations that remain once the representation $$R$$ is fixed. Empirically, however, we never wield a "God's eye" universal decoder. Every decoder we train is built for a specific task context. For instance "these ten labels are the MNIST digits" or "the target is the distance of a pixel from image centre."  We denote this context by $$C$$.
 
 Because $$C$$ is already baked into the trained decoder, the quantity we can bound in experiments is
 
 $$
-H(I\mid R, C),
+H(I \vert R, C),
 $$
 
-the entropy that remains **given both** the relational structure encoded in R **and** the contextual constraint that interpretations must come from the *known* label set defined by C.  By translating decoding performance into an upper bound on $$H(I\mid R, C)$$ we obtain a lower bound on how much ambiguity the training process has eliminated *within that context*.  This shifts the theory-experiment link from $$H(I\mid R)$$ to $$H(I\mid R, C)$$ but preserves the central idea: less ambiguous representations are those that admit fewer alternative interpretations even when the task is specified.
+the entropy that remains given both the relational structure encoded in R and the contextual constraint that interpretations must come from the known label set defined by C. By translating decoding performance into an upper bound on $$H(I \vert R, C)$$ we obtain a lower bound on how much ambiguity the training process has eliminated within that context. This shifts the theory-experiment link from $$H(I \vert R)$$ to $$H(I \vert R, C)$$ but preserves the central idea: less ambiguous representations are those that admit fewer alternative interpretations even when the task is specified.
 
 
 ## Ambiguity-Reduction Score (ARS)
@@ -254,10 +256,10 @@ the entropy that remains **given both** the relational structure encoded in R **
 We define  
 
 $$
-\mathrm{ARS}=1-\frac{H(I\mid R,C)}{H_{\max}},
+\mathrm{ARS}=1-\frac{H(I\ vert R,C)}{H_{\max}},
 $$
 
-where $$H(I\mid R,C)$$ is the conditional entropy of interpretations $$I$$ given a representation $$R$$ under the same context $$C$$ as the task, and $$H_{\max}$$ is the entropy of a completely ambiguous representation ($$\log_{2}K$$ for $$K$$ classes; $$h(Y)$$ for a continuous target $$Y$$).
+where $$H(I \vert R,C)$$ is the conditional entropy of interpretations $$I$$ given a representation $$R$$ under the same context $$C$$ as the task, and $$H_{\max}$$ is the entropy of a completely ambiguous representation ($$\log_{2}K$$ for $$K$$ classes; $$h(Y)$$ for a continuous target $$Y$$).
 
 *ARS ≈ 0* means the representation is maximally ambiguous;  
 *ARS ≈ 1* means it is fully unambiguous.
@@ -267,7 +269,7 @@ where $$H(I\mid R,C)$$ is the conditional entropy of interpretations $$I$$ given
 Fano's inequality links top-1 accuracy $$A$$ to entropy:
 
 $$
-H(I\mid R,C)\leq h_{b}(1-A)+(1-A)\log_{2}(K-1),
+H(I \vert R,C)\leq h_{b}(1-A)+(1-A)\log_{2}(K-1),
 $$
 
 yielding the bound we report
@@ -281,10 +283,10 @@ $$
 
 ## Lower-bound from R2 (regression)
 
-Assuming Gaussian residuals and standardising the target so $$\mathrm{Var}(Y)=1$$,
+Assuming Gaussian residuals and standardizing the target so $$\mathrm{Var}(Y)=1$$,
 
 $$
-H(Y\mid R,C)\leq\tfrac12\log_{2}(2\pi e\,(1-R^{2})),
+H(Y\vert R,C)\leq\tfrac12\log_{2}(2\pi e\,(1-R^{2})),
 $$
 
 which leads to
@@ -299,23 +301,23 @@ $$
 
 ### Exhibit 1 – Class-ID decoding
 
-| Training paradigm | Accuracy&nbsp;(mean ± SD) | ARS&nbsp;(lower bound, mean ± SD) |
+| Training paradigm | Accuracy (mean ± SD)      | ARS (lower bound, mean ± SD)      |
 |-------------------|---------------------------|-----------------------------------|
 | Dropout           | 0.743 ± 0.011             | 0.507 ± 0.015                     |
 | No Dropout        | 0.238 ± 0.009             | 0.035 ± 0.004                     |
 | Untrained         | 0.094 ± 0.007             | 0.000 ± 0.000                     |
 
-*Dropout lifts accuracy four-fold and halves the theoretical ambiguity compared with a chance-level network.*
+
 
 ### Exhibit 2 – Pixel-distance regression
 
-| Training paradigm | $$R^{2}$$ | ARS (lower bound) |
-|-------------------|-----------|-------------------|
-| Dropout           | 0.695     | 0.419     |
-| No Dropout        | 0.844     | 0.654     |
-| Untrained         | −0.008    | 0.000     |
+| Training paradigm | $$R^{2}$$                 | ARS (lower bound)                 |
+|-------------------|---------------------------|-----------------------------------|
+| Dropout           | 0.695                     | 0.419                             |
+| No Dropout        | 0.844                     | 0.654                             |
+| Untrained         | −0.008                    | 0.000                             |
 
-*Even a moderate $$R^{2}=0.695$$ guarantees that at least 42 % of potential ambiguity has been eliminated; untrained networks remove none.*
+In both paradigms, the decoder is able to reduce the ambiguity of what the representations could be about by at least 50% when looking at the relational patterns in neurons, given the context of the task.
 
 
 # References
