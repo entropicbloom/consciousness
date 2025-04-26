@@ -256,7 +256,7 @@ the entropy that remains given both the relational structure encoded in R and th
 We define  
 
 $$
-\mathrm{ARS}=1-\frac{H(I\ vert R,C)}{H_{\max}},
+\mathrm{ARS}=1-\frac{H(I \vert R,C)}{H_{\max}},
 $$
 
 where $$H(I \vert R,C)$$ is the conditional entropy of interpretations $$I$$ given a representation $$R$$ under the same context $$C$$ as the task, and $$H_{\max}$$ is the entropy of a completely ambiguous representation ($$\log_{2}K$$ for $$K$$ classes; $$h(Y)$$ for a continuous target $$Y$$).
