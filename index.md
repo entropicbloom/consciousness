@@ -297,7 +297,7 @@ $$
            }\approx\frac{\log_{2}[1/(1-R^{2})]}{4.094}
 $$
 
-## Empirical summary
+## Results
 
 ### Exhibit 1 – Class-ID decoding
 
