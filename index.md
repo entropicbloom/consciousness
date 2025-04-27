@@ -272,7 +272,7 @@ $$
 H(I \vert R,C)\leq h_{b}(1-A)+(1-A)\log_{2}(K-1)
 $$
 
-yielding the bound we report
+where $$h_b(p)$$ is the binary entropy function $$h_b(p) = -p\log_2(p) - (1-p)\log_2(1-p)$$, which measures the uncertainty of a binary random variable with probability $$p$$. This yields the bound we report.
 
 $$
 \boxed{
