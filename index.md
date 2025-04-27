@@ -245,7 +245,7 @@ We defined representational ambiguity as $$H(I \vert R)$$: the entropy over all 
 Because $$C$$ is already baked into the trained decoder, the quantity we can bound in experiments is
 
 $$
-H(I \vert R, C),
+H(I \vert R, C)
 $$
 
 the entropy that remains given both the relational structure encoded in R and the contextual constraint that interpretations must come from the known label set defined by C. By translating decoding performance into an upper bound on $$H(I \vert R, C)$$ we obtain a lower bound on how much ambiguity the training process has eliminated within that context. This shifts the theory-experiment link from $$H(I \vert R)$$ to $$H(I \vert R, C)$$ but preserves the central idea: less ambiguous representations are those that admit fewer alternative interpretations even when the task is specified.
@@ -256,7 +256,7 @@ the entropy that remains given both the relational structure encoded in R and th
 We define  
 
 $$
-\mathrm{ARS}=1-\frac{H(I \vert R,C)}{H_{\max}},
+\mathrm{ARS}=1-\frac{H(I \vert R,C)}{H_{\max}}
 $$
 
 where $$H(I \vert R,C)$$ is the conditional entropy of interpretations $$I$$ given a representation $$R$$ under the same context $$C$$ as the task, and $$H_{\max}$$ is the entropy of a completely ambiguous representation ($$\log_{2}K$$ for $$K$$ classes; $$h(Y)$$ for a continuous target $$Y$$).
@@ -269,7 +269,7 @@ where $$H(I \vert R,C)$$ is the conditional entropy of interpretations $$I$$ giv
 Fano's inequality links top-1 accuracy $$A$$ to entropy:
 
 $$
-H(I \vert R,C)\leq h_{b}(1-A)+(1-A)\log_{2}(K-1),
+H(I \vert R,C)\leq h_{b}(1-A)+(1-A)\log_{2}(K-1)
 $$
 
 yielding the bound we report
@@ -278,7 +278,7 @@ $$
 \boxed{
 \mathrm{ARS}_{\min}
   =1-\frac{h_{b}(1-A)+(1-A)\log_{2}(K-1)}{\log_{2}K}}
-\qquad(K=10\text{ for MNIST}).
+\qquad(K=10\text{ for MNIST})
 $$
 
 ## Lower-bound from R2 (regression)
@@ -286,7 +286,7 @@ $$
 Assuming Gaussian residuals and standardizing the target so $$\mathrm{Var}(Y)=1$$,
 
 $$
-H(Y\vert R,C)\leq\tfrac12\log_{2}(2\pi e\,(1-R^{2})),
+H(Y\vert R,C)\leq\tfrac12\log_{2}(2\pi e\,(1-R^{2}))
 $$
 
 which leads to
@@ -294,7 +294,7 @@ which leads to
 $$
 \boxed{
 \mathrm{ARS}_{\min}=\dfrac{\log_{2}[1/(1-R^{2})]}{\log_{2}(2\pi e)}
-           }\approx\frac{\log_{2}[1/(1-R^{2})]}{4.094}.
+           }\approx\frac{\log_{2}[1/(1-R^{2})]}{4.094}
 $$
 
 ## Empirical summary
