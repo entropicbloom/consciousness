@@ -279,9 +279,10 @@ $$
 \mathrm{ARS}
   \geq 1-\frac{h_{b}(1-A)+(1-A)\log_{2}(K-1)}{\log_{2}K}}
 \qquad(K=10\text{ for MNIST})
+$$
 
 Note: Since the bound relies only on top-1 accuracy, treating every mistake as if any of the other K−1 classes could be correct, it overestimates residual ambiguity, so the reported ARS values are conservative lower bounds.
-$$
+
 
 ## Lower-bound from R2 (regression)
 
