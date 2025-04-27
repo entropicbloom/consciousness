@@ -276,8 +276,8 @@ yielding the bound we report
 
 $$
 \boxed{
-\mathrm{ARS}_{\min}
-  =1-\frac{h_{b}(1-A)+(1-A)\log_{2}(K-1)}{\log_{2}K}}
+\mathrm{ARS}
+  \geq 1-\frac{h_{b}(1-A)+(1-A)\log_{2}(K-1)}{\log_{2}K}}
 \qquad(K=10\text{ for MNIST})
 $$
 
@@ -293,7 +293,7 @@ which leads to
 
 $$
 \boxed{
-\mathrm{ARS}_{\min}=\dfrac{\log_{2}[1/(1-R^{2})]}{\log_{2}(2\pi e)}
+\mathrm{ARS} \geq \dfrac{\log_{2}[1/(1-R^{2})]}{\log_{2}(2\pi e)}
            }\approx\frac{\log_{2}[1/(1-R^{2})]}{4.094}
 $$
 
