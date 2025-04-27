@@ -281,7 +281,7 @@ $$
 \qquad(K=10\text{ for MNIST})
 $$
 
-Note: Since the bound relies only on top-1 accuracy, treating every mistake as if any of the other K−1 classes could be correct, it overestimates residual ambiguity, so the reported ARS values are conservative lower bounds.
+Note: Since the bound relies only on top-1 accuracy, treating every mistake as if any of the other K-1 classes could be correct, it overestimates residual ambiguity, so the reported ARS values are conservative lower bounds.
 
 
 ## Lower-bound from R2 (regression)
