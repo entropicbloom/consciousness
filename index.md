@@ -302,7 +302,7 @@ $$
 
 ## Results
 
-### Exhibit 1 – Class-ID decoding
+### Exhibit 1 - Class-ID decoding
 
 | Training paradigm | Accuracy (mean ± SD)      | ARS (lower bound, mean ± SD)      |
 |-------------------|---------------------------|-----------------------------------|
@@ -312,7 +312,7 @@ $$
 
 
 
-### Exhibit 2 – Pixel-distance regression
+### Exhibit 2 - Pixel-distance regression
 
 | Training paradigm | $$R^{2}$$                 | ARS (lower bound)                 |
 |-------------------|---------------------------|-----------------------------------|
