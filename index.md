@@ -139,7 +139,7 @@ To provide additional context for our results, Figure 5 shows the validation acc
 ![Figure 5](figures/fig5.png)
 _Figure 5: Validation accuracies of the underlying MNIST models used to generate datasets for the decoder across 10 randomly sampled seeds for each training paradigm._
 
-To pinpoint how much of the decoder’s success comes from the global relational geometry of the output layer, we reran the experiment but supplied the decoder with only the first row of X', the cosine-similarity vector of the target neuron with all other neurons in the input layer, while masking out all pairwise similarities that do not involve the target neuron.
+To pinpoint how much of the decoder’s success comes from the global relational geometry of the output layer, we reran the experiment but supplied the decoder with only the first row of X', the cosine-similarity vector of the target neuron with all other neurons in the output layer, while masking out all pairwise similarities that do not involve the target neuron.
 
 ![Figure 5.5](figures/tgt-sim-only-classid.png)
 
