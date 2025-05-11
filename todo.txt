@@ -1,2 +1,3 @@
+- integrate additional control figures
 - add cross-network decoding paradigm (i.e. validation set has different underlying model architecture than training set)
 - input pixel neuron decoding
