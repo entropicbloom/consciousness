@@ -198,7 +198,7 @@ Moreover, since we will apply the same cosine similarity preprocessing step as i
 Preliminary visualizations using UMAP on the cosine similarity matrix between input neurons already suggest that some positional information is present and decodable relationally.
 
 <p align="center">
-  <img src="figures/fig6.png" alt="Figure 6" width="400"/>
+  <img src="figures/fig6.png" alt="Figure 6" width="600"/>
 </p>
 
 ## Machine learning setup
@@ -248,7 +248,7 @@ First, we can establish that this task is also solvable, suggesting that relatio
 Analogous to Exhibit 1, we probe whether the decoder exploits the entire relational geometry or merely the target neuron's local neighbourhood by feeding it only the cosine-similarity row corresponding to that neuron.
 
 <p align="center">
-  <img src="figures/tgt-sim-only-inputpixels.png" alt="Figure 7.5" width="400"/>
+  <img src="figures/tgt-sim-only-inputpixels.png" alt="Figure 7.5" width="600"/>
 </p>
 
 We can see that, while the decoder can indeed extract useful information solely from the local neighborhood of the target neuron, adding more relations significantly improves performance. This validates our intuition that a richer relational structure helps in disambiguating a representation.
