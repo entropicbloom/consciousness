@@ -253,7 +253,6 @@ Analogous to Exhibit 1, we probe whether the decoder exploits the entire relatio
 
 We can see that, while the decoder can indeed extract useful information solely from the local neighborhood of the target neuron, adding more relations significantly improves performance. This validates our intuition that a richer relational structure helps in disambiguating a representation.
 
-![Figure 8](figures/fig8.png)
 
 # Model Accuracy → Representational Ambiguity
 We showed that a decoder can be trained to recover representational content by looking at a set of relations between neurons. The metrics we obtained in the experiments are: accuracy for output neuron class identity, and R2 score for input neuron distance from center. To link this more directly to the concept of _ambiguity_, we want to come back to the idea discussed in [Defining ambiguity](#defining-ambiguity).
