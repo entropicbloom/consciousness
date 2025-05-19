@@ -139,7 +139,7 @@ To provide additional context for our results, Figure 5 shows the validation acc
 ![Figure 5](figures/fig5.png)
 _Figure 5: Validation accuracies of the underlying MNIST models used to generate datasets for the decoder across 10 randomly sampled seeds for each training paradigm._
 
-To pinpoint how much of the decoder’s success comes from the global relational geometry of the output layer, we reran the experiment but supplied the decoder with only the first row of X', the cosine-similarity vector of the target neuron with all other neurons in the output layer, while masking out all pairwise similarities that do not involve the target neuron.
+To pinpoint how much of the decoder’s success comes from the whole relational geometry of the output layer, we reran the experiment but supplied the decoder with only the first row of X', the cosine-similarity vector of the target neuron with all other neurons in the output layer, while masking out all pairwise similarities that do not involve the target neuron.
 
 ![Figure 5.5](figures/tgt-sim-only-classid.png)
 
@@ -242,6 +242,12 @@ We feed the similarity matrix $$X'$$ to a Set Transformer-based decoder. This pr
 ## Results
 ![Figure 7](figures/fig7.png)
 First, we can establish that this task is also solvable, suggesting that relational information encoded in the input neuron outgoing weights is sufficient to determine distance from the center of the pixel they represent (except for the untrained control networks, which serve as a sanity check for our experimental setup). The next most salient observation is that, unlike in the output layer experiment, adding dropout to the underlying network degrades decoding performance in this case. 
+
+Analogous to Exhibit 1, we probe whether the decoder exploits the entire relational geometry or merely the target neuron's local neighbourhood by feeding it only the cosine-similarity row corresponding to that neuron.
+
+![Figure 7.5](figures/tgt-sim-only-inputpixels.png)
+
+We can see that, while the decoder can indeed extract useful information solely from the local neighborhood of the target neuron, adding more relations significantly improves performance. This validates our intuition that a richer relational structure helps in disambiguating a representation.
 
 ![Figure 8](figures/fig8.png)
 
