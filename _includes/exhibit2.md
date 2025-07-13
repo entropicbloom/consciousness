@@ -72,3 +72,10 @@ Analogous to Exhibit 1, we probe whether the decoder exploits the entire relatio
 We can see that, while the decoder can indeed extract useful information solely from the local neighborhood of the target neuron, adding more relations significantly improves performance. This validates our intuition that a richer relational structure helps in disambiguating a representation.
 
 
+Next, we assess how the size of the relational graph that we provide to the decoder affects the decoding accuracy. To do this, we sample uniformly random subsets of the 784 input neurons and perform the decoding task on the relational structure of subsets of varying sizes.
+
+<p align="center">
+  <img src="figures/varying-k-input-pixel-results.png" alt="Figure 7.75" width="600"/>
+</p>
+
+We can see that, while performance improves as we increase the size of the relational graph provided, adding more neurons to the input yields diminishing returns at some point. In other words, intentional content can be extracted from neurons even when considering only a subgraph of the relational structure they are embedded in.
