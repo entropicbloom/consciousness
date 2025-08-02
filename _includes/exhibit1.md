@@ -109,3 +109,11 @@ _Gram matrix decoding accuracies across training paradigms using 10 reference se
 
 This geometric approach achieves remarkably higher accuracies than the self-attention decoder, reaching perfect 100% accuracy for dropout-trained networks while requiring significantly fewer reference networks (10 vs 800 networks). The untrained networks perform at chance level as expected, while standard backpropagation networks achieve 38.3% accuracy. Most notably, the dropout condition achieves perfect decoding with zero variance, suggesting that dropout creates highly consistent and distinctive relational geometries between output neurons across different network instances.
 
+![Permutation distances for no dropout](figures/perm_distances_no_dropout.png)
+_Permutation distance distributions for networks trained without dropout: The true permutation (red dot) shows only a small margin over incorrect permutations._
+
+![Permutation distances for dropout](figures/perm_distances_dropout.png)
+_Permutation distance distributions for networks trained with dropout: The true permutation shows a substantial gap from all incorrect alternatives._
+
+These distance distributions reveal why dropout achieves perfect accuracy while vanilla backpropagation struggles. For networks without dropout, the true permutation (red dot) has only a tiny margin over incorrect permutations, making it easily confused with alternatives. In contrast, dropout networks show a substantial gap between the correct permutation and all others, creating an unambiguous geometric signature that reliably identifies the true class ordering.
+
