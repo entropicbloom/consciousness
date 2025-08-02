@@ -99,3 +99,13 @@ _Table 2: Hyperparameters for decoder. MSA is short for multi-head self-attentio
 
 While the self-attention decoder above successfully identifies output neuron classes through learned relational patterns, we also tested a simpler, more direct geometric approach. This method constructs a reference Gram matrix by averaging the cosine similarity matrices from several reference networks trained on MNIST. For each test network, we then evaluate all possible permutations of its output neurons to find which ordering produces a Gram matrix closest to the reference geometry using Frobenius distance. The hypothesis is that the true class ordering should yield the best match to the reference geometry, as networks trained on the same task should converge to similar relational structures between output neurons representing the same classes.
 
+| Model           | Accuracy | Std Dev |
+|-----------------|----------|---------|
+| untrained       | 0.100    | 0.155   |
+| no_dropout      | 0.383    | 0.441   |
+| dropout         | 1.000    | 0.000   |
+
+_Gram matrix decoding accuracies across training paradigms using 10 reference seeds and 10 test seeds._
+
+This geometric approach achieves remarkably higher accuracies than the self-attention decoder, reaching perfect 100% accuracy for dropout-trained networks while requiring significantly fewer reference networks (10 vs 800 networks). The untrained networks perform at chance level as expected, while standard backpropagation networks achieve 38.3% accuracy. Most notably, the dropout condition achieves perfect decoding with zero variance, suggesting that dropout creates highly consistent and distinctive relational geometries between output neurons across different network instances.
+
