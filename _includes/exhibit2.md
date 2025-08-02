@@ -16,7 +16,7 @@ Moreover, since we will apply the same cosine similarity preprocessing step as i
 Preliminary visualizations using UMAP on the cosine similarity matrix between input neurons already suggest that some positional information is present and decodable relationally.
 
 <p align="center">
-  <img src="figures/fig6.png" alt="Figure 6" width="600"/>
+  <img src="figures/umap-input-neuron-similarity.png" alt="UMAP input neuron similarity" width="600"/>
 </p>
 
 ## Machine learning setup
@@ -60,13 +60,13 @@ $$
 We feed the similarity matrix $$X'$$ to a Set Transformer-based decoder. This preprocessing emphasizes relational structure by encoding how similar each input neuron is to every other in terms of their effect on the next layer.
 
 ## Results
-![Figure 7](figures/fig7.png)
+![Input neuron distance prediction accuracy](figures/input-neuron-distance-prediction-accuracy.png)
 First, we can establish that this task is also solvable, suggesting that relational information encoded in the input neuron outgoing weights is sufficient to determine distance from the center of the pixel they represent (except for the untrained control networks, which serve as a sanity check for our experimental setup). The next most salient observation is that, unlike in the output layer experiment, adding dropout to the underlying network degrades decoding performance in this case. 
 
 Analogous to Exhibit 1, we probe whether the decoder exploits the entire relational geometry or merely the target neuron's local neighbourhood by feeding it only the cosine-similarity row corresponding to that neuron.
 
 <p align="center">
-  <img src="figures/tgt-sim-only-inputpixels.png" alt="Figure 7.5" width="600"/>
+  <img src="figures/target-similarity-only-input-pixels.png" alt="Target similarity only for input pixels" width="600"/>
 </p>
 
 We can see that, while the decoder can indeed extract useful information solely from the local neighborhood of the target neuron, adding more relations significantly improves performance. This validates our intuition that a richer relational structure helps in disambiguating a representation.
@@ -75,7 +75,7 @@ We can see that, while the decoder can indeed extract useful information solely 
 Next, we assess how the size of the relational graph that we provide to the decoder affects the decoding accuracy. To do this, we sample uniformly random subsets of the 784 input neurons and perform the decoding task on the relational structure of subsets of varying sizes.
 
 <p align="center">
-  <img src="figures/varying-k-input-pixel-results.png" alt="Figure 7.75" width="600"/>
+  <img src="figures/varying-subset-size-input-pixels.png" alt="Varying subset size for input pixels" width="600"/>
 </p>
 
 We can see that, while performance improves as we increase the size of the relational graph provided, adding more neurons to the input yields diminishing returns at some point. In other words, intentional content can be extracted from neurons even when considering only a subgraph of the relational structure they are embedded in.
