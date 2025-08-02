@@ -95,3 +95,7 @@ _Table 1: Hyperparameters for underlying, MNIST-trained networks used to generat
 
 _Table 2: Hyperparameters for decoder. MSA is short for multi-head self-attention_
 
+## Alternative Approach: Gram Matrix Matching
+
+While the self-attention decoder above successfully identifies output neuron classes through learned relational patterns, we also tested a simpler, more direct geometric approach. This method constructs a reference Gram matrix by averaging the cosine similarity matrices from several reference networks trained on MNIST. For each test network, we then evaluate all possible permutations of its output neurons to find which ordering produces a Gram matrix closest to the reference geometry using Frobenius distance. The hypothesis is that the true class ordering should yield the best match to the reference geometry, as networks trained on the same task should converge to similar relational structures between output neurons representing the same classes.
+
