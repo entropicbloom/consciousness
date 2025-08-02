@@ -95,3 +95,25 @@ _Table 1: Hyperparameters for underlying, MNIST-trained networks used to generat
 
 _Table 2: Hyperparameters for decoder. MSA is short for multi-head self-attention_
 
+## Alternative Approach: Gram Matrix Matching
+
+While the self-attention decoder above successfully identifies output neuron classes through learned relational patterns, we also tested a simpler, more direct geometric approach. This method constructs a reference Gram matrix by averaging the cosine similarity matrices from several reference networks trained on MNIST. For each test network, we then evaluate all possible permutations of its output neurons to find which ordering produces a Gram matrix closest to the reference geometry using Frobenius distance. The hypothesis is that the true class ordering should yield the best match to the reference geometry, as networks trained on the same task should converge to similar relational structures between output neurons representing the same classes.
+
+| Model           | Accuracy | Std Dev |
+|-----------------|----------|---------|
+| untrained       | 0.100    | 0.155   |
+| no_dropout      | 0.383    | 0.441   |
+| dropout         | 1.000    | 0.000   |
+
+_Gram matrix decoding accuracies across training paradigms using 10 reference seeds and 10 test seeds._
+
+This geometric approach achieves remarkably higher accuracies than the self-attention decoder, reaching perfect 100% accuracy for dropout-trained networks while requiring significantly fewer reference networks (10 vs 800 networks). The untrained networks perform at chance level as expected, while standard backpropagation networks achieve 38.3% accuracy. Most notably, the dropout condition achieves perfect decoding with zero variance, suggesting that dropout creates highly consistent and distinctive relational geometries between output neurons across different network instances.
+
+![Permutation distances for no dropout](figures/perm_distances_no_dropout.png)
+_Permutation distance distributions for networks trained without dropout: The true permutation (red dot) shows only a small margin over incorrect permutations._
+
+![Permutation distances for dropout](figures/perm_distances_dropout.png)
+_Permutation distance distributions for networks trained with dropout: The true permutation shows a substantial gap from all incorrect alternatives._
+
+These distance distributions reveal why dropout achieves perfect accuracy while vanilla backpropagation struggles. For networks without dropout, the true permutation (red dot) has only a tiny margin over incorrect permutations, making it easily confused with alternatives. In contrast, dropout networks show a substantial gap between the correct permutation and all others, creating an unambiguous geometric signature that reliably identifies the true class ordering.
+
