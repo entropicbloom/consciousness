@@ -117,3 +117,9 @@ _Permutation distance distributions for networks trained with dropout: The true 
 
 These distance distributions reveal why dropout achieves perfect accuracy while vanilla backpropagation struggles. For networks without dropout, the true permutation (red dot) has only a tiny margin over incorrect permutations, making it easily confused with alternatives. In contrast, dropout networks show a substantial gap between the correct permutation and all others, creating an unambiguous geometric signature that reliably identifies the true class ordering.
 
+### 3D Embedding of Reference Gram Matrix
+
+To further visualize the relational structure that enables perfect decoding in dropout networks, we performed eigendecomposition on the reference Gram matrix and embedded the 10 neuron positions into 3D space using the top 3 eigenvectors, scaled by their corresponding eigenvalues. The connecting edges highlight nearest-neighbor relationships.
+
+{% include gram_matrix_3d_dropout.html %}
+
