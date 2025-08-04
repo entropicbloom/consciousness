@@ -121,5 +121,7 @@ These distance distributions reveal why dropout achieves perfect accuracy while 
 
 To further visualize the relational structure that enables perfect decoding in dropout networks, we performed eigendecomposition on the reference Gram matrix and embedded the 10 neuron positions into 3D space using the top 3 eigenvectors, scaled by their corresponding eigenvalues. The connecting edges highlight nearest-neighbor relationships.
 
+{% raw %}
 {% include gram_matrix_3d_dropout.html %}
+{% endraw %}
 
