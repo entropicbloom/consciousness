@@ -16,7 +16,7 @@ Moreover, since we will apply the same cosine similarity preprocessing step as i
 Preliminary visualizations using UMAP on the cosine similarity matrix between input neurons of a trained network (no dropout) already suggest that some positional information is present and decodable relationally.
 
 <p align="center">
-  <img src="figures/umap-input-neuron-similarity.png" alt="UMAP input neuron similarity" width="600"/>
+  <img src="figures/umap-input-neuron-similarity.png" alt="UMAP of input neuron cosine similarity vectors" width="600"/>
 </p>
 
 ## Machine learning setup
