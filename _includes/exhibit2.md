@@ -13,7 +13,7 @@ Please note that only considering one layer for this decoding task serves severa
 
 Moreover, since we will apply the same cosine similarity preprocessing step as in the previous experiment, we can also prevent other 'trivial' solution methods such as inferring positional information from the norm of the outgoing weights of an input neuron.
 
-Preliminary visualizations using UMAP on the cosine similarity matrix between input neurons already suggest that some positional information is present and decodable relationally.
+Preliminary visualizations using UMAP on the cosine similarity matrix between input neurons of a trained network (no dropout) already suggest that some positional information is present and decodable relationally.
 
 <p align="center">
   <img src="figures/umap-input-neuron-similarity.png" alt="UMAP input neuron similarity" width="600"/>
