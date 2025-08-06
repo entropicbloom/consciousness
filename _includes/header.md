@@ -1,21 +1,31 @@
-<script
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
-  type="text/javascript">
-</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://consciousness-is-unambiguous.com/"
+  },
   "headline": "Consciousness and Unambiguous Representations",
+  "image": "https://consciousness-is-unambiguous.com/assets/images/background.png",
   "author": {
+    "@type": "Person",
+    "name": "Francesco Lässig",
+    "url": "https://github.com/entropicbloom"
+  },
+  "publisher": {
     "@type": "Person",
     "name": "Francesco Lässig"
   },
   "datePublished": "2025-04-15",
+  "dateModified": "2025-08-06",
   "url": "https://consciousness-is-unambiguous.com/",
   "description": "This article investigates the intentionality constraint on neural correlates of consciousness and how unambiguous representations emerge in neural networks.",
-  "keywords": "consciousness, neural networks, ambiguity, representationalism, representations, entropy, intentionality, philosophy of mind"
+  "keywords": "consciousness, neural networks, ambiguity, representationalism, representations, entropy, intentionality, philosophy of mind",
+  "inLanguage": "en"
 }
 </script>
 
