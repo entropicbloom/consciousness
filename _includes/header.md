@@ -1,5 +1,7 @@
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<link rel="canonical" href="https://consciousness-is-unambiguous.com/">
+
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
 <script type="application/ld+json">
 {
@@ -17,8 +19,12 @@
     "url": "https://github.com/entropicbloom"
   },
   "publisher": {
-    "@type": "Person",
-    "name": "Francesco Lässig"
+    "@type": "Organization",
+    "name": "Francesco Lässig",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://consciousness-is-unambiguous.com/assets/images/background.png"
+    }
   },
   "datePublished": "2025-04-15",
   "dateModified": "2025-08-06",

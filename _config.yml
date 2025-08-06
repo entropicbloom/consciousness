@@ -1,5 +1,15 @@
 title: Consciousness and Unambiguous Representations
 description: Thoughts and experiments about necessary physical correlates of phenomenal consciousness.
+author: Francesco Lässig
+url: https://consciousness-is-unambiguous.com
+baseurl: ""
+lang: en
+
+social:
+  name: Francesco Lässig
+  links:
+    - https://github.com/entropicbloom
+
 theme: jekyll-theme-cayman
 markdown: kramdown
 kramdown:
