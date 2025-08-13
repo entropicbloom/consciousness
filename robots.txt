@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /consciousness-and-unambigous-representations.pdf
 
 Sitemap: https://consciousness-is-unambiguous.com/sitemap.xml
