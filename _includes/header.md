@@ -1,4 +1,4 @@
-<link rel="canonical" href="https://consciousness-is-unambiguous.com/">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
 
 
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -10,7 +10,7 @@
   "@type": "ScholarlyArticle",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://consciousness-is-unambiguous.com/"
+    "@id": "{{ page.url | absolute_url }}"
   },
   "headline": "Consciousness and Unambiguous Representations",
   "image": "https://consciousness-is-unambiguous.com/assets/images/background.png",
@@ -29,7 +29,7 @@
   },
   "datePublished": "2025-04-15",
   "dateModified": "2025-08-06",
-  "url": "https://consciousness-is-unambiguous.com/",
+  "url": "{{ page.url | absolute_url }}",
   "description": "This article investigates the intentionality constraint on neural correlates of consciousness and how unambiguous representations emerge in neural networks.",
   "keywords": "consciousness, neural networks, ambiguity, representationalism, representations, entropy, intentionality, philosophy of mind",
   "inLanguage": "en"

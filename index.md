@@ -1,15 +1,18 @@
-{% include header.md %}
-
-{% include theory.md %}
-
+---
+layout: default
+title: Consciousness and Unambiguous Representations
 ---
 
-{% include exhibit1.md %}
+{% include header.md %}
 
-{% include exhibit2.md %}
+Welcome to the Consciousness and Unambiguous Representations project. Choose a section to explore:
 
-{% include ambiguity-analysis.md %}
+## Sections
 
-{% include related-work.md %}
+- [Theory]({{ '/theory/' | relative_url }})
+- [Exhibit 1]({{ '/exhibit1/' | relative_url }})
+- [Exhibit 2]({{ '/exhibit2/' | relative_url }})
+- [Ambiguity Analysis]({{ '/ambiguity-analysis/' | relative_url }})
+- [Related Work]({{ '/related-work/' | relative_url }})
+- [References]({{ '/references/' | relative_url }})
 
-{% include references.md %}
