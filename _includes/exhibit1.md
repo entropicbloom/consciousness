@@ -109,6 +109,12 @@ _Gram matrix decoding accuracies across training paradigms using 10 reference se
 
 This geometric approach achieves remarkably higher accuracies than the self-attention decoder, reaching perfect 100% accuracy for dropout-trained networks while requiring significantly fewer reference networks (10 vs 800 networks). The untrained networks perform at chance level as expected, while standard backpropagation networks achieve 38.3% accuracy. Most notably, the dropout condition achieves perfect decoding with zero variance, suggesting that dropout creates highly consistent and distinctive relational geometries between output neurons across different network instances.
 
+To evaluate the architecture-invariance of the gram matrix approach, we tested cross-architecture transfer by using reference networks of one architecture to decode test networks of different architectures. The heatmap below shows decoding accuracy when transferring between different network architectures, with each cell representing accuracy when using reference networks of one architecture (y-axis) to decode test networks of another architecture (x-axis). The strong diagonal and near-diagonal performance demonstrates that the gram matrix approach maintains high accuracy across different network architectures, confirming that the relational geometric structure is largely architecture-invariant.
+
+<p align="center">
+  <img src="figures/cross_architecture_heatmap_accuracy.png" alt="Cross Architecture Heatmap Accuracy" width="600"/>
+</p>
+
 ![Permutation distances for no dropout](figures/perm_distances_no_dropout.png)
 _Permutation distance distributions for networks trained without dropout: The true permutation (red dot) shows only a small margin over incorrect permutations._
 
