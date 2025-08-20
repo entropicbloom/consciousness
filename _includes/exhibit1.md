@@ -128,3 +128,13 @@ To further visualize the relational structure that enables perfect decoding in d
         style="border: none;">
 </iframe>
 
+## Dataset identity from final-layer weights
+Using the same self-attention decoder and random output-neuron permutations, we classify whether a network was trained on MNIST or Fashion-MNIST from the final-layer weights alone. Performance is near-perfect for Dropout models (0.998 ± 0.001 STD) and clearly above chance for No Dropout (0.843 ± 0.008 STD). This indicates that the relational geometry of the output weights carries a dataset-specific signature, amplified by dropout.
+
+<p align="center">
+  <img src="/figures/dataset-classification-accuracy.png" alt="Dataset classification from final-layer weights" style="max-width:560px;width:100%;">
+</p>
+
+Implications for $$H(I \mid R, C)$$: while we treat $$C$$ as given, this result suggests $$C$$ can be inferred from $$R$$ itself (at least in this setting). The distinction between I and C is artificial in the first place and only arises because our decoder operates in a very limited domain. We can imagine a universal decoder, which is trained on relational structures in larger, multi-modal neural networks, that does not have to be conditioned on a context (at least not beyond a very broad context consisting of our part of the universe, and choice of modalities).
+
+
