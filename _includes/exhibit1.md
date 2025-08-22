@@ -109,6 +109,11 @@ _Gram matrix decoding accuracies across training paradigms using 10 reference se
 
 This geometric approach achieves remarkably higher accuracies than the self-attention decoder, reaching perfect 100% accuracy for dropout-trained networks while requiring significantly fewer reference networks (10 vs 800 networks). The untrained networks perform at chance level as expected, while standard backpropagation networks achieve 38.3% accuracy. Most notably, the dropout condition achieves perfect decoding with zero variance, suggesting that dropout creates highly consistent and distinctive relational geometries between output neurons across different network instances.
 
+Similar to our earlier ablation study with the self-attention decoder, we investigated how the number of output neurons affects the Gram matrix matching approach:
+
+![Gram matrix neuron ablation](figures/gram_neuron_ablation_plot.png)
+_Gram matrix decoding performance vs. number of neurons: Ablation study showing how Gram matrix matching accuracy varies with the number of output neurons available for decoding._
+
 ![Permutation distances for no dropout](figures/perm_distances_no_dropout.png)
 _Permutation distance distributions for networks trained without dropout: The true permutation (red dot) shows only a small margin over incorrect permutations._
 
