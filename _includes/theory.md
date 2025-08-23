@@ -41,8 +41,7 @@ If you think you lack the intuition of how the shape of a probability distributi
 
 How could any type of encoding convey meaning without presupposing a decoding scheme? We saw that a bit string cannot do the job. The reason for that is that it is a purely indexical object. A bit string is a number, and all it tells us is that it is this number and not any other number. What we need is structure. Let’s illustrate this using an example. Let’s say we encode 5x5 image of a square by encoding all the values of the individual pixels, giving us a 25-dim vector as seen in the [pixel encoding visualization](#pixel-encoding-structure) (panel a).
 
-![Pixel encoding and relational structure](figures/pixel-encoding-relational-structure.png)
-{#pixel-encoding-structure}
+![Pixel encoding and relational structure](figures/pixel-encoding-relational-structure.png){:#pixel-encoding-structure}
 _Pixel encoding and relational structure: **a:** Visualization of the elements of a binary vector (orange=1, blue=0) as a square grid. **b:** Set of relations between neighboring vector elements in addition to the vector elements themselves._
 
 
