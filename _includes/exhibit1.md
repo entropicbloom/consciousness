@@ -77,14 +77,15 @@ _Table 1: Hyperparameters for underlying, MNIST-trained networks used to generat
 <br />
 <br />
 
-| Name                                                 | Value |
-|------------------------------------------------------|-------|
-| learning rate                                        | 0.001 |
-| batch size                                           | 64    |
-| epochs (except for the non-train paradigm)           | 100   |
-| hidden dimensionality                                | 64    |
-| number of attention heads per MSA layer              | 4     |
-| number of MSA layers                                 | 2     |
+| Name                                    | Value |
+|-----------------------------------------|-------|
+| learning rate                           | 0.001 |
+| batch size                              | 64    |
+| epochs                                  | 100   |
+| hidden dimensionality                   | 128   |
+| number of attention heads per MSA layer | 4     |
+| number of MSA layers (encoder)          | 2     |
+| number of fully connected layers        | 1     |
 
 _Table 2: Hyperparameters for decoder. MSA is short for multi-head self-attention_
 
