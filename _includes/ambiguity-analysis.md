@@ -64,17 +64,19 @@ $$
 
 ## Results
 
-### Exhibit 1 - Class-ID decoding
+### Exhibit 1 - Class-ID decoding (Gram matrix matching)
 
-| Training paradigm | Accuracy (mean ± SD)      | ARS (lower bound, mean ± SD)      |
-|-------------------|---------------------------|-----------------------------------|
-| Dropout           | 0.743 ± 0.011             | 0.507 ± 0.015                     |
-| No Dropout        | 0.238 ± 0.009             | 0.035 ± 0.004                     |
-| Untrained         | 0.094 ± 0.007             | 0.000 ± 0.000                     |
+For the ARS calculation we use the Gram-matrix accuracy, which yields stronger and more stable bounds than the self-attention decoder.
+
+| Training paradigm | Position Accuracy | ARS (lower bound) |
+|-------------------|-------------------|-------------------|
+| Dropout           | 1.000             | 1.000             |
+| No Dropout        | 0.383             | 0.122             |
+| Untrained         | 0.120             | 0.001             |
 
 
 
-### Exhibit 2 - Pixel-distance regression
+### Exhibit 2 - Pixel-distance regression (self-attention decoder)
 
 | Training paradigm | $$R^{2}$$                 | ARS (lower bound)                 |
 |-------------------|---------------------------|-----------------------------------|
@@ -82,6 +84,5 @@ $$
 | No Dropout        | 0.844                     | 0.654                             |
 | Untrained         | −0.008                    | 0.000                             |
 
-In both paradigms, the decoder is able to reduce the ambiguity of what the representations could be about by at least 50% when looking at the relational patterns in neurons, given the context of the task.
 
 
