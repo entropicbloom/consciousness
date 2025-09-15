@@ -5,7 +5,7 @@
 
 
 ### Links
-- [Old pdf](https://www.flaessig.com/uploads/consciousness-and-unambigous-representations.pdf)
+- [PDF](https://consciousness-is-unambiguous.com/consciousness-is-unambiguous.pdf)
 - [Code](https://github.com/entropicbloom/intentionality)
 
 # Contents
