@@ -5,6 +5,7 @@
 
 
 ### Links
+- [Video](https://youtu.be/2BGzn22B5J8?si=OfUAcZsXBoNH8U6x)
 - [PDF](https://consciousness-is-unambiguous.com/consciousness-is-unambiguous.pdf)
 - [Code](https://github.com/entropicbloom/intentionality)
 
