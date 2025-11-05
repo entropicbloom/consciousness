@@ -1,0 +1,118 @@
+\section{Theoretical Framework}
+\label{sec:theory}
+
+\subsection{Ambiguous Representations}
+
+Representations are ubiquitous within our daily lives: letters represent sounds, words represent concepts, bit strings represent files. However, these representations are only meaningful insofar as they are decoded in the right way. Roman letters are meaningless to someone only familiar with Chinese characters; the word ``Utangatta'' is only meaningful if you know Icelandic; and a bit string representing a JPEG image of an apple only does so if the right decoding algorithm is applied. In fact, given the right decoding algorithm, the same bit string could be decoded into a sound file, a video game, a text, or any other type of digital medium.
+
+Generally speaking, there is no information inherent in a bit string that tells us anything about what it is about. For all examples provided so far, this does not pose a problem. Representations such as letters, words and bit strings are useful because we can agree on decoding schemes that should be applied for a given set of representations. Representations in conjunction with an encoding scheme bear meaning, thus rendering them useful to us. Without an encoding scheme, however, most representations are ambiguous: they could represent anything.
+
+\subsection{Representational Accounts of Consciousness}
+
+One strategy to think about a mapping between neural activity and conscious experience is in terms of a representational relationship~\cite{lycan2019representational}. If I see an apple, neural activity in my brain is representing an apple. This idea of a representational relationship accounts for the fact that the experience of an apple is not dependent on the presence of the actual apple in the real world. After all, dreams and hallucinations of apples are real phenomena. If conscious experience corresponds to the presence of representations, dreams of apples can be explained as instantiating a representation in the absence of the actual apple in the real world. But this begs the question of what encoding scheme is used to represent the visual perception of an apple in terms of neural activity.
+
+\subsection{Conscious Content is Determined}
+
+It is reasonable to assume that a brain in a given state has a determined conscious experience (or a determined set of conscious experiences to allow for the case of islands of consciousness that could conceivably occur in healthy individuals or perhaps more likely in split brain patients~\cite{bayne2020islands}). In any case, a given brain state that is postulated to account for a given experience cannot at the same time account for a different, conflicting experience. In other words, if I see an apple, then part of my brain is representing an apple, and the same neural activity is not also representing an orange, or the sound of a passing car (which could concurrently be represented, but not alternatively decoded instead of decoding the apple).
+
+This is arguably already the case prior to any higher cognitive judgments about the nature of the experience, as the appearance of the apple itself already presupposes what it is about. Not only does it presuppose it's about an apple, but it presupposes it's about something visual~\cite{pennartz2009identification}. Acting upon the correct identification of the object is not necessary for postulating that a representation has determined content. This is because, while the content of consciousness certainly guides our behavior, it is arguably not dependent on it~\cite{pennartz2018consciousness}.
+
+\subsection{Conscious Content is Not Determined by a Decoder}
+
+Given what we know about the nature of bit string encodings of images and similar representations, it might be tempting to propose a decoder within our brain that gives meaning to our representations of the real world. If we follow this line of reasoning, it would be our ``internal decoder'' that is responsible for conscious experience, since only when decoded do representations become meaningful. But all a decoder can do is to transform representations in one encoding to a different encoding. We are still left with the question of how this new encoding ``knows'' what it is about, or, in other words, why this representation is about one specific thing (an apple) as opposed to anything else. Postulating a special brain area that reads out the meaning of representations is just an instance of the internal homunculus or Cartesian theater fallacy~\cite{pennartz2022neurorepresentationalism}.
+
+\subsection{Conscious Representations are Unambiguous}
+
+If the content of conscious representations is determined, and if we cannot rely on a decoder to give it meaning, we must assume that, unlike for bit strings or letters, the encoding intrinsically carries meaning about the intentional content of the representation. This gives us a formal requirement for a conscious representation.
+
+\begin{definition}[Intentionality Constraint]
+\label{def:intentionality}
+The intentionality constraint on NCCs requires that an explanatory NCC of an aspect of conscious experience must unambiguously represent that aspect.
+\end{definition}
+
+\begin{corollary}
+\label{cor:meaning}
+Conscious representations need to carry meaning about how they are representing things in addition to what they are representing.
+\end{corollary}
+
+To illustrate the strength of this constraint, let us consider again the JPEG. While the meaning of a bit string representing a JPEG image is ambiguous and meaningless by itself, given enough pairs of bit strings and images, one could deduce the decoding, and thus the meaning of the individual bit string. However, the contents of consciousness of a subject are already determined within one moment (again, subject to microgenesis constraints). There is no need for some external observer to scan the subject's brain in many different states to give meaning to the current conscious representations. To the brain itself, they carry meaning, i.e., represent a determined conscious experience, in every moment.
+
+Note that we are proposing that this intentionality constraint is a necessary, but not necessarily sufficient condition for phenomenal consciousness. While an unambiguous representation might have clear intentional content to an outside observer, this content might not ``appear to itself.'' We might have to postulate additional requirements, such as ``integration'' for consciousness to arise.
+
+\subsection{Defining Ambiguity}
+
+An unambiguous representation conveys content as well as how to decode that content, thus leaving us with only one possible interpretation. On the other hand, a representation is ambiguous to the extent that it does not exclude other possible interpretations. To allow for a spectrum of ambiguity levels, with completely ambiguous representations such as random bit strings on the one hand, and completely unambiguous conscious representations on the other, we propose the following formalism:
+
+\begin{equation}
+\text{Ambiguity} = H(I|R)
+\label{eq:ambiguity}
+\end{equation}
+
+where $H$ denotes the entropy function and $I|R$ the probability distribution of all possible interpretations given a certain representation. Of course, despite the mathematical formulation, without further assumptions this is not a computable quantity. In addition to the set of interpretations being intractable, the relationship between representations and possible interpretations is not clear, although relation-preservation might be a good candidate~\cite{kleiner2024mathematical}. Still, this definition of representational ambiguity should help the reader get a sense for what we mean with ``ambiguity.''
+
+To illustrate this formulation with a concrete example, consider a simple case where a representation $R$ can have three possible interpretations $I = \{i_1, i_2, i_3\}$. For a completely ambiguous representation (like a random bit string), the conditional probability distribution would be uniform: $p(i_1 | R) = p(i_2 | R) = p(i_3 | R) = 1/3$, yielding $H(I | R) = \log_2(3) \approx 1.58$ bits. For a partially unambiguous representation that strongly suggests one interpretation over others, we might have $p(i_1 | R) = 0.7$, $p(i_2 | R) = 0.2$, $p(i_3 | R) = 0.1$, yielding $H(I | R) = 0.9$ bits. Finally, for a completely unambiguous representation like those postulated for consciousness, we would have $p(i_1 | R) = 1$, $p(i_2 | R) = p(i_3 | R) = 0$, yielding $H(I | R) = 0$ bits. This illustrates how the ambiguity measure captures the uncertainty about the correct interpretation given a representation.
+
+\subsection{Relational Structures as Unambiguous Representations}
+
+How could any type of encoding convey meaning without presupposing a decoding scheme? We saw that a bit string cannot do the job. The reason for that is that it is a purely indexical object. A bit string is a number, and all it tells us is that it is this number and not any other number. What we need is structure. Let us illustrate this using an example. Suppose we encode a 5×5 image of a square by encoding all the values of the individual pixels, giving us a 25-dimensional vector as seen in Figure~\ref{fig:pixel-encoding} (panel a).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../figures/pixel-encoding-relational-structure.png}
+\caption{Pixel encoding and relational structure. \textbf{(a)} Visualization of the elements of a binary vector (orange=1, blue=0) as a square grid. \textbf{(b)} Set of relations between neighboring vector elements in addition to the vector elements themselves.}
+\label{fig:pixel-encoding}
+\end{figure}
+
+While Figure~\ref{fig:pixel-encoding} (panel a) looks to us like it is representing a square, this is only true because we have arranged the values of the vector in the appropriate way. The information about how the vector should be decoded is not contained within the vector itself. However, if in addition to the vector, we include a set of relations to our representations that link neighboring vector elements (panel b), then the read-out of the vector as a square grid ceases to be arbitrary. Essentially, we give every vector element a meaning by defining how it relates to other vector elements. The values of the vector lose their arbitrariness to some extent. Note that we are not claiming that this structure can account for the richness of spatial experience (see~\cite{haun2019space} for a more rigorous treatment of spatial experience in the context of IIT), but it can restrict the space of possible decodings to some extent, giving rise to the possibility of unambiguously decoding something like a square.
+
+Relational structures as physical or functional correlates of consciousness have already been discussed in much more detail by Kleiner and Ludwig~\cite{kleiner2024mathematical}. They are motivated by the idea that a mathematical structure of consciousness should be \textit{about} consciousness. In this sense, what we are proposing might be a restatement of their thesis. Nevertheless, we believe that approaching the same idea from the perspective of representations and ambiguity leads to a useful and complementary motivation for relational approaches to NCCs.
+
+Consider a musical major chord as an analogy for unambiguous relational structures. The identity of a ``major chord'' emerges not from its individual notes but from their specific intervallic relationships (root, major third, perfect fifth). C-E-G, D-F\#-A, and F-A-C are all recognized as major chords despite having different constituent notes because they maintain the same relational pattern. This structure gives each chord its characteristic ``major'' quality that remains invariant across different keys. Similarly, neural networks may encode meaning through invariant relational patterns that persist despite variations in specific activations.
+
+\subsection{Two Types of Structuralism}
+
+Within the field of consciousness research and philosophy of mind the idea of conscious experience being determined relationally is known as structuralism~\cite{lyre2022neurophenomenal}. However, it is important to note two types of structuralism:
+
+\begin{enumerate}
+    \item The content of an experience is determined by its relation to all other possible experiences that a subject could have had.
+    \item The content of an experience is determined by relations instantiated in the current moment.
+\end{enumerate}
+
+In both consciousness science and philosophy of mind literature, structuralism is often understood in the first sense~\cite{lyre2022neurophenomenal}. However, this does not address the intentionality constraint (Definition~\ref{def:intentionality}) because conscious experience is already determined in one moment. It is not clear how the mere potentiality of other experiences and their relations to the current one could actively determine the character of the current conscious experience. What we are suggesting is that conscious experience is determined in the second sense, i.e., by a relational structure that is instantiated in the current moment. It is quite possible that these two types of structuralism map onto each other somehow. Structuralism 2 might in some way be a mirror image or a consequence of structuralism 1. Nevertheless, to determine the character of the current experience, it is the second one that counts.
+
+\subsection{Physical Grounding of Relational Structures}
+
+Even if the proposed mathematical structure of experience encodes meaning intrinsically, the way this structure is obtained from the (neural) substrate cannot be arbitrary. If we need an arbitrary decoding algorithm to obtain our mathematical structure from the substrate, we again run into the problem of why this particular decoding scheme is used as opposed to any other. To avoid this, we need to unambiguously tie the relational structure to physical reality. In the following we want to list some potential requirements for this ``physical grounding'' of relational structures corresponding to conscious representations:
+
+\begin{enumerate}
+    \item \textbf{Temporal continuity of encoding.} The way elements and relations of the mathematical structure representing conscious content are implemented in the physical substrate need to stay consistent over time. To consider a silly example, suppose two elements of our relational structure are grounded in two carbon atoms, and that a relation relevant to the structure of the conscious experience of that system is grounded in a covalent bond of that structure. The fact that atoms ground elements and covalent bonds ground relations needs to stay consistent. If that were not the case, e.g., if atoms could suddenly encode relations instead of covalent bonds, there would be no way to determine contents of consciousness from a physical system.
+
+    \item \textbf{Correspondence of concrete physical entities with elements of mathematical structure.} Elements in a relational structure representing conscious contents need to correspond to physical ``objects'' that can be delineated from the rest of the universe by some objective measure. Otherwise, there remains inherent ambiguity about what the elements and relations of our structure are.
+
+    \item \textbf{Physically meaningful connection between relations and elements of mathematical structure.} Going back to our example of the carbon molecule, if two elements of a relational structure are grounded in two C atoms, then a relation between the two should be grounded in a physical quantity/object that relates the two carbon atoms. If the relation between the two elements grounded in the C atoms were grounded by a covalent bond in a different molecule, there would be inherent ambiguity about which relations link which elements of the relational structure.
+\end{enumerate}
+
+Overall, ambiguity in a representation can arise at two stages:
+\begin{enumerate}
+    \item The abstract mathematical representation is inherently ambiguous (for instance a bit string).
+    \item The way physical substrate implements this mathematical representation is ambiguous, i.e., although the abstract mathematical representation is intrinsically meaningful, it is not unambiguously decodable from the substrate. For instance, a mathematical structure (e.g., a graph) could unambiguously represent a conscious experience, but the structure is encoded in binary switches using an arbitrary encoding.
+\end{enumerate}
+
+\subsection{Neural Networks as Mathematical Structures of Consciousness}
+
+Relational structures can give meaning to elements of a representation by defining how they are related to other elements. But what kind of relational structure might be dictating the contents of our consciousness? To answer this question, let us return to the example of an image represented as a pixel vector. As mentioned previously, there is no way of knowing what a specific vector $\mathbf{v}$ is about, without being provided with the encoding scheme used. However, given the full distribution of natural images $X \sim p(x)$, we could conceivably deduce that the vectors encode something 2D (this could be achieved by noticing strong correlations between vector elements corresponding to adjacent pixels and deducing the grid from that), and additionally, we could probably decode and visualize vector $\mathbf{v}$, which is one sample of $X$.
+
+Does this make intentionality trivial? Not in the case of conscious representations. This is because a single conscious experience is already determined in the moment we are experiencing it. It does not have to be compared against the whole distribution of other possible conscious experiences, at least not explicitly. After all, to see a square, we do not have to see all possible arrangements of edges and shapes to make sense of that experience. However, implicitly we may make use of exactly this information. Through evolution and plasticity, our brain has learned to model real-world distributions in its neural circuitry. While this model only represents one, say, visual experience at any given moment, it embeds this representation within a network that models the structure of the whole distribution of all visual experiences encountered in the natural world. This way it re-instantiates the whole distribution when experiencing a single instance of it, thus giving it meaning.
+
+Essentially, by mirroring the distribution of the natural world (which involves modeling its relations), a neural network can not only unambiguously encode a mathematical structure corresponding to contents of consciousness, but the network itself might be a candidate for a mathematical structure of consciousness. This line of reasoning would arguably avoid ambiguity at both the abstract and the physical level: In terms of an abstract representation, a neural network can unambiguously represent things because it encodes an intricate web of relations modeling real-world distributions. In terms of physical implementation, the abstract network structure is grounded in physics unambiguously because it corresponds to an actual network of real physical nodes and connections between these nodes.
+
+One possible (naive) approach to think about this would be to look at neurons and their activity as elements, and connectivity as relations. However, there are still two ways to cash out network connectivity as a relational structure:
+
+\begin{enumerate}
+    \item Relations could be encoded as structural connectivity, i.e., the presence of synapses and synapse strengths.
+    \item Relations could be encoded as functional connectivity, i.e., statistical relationships of activity between neurons.
+\end{enumerate}
+
+The problem with the first option is that it comes with a certain disconnect between elements and relations of the structure, leaving open room for ambiguous representation. This is because network connections only represent the \textit{possibility} of the activity of different neurons interacting, not the actuality. If, for example, in a given instant a synapse is not involved in shaping neural activity, but it constitutes a relation of the mathematical structure of consciousness, then what gives that particular synapse a privileged role in shaping the experience of the subject as opposed to some random synapse in a different subject, or any other physical quantity for that matter?
+
+If, on the other hand, we say that only synapses currently involved in shaping neural activity constitute relations in the mathematical structure of consciousness, then to what extent is it reasonable to say that it is the synapse itself, rather than the statistical effects on neural activity, that constitutes the grounding of a relation? Thus, we believe the second option seems more reasonable, since it directly links the elements and relations of the structure of experience by grounding them in the same physical quantity: neural activity. One way to cash out this idea would be to let the magnitude of neural activity ground the presence of elements, and correlations between activity of neurons to ground relations of the mathematical structure of consciousness (similar to what Pennartz proposes~\cite{pennartz2009identification}).

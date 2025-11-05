@@ -1,0 +1,26 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+The neural basis of consciousness must explain not only \textit{that} certain brain states correspond to conscious experiences, but \textit{why} they correspond to specific experiences with determinate content. This paper addressed this intentionality constraint by formalizing the requirement that conscious representations be unambiguous—they must intrinsically specify what they represent without relying on arbitrary decoding schemes.
+
+We proposed that relational structures, where meaning emerges from patterns of relationships between elements, can achieve the required unambiguity. Drawing on information theory, we formalized representational ambiguity as $H(I|R)$, the conditional entropy of possible interpretations given a representation. Through experiments with artificial neural networks trained on image classification, we demonstrated that:
+
+\begin{itemize}
+    \item Networks naturally develop unambiguous relational representations through learning, achieving perfect decoding accuracy (ARS = 1.0) for categorical information when trained with dropout regularization
+    \item Both categorical (digit class) and spatial (pixel position) information can be decoded purely from relational structure, with neuron identities deliberately obscured
+    \item The degree of unambiguity is largely independent of task performance—networks can classify perfectly while maintaining ambiguous or unambiguous internal representations
+    \item Relational structure is architecture-invariant, suggesting it reflects properties of learned distributions rather than network specifics
+    \item Different types of information (categorical vs. spatial) exhibit different ambiguity profiles, indicating multiple mechanisms for unambiguous representation
+\end{itemize}
+
+We introduced the Ambiguity-Reduction Score (ARS), which quantifies how much training reduces representational ambiguity by bounding conditional entropy from decoder performance. This metric provides a practical tool for evaluating representational quality beyond task accuracy, with potential applications in interpretability, robustness, and consciousness research.
+
+Our findings connect to broader questions in philosophy of mind, neuroscience, and artificial intelligence. They support sophisticated representationalism: conscious experiences may be representations, but only certain kinds—unambiguous relational representations that intrinsically specify content. They complement Integrated Information Theory by focusing on determinacy and unambiguity rather than integration. They align with the Platonic Representation Hypothesis by suggesting that representational convergence occurs because training reduces ambiguity toward the intrinsic structure of reality.
+
+While this work does not solve the hard problem of consciousness—explaining why physical processes give rise to subjective experience—it addresses an important prerequisite by showing how physical systems can achieve representations with determinate content. The intentionality constraint provides a principled filter for evaluating proposed neural correlates: any candidate NCC must explain not just correlation but content specificity, ruling out representations that require arbitrary interpretation.
+
+Several important questions remain open. Does functional connectivity (activity correlations) provide even more unambiguous representations than the structural connectivity we examined? Do biological neural networks develop similar relational structures? Can we build truly universal decoders that eliminate context dependence, measuring $H(I|R)$ rather than $H(I|R,C)$? What additional properties beyond unambiguity—integration, global availability, recurrence—are required for consciousness?
+
+Nevertheless, our results demonstrate that the problem of representational ambiguity—long considered a philosophical puzzle—can be approached through rigorous experimental investigation. Neural networks provide tractable model systems for studying how physical systems develop unambiguous representations. The methods developed here—relational preprocessing, geometric structure matching, and the ARS metric—offer practical tools for quantifying and comparing representations across systems.
+
+Ultimately, understanding consciousness requires understanding representation. By formalizing and measuring representational ambiguity, we take a step toward explaining not just which neural activity correlates with conscious experience, but why it does—why certain patterns of activity are \textit{about} seeing apples rather than oranges, experiencing red rather than blue, or feeling pain rather than pleasure. The unambiguity of relational representations provides a foundation for determinate content, bringing us closer to bridging the explanatory gap between physical processes and phenomenal experience.

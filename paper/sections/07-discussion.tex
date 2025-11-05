@@ -1,0 +1,183 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Summary of Main Findings}
+
+This work makes both theoretical and empirical contributions to understanding how neural systems can represent information unambiguously—a necessary condition for consciousness according to our intentionality constraint. Theoretically, we formalized the requirement that conscious representations must be unambiguous in terms of conditional entropy $H(I|R)$, and we proposed that relational structures can satisfy this requirement by intrinsically encoding both content and its interpretation. Empirically, we demonstrated that neural networks trained on image classification naturally develop such unambiguous relational representations, achieving perfect decoding accuracy (ARS = 1.0) for categorical information and substantial accuracy (ARS = 0.65) for spatial information.
+
+\subsection{Implications for Consciousness Research}
+
+\subsubsection{The Intentionality Constraint as a Filter for NCCs}
+
+Our theoretical framework provides a principled filter for evaluating proposed neural correlates of consciousness. Any candidate NCC must explain not only \textit{that} a conscious experience occurs, but \textit{why} it has specific content rather than other possible contents. This intentionality constraint (Definition~\ref{def:intentionality}) rules out representations that require arbitrary decoding schemes, such as:
+
+\begin{itemize}
+    \item Pure population codes where neuron identity is arbitrary
+    \item Representations requiring learned read-out mechanisms that could be applied differently
+    \item Indexical representations (like bit strings) without relational structure
+\end{itemize}
+
+Instead, the constraint favors representations where meaning emerges from intrinsic structure—particularly relational structures where each element's meaning is determined by its relationships to other elements.
+
+\subsubsection{Connection to Integrated Information Theory}
+
+Our framework resonates with Integrated Information Theory (IIT)~\cite{haun2019space,kleiner2024mathematical}, which also emphasizes the importance of intrinsic structure and relations for consciousness. However, our approach differs in emphasis:
+
+\begin{itemize}
+    \item \textbf{IIT focus:} Integration and irreducibility of experience; the maximally irreducible conceptual structure (MICS) as the substrate of consciousness
+    \item \textbf{Our focus:} Unambiguity and determinacy of content; relational structure as the means to achieve unambiguous representation
+\end{itemize}
+
+These perspectives are complementary. IIT's integration requirements might explain \textit{why} certain structures are conscious (they cannot be reduced to independent parts), while our unambiguity requirement explains \textit{what} the conscious content is about (the relational structure unambiguously specifies content).
+
+Notably, we distinguish between two types of structuralism (Section~\ref{sec:theory}): (1) content determined by relations to all \textit{possible} experiences, and (2) content determined by relations instantiated \textit{in the current moment}. We argue that type (2) is necessary for explaining the determinacy of current experience, though these two types may ultimately be related.
+
+\subsubsection{Functional vs. Structural Connectivity}
+
+We acknowledged that our experiments examine structural connectivity (synaptic weights) rather than functional connectivity (activity correlations), which may be more appropriate for grounding conscious representations. However, structural connectivity should constrain and enable functional connectivity patterns. The fact that we can decode representational content from structural connectivity suggests that the learned weight patterns reflect the functional relationships that would arise during processing.
+
+Future work should explicitly test whether functional connectivity (measured through activity correlations during stimulus processing) provides even more unambiguous representations than structural connectivity. We predict that functional connectivity will show higher ARS values, particularly for representations more directly related to current sensory input.
+
+\subsection{Connection to the Platonic Representation Hypothesis}
+
+Recent work by Huh et al.~\cite{huh2024platonic} proposed the Platonic Representation Hypothesis: that neural networks trained on different tasks and modalities converge toward a shared representation space reflecting the statistical structure of reality. They used mutual k-nearest neighbor (k-NN) kernel similarity to measure representational alignment across models.
+
+Our findings complement and extend this work:
+
+\begin{itemize}
+    \item \textbf{Theoretical connection:} The Platonic Representation Hypothesis implicitly assumes that reality has a determinate structure that can be captured in representations. Our framework makes this explicit: unambiguous representations mirror the relational structure of the world, and this mirroring is what allows multiple networks to converge toward similar representations.
+
+    \item \textbf{Empirical connection:} Figure~\ref{fig:knn-similarity} shows that k-NN kernel similarity correlates with decoder accuracy (and thus inversely with ambiguity) in our MNIST networks.
+
+    \item \textbf{Ambiguity as a mechanism:} We propose that representational convergence occurs \textit{because} training reduces ambiguity. Networks that learn unambiguous relational structures necessarily align with each other and with the structure of reality.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{../figures/knn-kernel-similarity-vs-decoder-accuracy.png}
+\caption{k-NN kernel similarity vs. decoder accuracy. Mutual k-NN kernel similarity (computed by comparing output weights across networks trained with different seeds) correlates with decoding accuracy. This suggests that higher kernel similarity indicates lower representational ambiguity, potentially extending to large-scale multimodal models.}
+\label{fig:knn-similarity}
+\end{figure}
+
+This connection suggests that if the pattern holds for larger, multimodal models, then higher representational alignment (as measured by k-NN similarity) should correlate with lower ambiguity. This would provide a practical tool for identifying which representations in large models achieve the unambiguity required for consciousness-relevant representations.
+
+\subsection{Architectural and Training Considerations}
+
+\subsubsection{The Role of Dropout}
+
+Our most striking finding is that dropout regularization produces dramatically more unambiguous representations for categorical information (ARS = 1.0 vs. 0.12), despite identical task performance. This effect likely arises because dropout forces distributed representations by preventing co-adaptation of neurons~\cite{baldi2013understanding}.
+
+For categorical information, this distribution creates distinctive relational geometries: neurons representing similar categories develop similar weight patterns because they must rely on overlapping features. For spatial information, however, dropout slightly reduces unambiguity (ARS = 0.42 vs. 0.65). This suggests that spatial structure benefits from more localized representations where individual weights can encode spatial relationships more directly.
+
+These findings have practical implications:
+\begin{itemize}
+    \item For applications requiring interpretable categorical representations, dropout should be strongly favored
+    \item For spatial or continuous representations, standard training may suffice
+    \item Different regularization schemes might optimize different aspects of representational unambiguity
+\end{itemize}
+
+\subsubsection{Architecture Invariance}
+
+The cross-architecture transfer results (Figures~\ref{fig:arch-transfer-decoder} and~\ref{fig:arch-transfer-gram}) demonstrate that relational structure is largely invariant to architectural details. This has important theoretical implications:
+
+\begin{itemize}
+    \item Relational representations reflect properties of the \textit{learned distribution} rather than architectural specifics
+    \item The same informational content can be encoded in networks of different sizes and shapes
+    \item This suggests that consciousness might not depend on specific architectural features, but rather on achieving appropriate relational structure—regardless of how that structure is implemented
+\end{itemize}
+
+This architecture invariance parallels the substrate independence often discussed in philosophy of mind: if consciousness depends on functional/relational organization rather than specific physical implementation, then different physical substrates could support the same conscious content provided they instantiate the same relational structure.
+
+\subsection{Limitations and Future Directions}
+
+\subsubsection{Limitations of Current Work}
+
+Several limitations constrain our conclusions:
+
+\begin{enumerate}
+    \item \textbf{Simple domains:} MNIST and Fashion-MNIST are relatively simple, structured datasets. Whether similar unambiguity emerges in more complex, naturalistic domains remains to be tested.
+
+    \item \textbf{Structural vs. functional connectivity:} Our analysis of synaptic weights rather than activity patterns may not capture the most consciousness-relevant aspects of neural representation.
+
+    \item \textbf{Context conditioning:} Our measurements yield $H(I|R,C)$ rather than $H(I|R)$, requiring context about task domain. While we argue this is not problematic (Section~\ref{sec:ambiguity}), a truly universal decoder would be preferable.
+
+    \item \textbf{Feedforward networks:} We examined only feedforward architectures. Recurrent networks, which are more biologically plausible and can implement dynamic processes, might show different patterns of representational ambiguity.
+
+    \item \textbf{Single time point analysis:} Consciousness is a dynamic process unfolding over time. Our analysis of static connectivity patterns cannot capture temporal aspects of representation.
+\end{enumerate}
+
+\subsubsection{Future Research Directions}
+
+Several promising directions emerge from this work:
+
+\paragraph{Extending to complex domains:}
+Applying these methods to natural image datasets (ImageNet, video data) and multimodal representations (vision-language models) would test whether unambiguous relational representations scale to realistic complexity. We predict that larger models trained on richer data will show even higher ARS values as they capture more of the relational structure of reality.
+
+\paragraph{Functional connectivity analysis:}
+Measuring representational ambiguity from activity patterns during stimulus processing would better match theoretical requirements for consciousness. This could involve computing correlations between neuron activations during natural stimulus presentation and testing whether these functional relationships provide more unambiguous representations than static weights.
+
+\paragraph{Temporal dynamics:}
+Extending the framework to recurrent networks and analyzing how representations evolve over time during stimulus processing would address the dynamic nature of consciousness. Time-resolved ARS measurements could track how ambiguity changes as information propagates through the network.
+
+\paragraph{Biological neural networks:}
+Applying relational decoding to neurophysiological data (e.g., multi-electrode recordings) would test whether biological neural networks also develop unambiguous relational representations. This might require new methods for estimating functional connectivity from spike trains.
+
+\paragraph{Universal decoders:}
+Training decoders on diverse tasks and modalities could reduce context dependence, moving from $H(I|R,C)$ toward $H(I|R)$. This might reveal whether truly context-free unambiguous representations are achievable.
+
+\paragraph{Comparing theories:}
+Using ARS as a common currency to evaluate different theories of consciousness. Which neural representations achieve the highest ARS: those maximizing integration (IIT), global availability (Global Workspace Theory), or predictive accuracy (Predictive Processing)?
+
+\subsection{Philosophical Implications}
+
+\subsubsection{The Hard Problem and Unambiguity}
+
+Our work does not solve the hard problem of consciousness—explaining why and how physical processes give rise to subjective experience. However, it addresses an important prerequisite: the intentionality constraint. Before we can explain why certain physical processes are conscious, we must explain why they have \textit{specific} content. Our framework shows that relational structures can satisfy this requirement by achieving unambiguous representation.
+
+This suggests that the hard problem might decompose into sub-problems:
+\begin{enumerate}
+    \item How do physical systems achieve unambiguous representations? (Addressed by our work)
+    \item Why do unambiguous representations (or certain types of them) give rise to subjective experience? (Remains open)
+    \item What additional properties (integration, global availability, etc.) are required beyond unambiguity? (Requires further investigation)
+\end{enumerate}
+
+\subsubsection{Representationalism Revisited}
+
+Our framework supports a sophisticated form of representationalism: conscious experiences are representations, but not all representations are conscious. Specifically, only \textit{unambiguous} relational representations that intrinsically specify their content could be conscious. This explains why:
+
+\begin{itemize}
+    \item Random neural activity is not conscious (ARS $\approx$ 0)
+    \item Simple feedforward processing might not be conscious even when task-relevant (ARS can be low despite good performance)
+    \item Highly integrated, relational representations are candidates for consciousness (ARS $\approx$ 1)
+\end{itemize}
+
+This suggests that consciousness requires not just representation, but a specific \textit{kind} of representation—one that achieves the unambiguity required for determinate content.
+
+\subsection{Implications Beyond Consciousness}
+
+While motivated by consciousness research, our framework has broader implications:
+
+\paragraph{Interpretability:}
+ARS provides a quantitative measure of how unambiguous neural network representations are, potentially useful for evaluating interpretability. More unambiguous representations should be more interpretable to external observers.
+
+\paragraph{Robustness:}
+Unambiguous representations might be more robust to perturbations, since their meaning is intrinsically determined rather than dependent on specific decoding schemes.
+
+\paragraph{Transfer learning:}
+Representations with low ambiguity might transfer better across tasks, since they capture fundamental structure rather than task-specific patterns.
+
+\paragraph{AI safety:}
+Understanding what neural networks truly represent (reducing ambiguity in our interpretation of their representations) is crucial for ensuring they behave as intended.
+
+\subsection{Conclusion of Discussion}
+
+Our theoretical and empirical investigation demonstrates that:
+\begin{enumerate}
+    \item The intentionality constraint provides a principled requirement for consciousness-relevant representations
+    \item Relational structures can satisfy this constraint by achieving unambiguous representation
+    \item Neural networks naturally develop such structures through learning
+    \item The degree of unambiguity can be quantified using the ARS metric
+    \item Different training procedures and information types yield different ambiguity profiles
+\end{enumerate}
+
+These findings bridge theoretical philosophy of mind, computational neuroscience, and machine learning, providing both conceptual clarity and practical tools for investigating the neural basis of conscious content.
