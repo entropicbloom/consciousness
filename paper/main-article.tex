@@ -1,0 +1,66 @@
+% Standard Article Class Version
+% For easy compilation without MDPI template
+\documentclass[11pt,a4paper]{article}
+
+% LaTeX packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{subcaption}
+\usepackage{natbib}
+\usepackage{times}
+
+% Theorem environments
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+
+% Title and authors
+\title{\textbf{Unambiguous Representations in Neural Networks: A Relational Structure Approach to Consciousness}}
+
+\author{
+    Anonymous Author$^{1}$\\
+    \small $^{1}$Affiliation\\
+    \small \texttt{anonymous@example.com}
+}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Theories of consciousness must explain not only \textit{that} neural activity gives rise to experience, but \textit{why} specific activity patterns correspond to specific conscious contents. This intentionality constraint poses a fundamental challenge: how can physical patterns be intrinsically \textit{about} something without requiring arbitrary interpretation? We argue that conscious representations must be unambiguous—intrinsically specifying their content without external decoding schemes. Drawing on information theory, we formalize representational ambiguity as $H(I|R,C)$, the conditional entropy of possible interpretations given a representation. We propose that relational structures, where meaning emerges from patterns of relationships between elements, can achieve the required unambiguity. Testing this empirically, we train neural networks on image classification and demonstrate that class identity and spatial position can be decoded from network connectivity using only relational information, achieving up to 100\% accuracy through geometric structure matching. We introduce the Ambiguity-Reduction Score (ARS) to quantify representational ambiguity, finding that dropout regularization produces completely unambiguous representations ($\text{ARS} = 1.0$, $H(I|R,C) = 0$) for categorical content despite identical task performance to standard training. Our results establish that neural networks naturally develop unambiguous relational representations through learning, providing both a theoretical framework and practical methods for investigating how physical systems achieve determinate representational content.
+\end{abstract}
+
+\textbf{Keywords:} consciousness; neural correlates; representation; ambiguity; information theory; neural networks; relational structure
+
+\section*{} % spacing
+
+% Include sections
+\input{sections/01-introduction}
+\input{sections/02-theory}
+\input{sections/03-methods}
+\input{sections/04-experiment1}
+\input{sections/05-experiment2}
+\input{sections/06-ambiguity-analysis}
+\input{sections/07-discussion}
+\input{sections/08-conclusion}
+
+% References
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

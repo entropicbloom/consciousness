@@ -1,0 +1,175 @@
+\section{Quantifying Representational Ambiguity}
+\label{sec:ambiguity}
+
+\subsection{From Decoder Accuracy to Ambiguity}
+
+In Section~\ref{sec:theory}, we defined representational ambiguity as $H(I|R)$: the entropy over all possible interpretations given a representation. Our experiments demonstrated that decoders can recover representational content by analyzing relational structure. However, to link decoder performance more directly to the theoretical concept of ambiguity, we need a quantitative framework.
+
+In practice, we never possess a ``God's eye'' universal decoder. Every decoder we train is built for a specific task context $C$. For instance, ``these ten labels are the MNIST digits'' or ``the target is the distance of a pixel from image center.'' Because $C$ is baked into the trained decoder, the quantity we can bound in experiments is
+
+\begin{equation}
+H(I|R,C)
+\label{eq:conditional-ambiguity}
+\end{equation}
+
+the entropy that remains given both the relational structure encoded in $R$ and the contextual constraint that interpretations must come from the known label set defined by $C$. By translating decoding performance into an upper bound on $H(I|R,C)$, we obtain a lower bound on how much ambiguity the training process has eliminated within that context.
+
+This shifts our theory-experiment link from $H(I|R)$ to $H(I|R,C)$, but preserves the central idea: less ambiguous representations are those that admit fewer alternative interpretations even when the task is specified.
+
+\subsection{The Ambiguity-Reduction Score (ARS)}
+
+To quantify ambiguity reduction, we define the Ambiguity-Reduction Score:
+
+\begin{equation}
+\mathrm{ARS} = 1 - \frac{H(I|R,C)}{H_{\max}}
+\label{eq:ars}
+\end{equation}
+
+where $H(I|R,C)$ is the conditional entropy of interpretations $I$ given a representation $R$ under task context $C$, and $H_{\max}$ is the entropy of a completely ambiguous representation:
+\begin{itemize}
+    \item For classification: $H_{\max} = \log_2 K$ where $K$ is the number of classes
+    \item For regression: $H_{\max} = h(Y)$ where $h(Y)$ is the differential entropy of the target variable
+\end{itemize}
+
+The ARS ranges from 0 to 1:
+\begin{itemize}
+    \item $\mathrm{ARS} \approx 0$ indicates maximally ambiguous representations
+    \item $\mathrm{ARS} \approx 1$ indicates fully unambiguous representations
+\end{itemize}
+
+\subsection{Deriving ARS from Classification Accuracy}
+
+For classification tasks, Fano's inequality provides a lower bound on conditional entropy from top-1 accuracy $A$:
+
+\begin{equation}
+H(I|R,C) \leq h_b(1-A) + (1-A)\log_2(K-1)
+\label{eq:fano}
+\end{equation}
+
+where $h_b(p) = -p\log_2(p) - (1-p)\log_2(1-p)$ is the binary entropy function. This yields:
+
+\begin{equation}
+\boxed{
+\mathrm{ARS} \geq 1 - \frac{h_b(1-A) + (1-A)\log_2(K-1)}{\log_2 K}
+}
+\label{eq:ars-classification}
+\end{equation}
+
+Note that since this bound relies only on top-1 accuracy (treating every mistake as if any of the other $K-1$ classes could be correct), it overestimates residual ambiguity. Thus, the reported ARS values are \textit{conservative lower bounds} on the true ambiguity reduction.
+
+\subsection{Deriving ARS from Regression Performance}
+
+For regression tasks, assuming Gaussian residuals and standardizing the target so $\mathrm{Var}(Y) = 1$, the conditional entropy is bounded by:
+
+\begin{equation}
+H(Y|R,C) \leq \frac{1}{2}\log_2(2\pi e \cdot (1-R^2))
+\label{eq:regression-entropy}
+\end{equation}
+
+where $R^2$ is the coefficient of determination. This leads to:
+
+\begin{equation}
+\boxed{
+\mathrm{ARS} \geq \frac{\log_2[1/(1-R^2)]}{\log_2(2\pi e)} \approx \frac{\log_2[1/(1-R^2)]}{4.094}
+}
+\label{eq:ars-regression}
+\end{equation}
+
+\subsection{Results: Experiment 1 (MNIST Class Identity)}
+
+For Experiment 1, we use the Gram matrix matching accuracies, which provide stronger and more stable bounds than the self-attention decoder. Table~\ref{tab:ars-exp1} shows the results.
+
+\begin{table}[h]
+\centering
+\caption{Ambiguity-Reduction Scores for MNIST class identity decoding (Experiment 1). ARS calculated using Equation~\ref{eq:ars-classification} with $K=10$ classes.}
+\label{tab:ars-exp1}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Training Paradigm} & \textbf{Accuracy} & \textbf{ARS (lower bound)} \\
+\midrule
+Dropout           & 1.000 & 1.000 \\
+No Dropout        & 0.383 & 0.122 \\
+Untrained         & 0.120 & 0.001 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The results reveal striking differences in representational ambiguity:
+
+\begin{itemize}
+    \item \textbf{Dropout networks:} Achieve $\mathrm{ARS} = 1.000$, indicating \textit{perfect} unambiguity. The representation fully determines class identity with zero remaining entropy. This represents a complete solution to the ambiguity problem for categorical representations in this domain.
+
+    \item \textbf{Standard backpropagation:} Achieve $\mathrm{ARS} = 0.122$, indicating substantial remaining ambiguity despite successful task learning. While these networks classify MNIST with $\approx 97\%$ accuracy, their internal representations remain largely ambiguous from a relational perspective.
+
+    \item \textbf{Untrained networks:} Achieve $\mathrm{ARS} = 0.001$, confirming near-total ambiguity in random representations.
+\end{itemize}
+
+These results demonstrate that task performance alone does not guarantee unambiguous representations. Dropout networks and standard networks achieve identical classification accuracy, yet differ dramatically in representational ambiguity (ARS = 1.000 vs. 0.122). This dissociation suggests that unambiguity is a distinct property from task performance—one that may be particularly relevant for consciousness.
+
+\subsection{Results: Experiment 2 (Spatial Position)}
+
+For Experiment 2, we apply Equation~\ref{eq:ars-regression} to the $R^2$ scores for distance-from-center prediction. Table~\ref{tab:ars-exp2} shows the results.
+
+\begin{table}[h]
+\centering
+\caption{Ambiguity-Reduction Scores for spatial position decoding (Experiment 2). ARS calculated using Equation~\ref{eq:ars-regression}.}
+\label{tab:ars-exp2}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Training Paradigm} & \textbf{$R^2$} & \textbf{ARS (lower bound)} \\
+\midrule
+No Dropout        & 0.844 & 0.654 \\
+Dropout           & 0.695 & 0.419 \\
+Untrained         & $-0.008$ & 0.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The spatial decoding results show a different pattern:
+
+\begin{itemize}
+    \item \textbf{Standard backpropagation:} Achieve $\mathrm{ARS} = 0.654$, indicating that spatial information is substantially less ambiguous than categorical information was in standard networks (0.122). This suggests spatial structure may be more naturally encoded in weight patterns.
+
+    \item \textbf{Dropout networks:} Achieve $\mathrm{ARS} = 0.419$, surprisingly \textit{lower} than standard networks. This contrasts with the categorical case and suggests that dropout's effect on representation depends on the type of information being encoded.
+
+    \item \textbf{Untrained networks:} Achieve $\mathrm{ARS} = 0.000$, again confirming that random weights encode no meaningful structure.
+\end{itemize}
+
+\subsection{Interpretation: Context-Conditioned Ambiguity}
+
+Our experimental measurements yield $H(I|R,C)$ rather than the theoretically ideal $H(I|R)$. Does this conditional formulation undermine the framework? We argue that it does not, for several reasons:
+
+\begin{enumerate}
+    \item \textbf{Context is partially encoded in representations:} The dataset classification results (Section~\ref{sec:exp1}) demonstrate that key components of $C$ can be inferred from $R$ itself. We achieve 99.8\% accuracy distinguishing MNIST from Fashion-MNIST networks based solely on relational structure, showing that task domain—a major component of $C$—is actually encoded in $R$. This suggests that the distinction between $I$ (content to be decoded) and $C$ (context) is somewhat artificial, arising only because our decoder operates in a limited domain.
+
+    \item \textbf{Toward universal decoders:} A universal decoder trained on relational structures across large, multi-modal neural networks could potentially eliminate the need for explicit context conditioning. The cross-architecture transfer results suggest this is feasible—relational structure is architecture-invariant and reflects properties of learned distributions rather than network specifics.
+
+    \item \textbf{Biological context:} For biological consciousness, the relevant context $C$ is presumably quite broad—roughly ``our part of the universe and our sensory modalities.'' This is not an arbitrarily narrow context but rather the natural domain of organismal experience. Our results suggest that within appropriately broad contexts, representations can achieve the required unambiguity.
+\end{enumerate}
+
+\subsection{Practical Implications}
+
+The ARS metric provides several practical benefits:
+
+\begin{enumerate}
+    \item \textbf{Quantifying representational quality:} ARS offers a principled measure of representation quality beyond task performance, potentially useful for comparing neural network architectures, training procedures, and regularization schemes.
+
+    \item \textbf{Identifying consciousness-relevant representations:} If unambiguous representations are necessary for consciousness, ARS provides a quantitative tool for identifying which neural representations might support conscious content.
+
+    \item \textbf{Guiding architecture search:} Training procedures that maximize ARS (like dropout for categorical representations) might be preferable for applications requiring interpretable, unambiguous representations.
+
+    \item \textbf{Measuring alignment:} The connection between ARS and representational alignment (see Section~\ref{sec:discussion}) suggests that ARS might serve as a metric for comparing representations across different systems.
+\end{enumerate}
+
+\subsection{Summary}
+
+Our quantitative analysis reveals:
+
+\begin{itemize}
+    \item Neural networks can achieve \textbf{perfect unambiguity} (ARS = 1.0) for categorical representations when trained with appropriate regularization.
+    \item Spatial representations achieve \textbf{substantial unambiguity} (ARS $\approx$ 0.65) even without specialized training procedures.
+    \item Task performance and representational ambiguity are \textbf{partially dissociable}—networks can classify perfectly while maintaining ambiguous or unambiguous internal representations.
+    \item Different types of information (categorical vs. spatial) exhibit \textbf{different ambiguity profiles}, suggesting multiple mechanisms for unambiguous representation.
+\end{itemize}
+
+These findings provide quantitative support for the theoretical claim that neural networks can develop the unambiguous relational representations required by the intentionality constraint on conscious experience.

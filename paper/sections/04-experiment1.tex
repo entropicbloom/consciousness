@@ -1,0 +1,216 @@
+\section{Experiment 1: Decoding MNIST Digit Class from Relational Structure}
+\label{sec:exp1}
+
+\subsection{Motivation}
+
+In this experiment we demonstrate that artificial neural networks can unambiguously represent categorical information through relational structure in their connectivity. The core idea is that networks trained on MNIST learn to organize output neurons in a way that reflects the structure of the digit distribution. Within this relational structure, we hypothesize that each MNIST class occupies a unique position relative to other classes. If this hypothesis is correct, we should be able to identify which digit a given output neuron represents purely from its relational position within the output layer—even when neuron labels are randomly permuted.
+
+This deviates somewhat from the idea that functional connectivity (activity correlations) rather than structural connectivity grounds conscious representations. However, the experiment is relevant for two reasons: First, we are primarily interested in whether networks that emerge from learning an input distribution can unambiguously encode information in principle, regardless of exact physical implementation. Second, functional networks ultimately emerge from structural networks and the latter should be reflected in the former.
+
+\subsection{Results: Self-Attention Decoder}
+
+\subsubsection{Main Results}
+
+We trained self-attention decoders on three datasets generated from networks using different training paradigms: untrained (control), standard backpropagation, and backpropagation with dropout. Figure~\ref{fig:decoder-accuracy} shows the validation accuracy progression during decoder training.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../figures/decoder-validation-accuracy-training-paradigms.png}
+\caption{Decoder validation accuracy across training paradigms. Progression of validation accuracy during 200 epochs of training the decoder to identify output neuron classes based on relational structure. Error margins reflect standard deviation across 5 random seeds. The three training paradigms refer to the base MNIST networks used to generate decoder training data.}
+\label{fig:decoder-accuracy}
+\end{figure}
+
+The results demonstrate that output neuron class identity can be decoded from relational structure alone:
+
+\begin{itemize}
+    \item \textbf{Untrained networks (control):} Achieve only chance-level accuracy ($\approx 10\%$), confirming that random weights contain no meaningful relational structure.
+
+    \item \textbf{Standard backpropagation:} Achieve approximately 25\% accuracy, well above chance but indicating substantial remaining ambiguity.
+
+    \item \textbf{Backpropagation with dropout:} Achieve approximately 75\% accuracy, representing a dramatic improvement and suggesting that dropout produces significantly more distinctive relational structure.
+\end{itemize}
+
+The superior performance of dropout-trained networks aligns with theoretical understanding of dropout as encouraging distributed representations and population coding~\cite{baldi2013understanding}. If output neurons rely on population activity of the last hidden layer, output neurons representing similar digits should have similar input weights because they share more features than neurons representing dissimilar digits.
+
+\subsubsection{Verification: MNIST Classification Performance}
+
+To verify that dropout's effect on relational structure is independent of task performance, Figure~\ref{fig:mnist-accuracy} shows the classification accuracy of the base MNIST networks themselves.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{../figures/mnist-model-validation-accuracies.png}
+\caption{MNIST model validation accuracies. Classification accuracies of the base MNIST networks used to generate decoder training data, across 10 randomly sampled seeds for each training paradigm.}
+\label{fig:mnist-accuracy}
+\end{figure}
+
+Critically, both standard and dropout-trained networks achieve virtually identical MNIST classification accuracy ($\approx 97\%$), yet yield dramatically different decoder accuracies (25\% vs 75\%). This dissociation demonstrates that the degree to which representations are ambiguous is largely orthogonal to task performance. Dropout fundamentally alters how information is represented within the network, creating more distinctive relational geometries while leaving task performance unchanged.
+
+\subsection{Ablation: Importance of Full Relational Structure}
+
+To verify that the decoder exploits the full relational geometry rather than just local patterns around the target neuron, we reran the experiment providing only the first row of $\mathbf{X}'$ (the target neuron's cosine similarities to all others), while masking out all pairwise similarities between non-target neurons.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{../figures/target-similarity-only-output-neurons.png}
+\caption{Ablation: target similarity only for output neurons. Decoder accuracy when provided with full relational structure (blue) versus only the target neuron's local neighborhood (orange). Accuracy plummets when contextual structure is removed, demonstrating that the decoder requires the full relational geometry to disambiguate class identity.}
+\label{fig:ablation-target-only}
+\end{figure}
+
+Figure~\ref{fig:ablation-target-only} shows that accuracy drops substantially when contextual structure is removed. A single neuron's local neighborhood is insufficient to accurately determine its class identity; the decoder takes into account how the rest of the output population is organized to disambiguate which digit the target neuron represents. This confirms that unambiguous representation emerges from the full relational structure, not merely from local pairwise relationships.
+
+\subsection{Ablation: Effect of Neuron Count}
+
+To investigate how relational structure complexity affects decoding accuracy, we systematically reduced the number of output neurons available to the decoder. Figure~\ref{fig:ablation-neuron-count} shows both absolute accuracy and performance relative to random guessing across different neuron counts.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../figures/ablation-study-neuron-count-performance.png}
+\caption{Ablation: neuron count performance. Top panel compares validation accuracy (purple) to random guessing baseline (green) for networks with 2-10 output neurons. Bottom panel shows relative performance gain compared to random guessing. The 2-neuron case achieves only random-level performance (1.0×), validating that asymmetric relational structures are necessary. Performance relative to random chance increases consistently with neuron count, with the 10-neuron model achieving 7.36× better than random.}
+\label{fig:ablation-neuron-count}
+\end{figure}
+
+Our results confirm that asymmetric relational structures between output neurons are essential for decoding to function. The 2-neuron case performs exactly at random chance level (50\%, or 1.0×), since asymmetric relations cannot exist between only two points. While the 5-neuron condition achieves the highest absolute validation accuracy (79.1\%), performance relative to random guessing increases consistently with neuron count. The 10-neuron model performs 7.36× better than random (73.6\% absolute), suggesting that decoder accuracy should continue to improve with more complex input distributions as the ambiguity of underlying representations decreases.
+
+\subsection{Results: Geometric Structure Matching}
+
+Having established that learned decoders can extract relational structure, we investigated whether the geometric structure itself is sufficiently distinctive and consistent across networks to enable direct matching without requiring a trained decoder.
+
+\subsubsection{Method}
+
+We constructed a reference Gram matrix by averaging cosine similarity matrices from 5 reference networks trained on MNIST with dropout. For each validation network, we evaluated all 10! = 3,628,800 possible permutations of output neurons to find which ordering produces a Gram matrix closest to the reference geometry using Frobenius distance.
+
+\subsubsection{Results}
+
+Table~\ref{tab:gram-accuracy} shows decoding accuracies using geometric matching across training paradigms.
+
+\begin{table}[h]
+\centering
+\caption{Gram matrix decoding accuracies using 5 reference networks and 10 validation networks.}
+\label{tab:gram-accuracy}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Training Paradigm} & \textbf{Accuracy} & \textbf{Std Dev} \\
+\midrule
+Untrained       & 0.100 & 0.155 \\
+No dropout      & 0.383 & 0.441 \\
+Dropout         & 1.000 & 0.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The geometric matching approach achieves remarkably higher accuracies than the self-attention decoder, reaching \textbf{perfect 100\% accuracy} for dropout-trained networks while requiring significantly fewer reference networks (5 vs 800 base networks for training the learned decoder). The untrained networks perform at chance level as expected, while standard backpropagation networks achieve 38.3\% accuracy.
+
+Most strikingly, the dropout condition achieves perfect decoding with zero variance across all validation networks. This demonstrates that dropout creates consistent and distinctive relational geometries between output neurons across different network instances—the relational structure is truly unambiguous.
+
+\subsubsection{Understanding Perfect Accuracy: Permutation Distance Distributions}
+
+To understand why dropout achieves perfect accuracy while vanilla backpropagation struggles, we examined the distribution of Frobenius distances for all possible permutations. Figures~\ref{fig:perm-dist-nodropout} and~\ref{fig:perm-dist-dropout} show these distributions for representative networks.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\textwidth]{../figures/perm_distances_no_dropout.png}
+\caption{No dropout}
+\label{fig:perm-dist-nodropout}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\textwidth]{../figures/perm_distances_dropout.png}
+\caption{Dropout}
+\label{fig:perm-dist-dropout}
+\end{subfigure}
+\caption{Permutation distance distributions. Histograms show Frobenius distances between reference and test Gram matrices across all possible permutations. Red dots indicate the true permutation. \textbf{(a)} For networks without dropout, the true permutation has only a small margin over incorrect permutations, making it easily confused with alternatives. \textbf{(b)} For dropout networks, the true permutation shows a substantial gap from all incorrect alternatives, creating an unambiguous geometric signature.}
+\label{fig:perm-dist}
+\end{figure}
+
+For networks without dropout (Figure~\ref{fig:perm-dist-nodropout}), the true permutation (red dot) has only a tiny margin over incorrect permutations, making it easily confused with alternatives. In contrast, dropout networks (Figure~\ref{fig:perm-dist-dropout}) show a substantial gap between the correct permutation and all others, creating an unambiguous geometric signature that reliably identifies the true class ordering.
+
+This geometric clarity explains why both our learned decoder approach (75\% accuracy) and direct matching approach (100\% accuracy) achieve their best performance on dropout networks—the underlying relational structure is fundamentally more distinctive and consistent.
+
+\subsubsection{Interpreting Perfect Accuracy: Complete Unambiguity}
+
+The 100\% accuracy achieved by geometric matching on dropout networks deserves careful interpretation, as it represents a remarkable result both empirically and theoretically.
+
+\textbf{What 100\% accuracy means:} Perfect decoding accuracy indicates that, across all tested network instances, the true class ordering minimizes the distance to the reference geometry with zero exceptions. This means that the relational geometry of the output layer is not merely similar across networks—it is effectively identical up to permutation. Each digit class occupies a consistent, unique position in the 10-dimensional relational space that is perfectly preserved across different random initializations and training trajectories.
+
+\textbf{Theoretical implications:} In terms of our ambiguity framework, perfect accuracy implies $H(I|R,C) = 0$ for categorical class identity within the MNIST context. Given the relational structure of a dropout-trained network, there is zero remaining entropy about which neuron represents which digit. The representation is \textit{completely unambiguous} with respect to this interpretive task.
+
+This is precisely what the intentionality constraint (Definition~\ref{def:intentionality}) requires: the representation intrinsically specifies its content without any remaining ambiguity. Unlike a bit string, which could mean anything depending on the decoder applied, the relational geometry unambiguously specifies ``this neuron represents the digit 3'' and no other interpretation is consistent with the structural evidence.
+
+\textbf{Why dropout enables this:} The perfect consistency suggests that dropout fundamentally changes how networks represent categorical information. Rather than allowing each network to find an arbitrary solution within the space of functionally equivalent representations, dropout constrains learning to converge on a canonical relational structure. This structure reflects the intrinsic geometry of the MNIST distribution itself—the ways in which different digits are objectively similar or dissimilar in visual feature space.
+
+\textbf{Contrast with standard training:} The 38\% accuracy for standard backpropagation (vs. 100\% for dropout) reveals that task performance alone is insufficient to guarantee unambiguous representations. Both training paradigms achieve $\sim$97\% MNIST classification accuracy, yet differ dramatically in representational ambiguity. Standard training finds solutions that work for the task but retain substantial ambiguity in their relational structure. Dropout finds solutions that not only work but do so through unambiguous encoding.
+
+\textbf{Broader significance:} This result demonstrates that neural networks \textit{can} achieve the degree of unambiguity that consciousness theories require, at least for categorical representations in constrained domains. Whether biological neural networks achieve similar unambiguity, and whether this extends to richer phenomenal contents, remains to be tested. But the proof of principle is established: unambiguous relational representations are achievable in physical systems through learning.
+
+\subsection{Cross-Architecture Transfer}
+
+To test whether relational structure is architecture-invariant, we evaluated cross-architecture transfer for both learned decoders and geometric matching.
+
+\subsubsection{Learned Decoder Transfer}
+
+Figure~\ref{fig:arch-transfer-decoder} summarizes results for an unseen target architecture [100] (single hidden layer with 100 neurons).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{../figures/architecture-transfer-evaluation.png}
+\caption{Architecture transfer evaluation for learned decoder. A decoder trained only on [50, 50] architecture transfers above chance to [100] architecture. A decoder trained on networks with randomly sampled layer widths (25-100) achieves near-oracle performance on the held-out architecture, demonstrating architecture-independent generalization.}
+\label{fig:arch-transfer-decoder}
+\end{figure}
+
+A decoder trained only on [50, 50] already transfers above chance, while a decoder trained on networks whose layer width is randomly sampled between 25 and 100 climbs almost to the self-transfer ``oracle,'' demonstrating near-architecture-independent generalization.
+
+\subsubsection{Geometric Matching Transfer}
+
+Figure~\ref{fig:arch-transfer-gram} shows cross-architecture transfer results for the Gram matrix matching approach.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{../figures/cross_architecture_heatmap_accuracy.png}
+\caption{Cross-architecture transfer heatmap for geometric matching. Each cell shows decoding accuracy when using reference networks of one architecture (y-axis) to decode test networks of another architecture (x-axis). Strong diagonal and near-diagonal performance demonstrates that the gram matrix approach maintains high accuracy across different network architectures.}
+\label{fig:arch-transfer-gram}
+\end{figure}
+
+The heatmap reveals strong diagonal and near-diagonal performance, confirming that the gram matrix approach maintains high accuracy across different network architectures. This architecture-invariance suggests that the relational geometric structure reflects fundamental properties of the learned distribution rather than architectural accidents.
+
+\subsection{Ablation: Neuron Count for Geometric Matching}
+
+Similar to our ablation study with the learned decoder, we investigated how the number of output neurons affects the Gram matrix matching approach.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{../figures/gram_neuron_ablation_plot.png}
+\caption{Gram matrix decoding performance vs. number of neurons. Ablation study showing how Gram matrix matching accuracy varies with the number of output neurons available for decoding. Performance improves consistently as more relational structure becomes available.}
+\label{fig:gram-neuron-ablation}
+\end{figure}
+
+Figure~\ref{fig:gram-neuron-ablation} shows that, consistent with the learned decoder results, accuracy improves as more output neurons (and thus more relational structure) become available. This reinforces the conclusion that richer relational structures enable more unambiguous representations.
+
+\subsection{Dataset Classification from Relational Structure}
+
+As a final test of how much information is encoded in relational structure, we trained a decoder to classify whether a network was trained on MNIST or Fashion-MNIST based solely on output layer weights with randomly permuted neurons.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{../figures/dataset-classification-accuracy.png}
+\caption{Dataset classification from final-layer weights. Using the same self-attention decoder with random output-neuron permutations, we classify whether a network was trained on MNIST or Fashion-MNIST. Performance is near-perfect for dropout models (0.998 ± 0.001) and clearly above chance for no dropout (0.843 ± 0.008).}
+\label{fig:dataset-classification}
+\end{figure}
+
+Figure~\ref{fig:dataset-classification} shows near-perfect classification accuracy (0.998 ± 0.001) for dropout models and above-chance accuracy (0.843 ± 0.008) for standard backpropagation. This demonstrates that the relational geometry of output weights carries a dataset-specific signature, amplified by dropout. The fact that task domain can be inferred from relational structure suggests that key components of representational context are actually encoded within the representation itself.
+
+\subsection{Discussion}
+
+The results of Experiment 1 provide strong evidence that neural networks develop unambiguous relational representations through learning:
+
+\begin{enumerate}
+    \item \textbf{Perfect decoding is possible:} The 100\% accuracy achieved by geometric matching on dropout networks demonstrates that $H(I|R) = 0$ for digit class identity—complete determination of representational content by relational structure.
+
+    \item \textbf{Training reduces ambiguity:} The progression from random (10\%) to trained (25\%) to dropout-trained (75-100\%) accuracy shows that learning systematically reduces representational ambiguity.
+
+    \item \textbf{Relational structure is architecture-invariant:} Cross-architecture transfer results indicate that the same relational patterns emerge across different network architectures, suggesting these structures reflect properties of the learned distribution rather than architectural quirks.
+
+    \item \textbf{Context is partially encoded:} The dataset classification results show that task domain—traditionally considered external context—is actually encoded in the relational structure itself.
+\end{enumerate}
+
+These findings validate the theoretical prediction that relational structures can achieve the unambiguous representations required by the intentionality constraint on NCCs.
