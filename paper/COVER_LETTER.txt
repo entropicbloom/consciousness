@@ -1,0 +1,38 @@
+Dear Dr. Marzen and Prof. Beggs,
+
+I am pleased to submit our manuscript titled "Unambiguous Representations in Neural Networks: A Relational Structure Approach to Consciousness" for consideration in the Special Issue "Information-Theoretic Methods in Computational Neuroscience" in Entropy.
+
+Our paper addresses a fundamental problem at the intersection of information theory, neuroscience, and consciousness research: how physical systems can achieve representations with determinate content. While theories of consciousness identify neural correlates, they often fail to explain why specific neural patterns correspond to specific conscious contents rather than others—what we call the intentionality constraint.
+
+We provide both theoretical and empirical contributions:
+
+1. Theoretical Framework: We formalize representational ambiguity using information theory as H(I|R,C), the conditional entropy of possible interpretations given a representation. We propose that conscious representations must be unambiguous (H(I|R,C) ≈ 0) and show how relational structures can achieve this.
+
+2. Novel Information-Theoretic Measure: We introduce the Ambiguity-Reduction Score (ARS), a quantitative measure of how much training reduces representational ambiguity in neural networks.
+
+3. Empirical Validation: Using neural networks trained on image classification, we demonstrate that relational structure alone is sufficient to decode representational content with up to 100% accuracy, and that dropout regularization produces completely unambiguous representations (ARS = 1.0) despite identical task performance.
+
+This work is particularly relevant to your special issue because:
+- It introduces novel information-theoretic methods for analyzing neural representations
+- It addresses fundamental questions about how neural systems encode information
+- It provides practical tools for measuring representational ambiguity in high-dimensional neural data
+- It connects information theory to normative theories of neural coding and consciousness
+
+Our findings have implications beyond consciousness research, including interpretability in artificial neural networks, representational alignment across systems, and understanding how learning shapes neural representations.
+
+All authors have approved the manuscript and agree with its submission to Entropy. This work has not been published previously and is not under consideration elsewhere. We have no conflicts of interest to declare.
+
+Thank you for considering our manuscript. We look forward to your response.
+
+Sincerely,
+
+[YOUR NAME HERE]
+[YOUR AFFILIATION HERE]
+[YOUR EMAIL HERE]
+
+
+---
+INSTRUCTIONS FOR USE:
+1. Replace the bracketed placeholders with your actual information
+2. Copy and paste this letter into the cover letter field during MDPI submission
+3. You may modify the letter as needed to match your style
