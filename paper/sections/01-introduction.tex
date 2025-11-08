@@ -1,37 +1,64 @@
 \section{Introduction}
 
-Understanding the neural basis of consciousness remains one of the most challenging problems in science. The search for neural correlates of consciousness (NCCs)~\cite{koch2016neural} seeks to identify which patterns of neural activity give rise to specific conscious experiences. However, identifying correlations between brain states and conscious states is not sufficient—we must also explain \textit{why} a particular pattern of neural activity corresponds to one specific experience rather than another. This is fundamentally a question about representation and meaning: how do physical patterns in the brain come to be \textit{about} something?
+We are familiar with representations of all kinds. Letters represent sounds, words represent concepts, and bit strings represent digital files. Consider a simple example: if I give you a bit string and tell you it's an image, you can apply an encoding scheme like JPEG or PNG to decode it into a picture. The same bit string could alternatively be decoded as an audio file using MP3, or as text, or any other digital format. There is nothing inherent in the bit string itself that tells you what it represents—its content is entirely dependent on an externally defined decoder. We call this kind of representation \textit{ambiguous}.
 
-Consider a simple analogy: a sequence of bits encoding a JPEG image. The same bit string could, in principle, be decoded as an image, a sound file, a text document, or any other digital format. The meaning of the bit string is entirely determined by the decoding algorithm applied to it—the representation itself is \textit{ambiguous}. This observation raises a crucial question for theories of consciousness: if conscious experiences have determinate content (I see an apple, not an orange), how can this determinacy arise from neural representations that might be fundamentally ambiguous?
+This is not a problem for bit strings or most representations we encounter in daily life. These representations are useful precisely because we can agree on decoding schemes. However, when it comes to conscious brain states, we face a fundamentally different situation.
 
-Traditional representational theories of consciousness~\cite{lycan2019representational} propose that conscious experiences correspond to representations in the brain, but they often leave unanswered the question of what makes these representations be \textit{about} specific contents. One might be tempted to invoke an internal decoder—some mechanism in the brain that interprets neural patterns and gives them meaning. However, this approach leads to an infinite regress: the decoder's outputs would themselves be representations requiring interpretation, recreating the homunculus fallacy~\cite{dennett1991consciousness}.
+If we assume that consciousness supervenes on brain states—a position known as narrow representationalism~\cite{lycan2019representational}—then a neural state must \textit{unambiguously} map to a set of conscious contents. For example, if a certain brain state corresponds to perceiving only a red square, that same brain state cannot alternatively encode the conscious experience of only a green square. This is because consciousness is an intrinsic property. We use the term ``consciousness'' here in the sense of \textit{phenomenal consciousness}—the ``what it is likeness'' of a certain brain state.
 
-\subsection*{The Intentionality Problem}
+Here we have a fundamentally different situation than with bit strings. We cannot say that a neural state has conscious content depending on some externally defined decoder. There is only one mapping allowed: the one that corresponds to the experience that the subject actually has.
 
-We can state the core problem more precisely: Any adequate theory of neural correlates of consciousness must satisfy what we call the \textit{intentionality constraint}. It's not enough to identify a pattern of neural activity that correlates with seeing an apple. The theory must explain why that \textit{particular} pattern corresponds to an apple rather than an orange, a sound, or nothing at all. The conscious content is determinate—when you see an apple, you're not simultaneously seeing an orange or experiencing ambiguity about what you see. Yet the physical substrate (neural activity) appears to be just patterns of electrochemical signals, which seem no more intrinsically ``about'' apples than a bit string is intrinsically about images.
+This observation raises a crucial question: how can neural representations achieve this determinacy? Traditional representational theories~\cite{lycan2019representational} propose that conscious experiences correspond to representations in the brain, but they often leave unanswered what makes these representations be \textit{about} specific contents. One might invoke an internal decoder that interprets neural patterns, but this leads to infinite regress—the decoder's outputs would themselves need interpretation, recreating the homunculus fallacy~\cite{dennett1991consciousness}.
 
-This creates a dilemma: Either (1) we accept that neural representations require arbitrary decoding schemes, making conscious content seem unmotivated and leaving the homunculus problem unsolved, or (2) we identify a type of representation that intrinsically specifies its own content. We pursue option (2).
+\subsection*{Formalizing Ambiguity}
 
-\subsection*{Our Proposal: Unambiguous Relational Representations}
+To make this notion of ambiguity more precise, we can formalize it using information theory. We define ambiguity as the conditional entropy $H(I|R)$—the entropy of all possible interpretations $I$ given a representation $R$.
 
-We argue that this problem can be resolved by requiring that conscious representations be \textit{unambiguous}: they must intrinsically specify both what they represent and how they represent it, without relying on an arbitrary external decoding scheme. Drawing on information theory, we formalize this intuition by defining representational ambiguity as $H(I|R)$—the conditional entropy of possible interpretations $I$ given a representation $R$. Conscious representations, we propose, must approach zero ambiguity: $H(I|R) \approx 0$.
+For example, the representation could be a neural state, and the space of interpretations could be the space of all possible conscious experiences a human could have. A representation with \textit{high ambiguity} has a uniform (or close to uniform) distribution over possible interpretations—intuitively, we have no information about what the representation is about. On the other hand, if the probability distribution of possible interpretations given a representation is very narrow, we have a \textit{low ambiguity} representation.
 
-But how can any physical system achieve such unambiguous representations? We propose that \textit{relational structures}—where the meaning of elements is determined by their relationships to other elements—provide a solution. Unlike indexical representations (such as bit strings), relational structures embed meaning in their connectivity patterns. A neural network that has learned to model the statistical structure of its input domain naturally creates such relational representations: each element's meaning is determined by its position within the larger network of relationships that mirror real-world structure.
+This gives us a spectrum: bit strings are maximally ambiguous (they could mean anything without a decoder), while conscious brain states—given the assumption of narrow representationalism—must be unambiguous or at least substantially less ambiguous than arbitrary representations. There may be intermediate cases as well. Consider a dictionary: one might say it's ambiguous because without knowing the language, the words are meaningless. However, if we take a structuralist approach to linguistics, we might disagree. Even without prior knowledge of the language, the relationships between words shown in the dictionary could reasonably restrict the meaning of certain words. A word gets meaning by occupying a specific slot in a relational structure.
 
-To test this theoretical framework empirically, we conduct experiments with artificial neural networks trained on image classification tasks. We demonstrate that:
+Similarly, we can think about different types of neural networks. Some might represent information in a completely ambiguous fashion, while others could unambiguously encode content. The idea is that conscious brain states would have to be on the less ambiguous end of this spectrum.
+
+\subsection*{Testing Ambiguity in Neural Networks}
+
+This raises an empirical question: can we demonstrate that neural networks develop unambiguous representations? To test this, we designed experiments using MNIST digit classifiers. Imagine a standard MNIST classifier with neurons corresponding to each digit (0-9). When we ask ``what does this neuron represent?'' the answer seems straightforward if you know how the network was trained—the neuron at index 2 represents the digit 2 because that's how we set up the training.
+
+But what if you \textit{don't know} how the network was set up? What if I scramble all the neurons in each layer, destroying the correspondence between neuron position and what it represents? Could you figure out which neuron represents which digit purely from the network's structure?
+
+Our intuition is: if the neural network unambiguously represents digit concepts, then yes, we should be able to figure this out. If not—if we cannot determine representational content purely from network connectivity—then the representations are ambiguous.
+
+\subsection*{Approach: Relational Structure and Decoding Methods}
+
+To operationalize this test, we extract a \textit{relational structure} from the network connectivity. This relational structure captures relationships between neurons. The idea of determining representational content from relational structure is deeply tied to structuralist ideas in the study of consciousness~\cite{lyre2022neurophenomenal,kleiner2024mathematical}. While a single neuron may not have discernable meaning on its own, it might derive meaning from the relationships it is embedded in.
+
+For example, to determine what an output neuron represents, we extract its incoming weights and compare them to the incoming weights of other output neurons using cosine similarity. This creates a relational structure—a geometry where similar neurons are close together. We then use two complementary methods to decode representational content from this structure:
 
 \begin{enumerate}
-    \item \textbf{Class identity can be decoded from relational structure alone}: Given the output layer weights of a network trained on MNIST, we can identify which digit each output neuron represents with up to 100\% accuracy using only the relational geometry between neurons, even when neuron labels are randomly permuted.
-
-    \item \textbf{Spatial position information is encoded relationally}: We can decode the spatial position of input pixels purely from relational patterns in network connectivity, demonstrating that even low-level sensory structure emerges as unambiguous relational representations.
-
-    \item \textbf{Training reduces representational ambiguity}: We introduce the Ambiguity-Reduction Score (ARS), which quantifies how much the training process reduces $H(I|R)$. Networks trained with dropout regularization achieve near-perfect unambiguity (ARS = 1.0) for categorical representations.
-
-    \item \textbf{Relational geometry is architecture-invariant}: The same relational patterns emerge across different network architectures, suggesting these structures reflect fundamental properties of the learned distribution rather than architectural accidents.
+    \item \textbf{Geometric matching}: We create a reference relational structure from networks where we know the neuron identities, then find the alignment between reference and target that minimizes structural distance.
+    \item \textbf{Machine learning decoder}: We train a decoder to predict representational content from relational structure across many network instances.
 \end{enumerate}
 
-Our work makes several contributions. Theoretically, we provide a formal framework for understanding the intentionality constraint on neural correlates of consciousness, grounded in information theory. Empirically, we demonstrate that neural networks naturally develop unambiguous relational representations, and we provide methods to measure and quantify representational ambiguity. Methodologically, we show how geometric structure matching can decode representational content with near-perfect accuracy, suggesting practical approaches for reading out the contents of neural representations.
+\subsection*{Main Findings}
 
-These results have implications beyond consciousness research. They connect to recent work on representational alignment in large-scale models~\cite{huh2024platonic}, suggest new approaches to interpretability in artificial neural networks, and provide a quantitative framework for comparing representations across different systems. Most fundamentally, they demonstrate that the problem of representational ambiguity—long considered a philosophical puzzle—can be approached through rigorous experimental investigation.
+Our experiments reveal several key findings:
 
-The remainder of this paper is organized as follows. Section~\ref{sec:theory} develops our theoretical framework, introducing the intentionality constraint and formalizing representational ambiguity. Section~\ref{sec:methods} describes our experimental methodology. Sections~\ref{sec:exp1} and~\ref{sec:exp2} present our experiments on digit classification and spatial position decoding, respectively. Section~\ref{sec:ambiguity} introduces the Ambiguity-Reduction Score and applies it to quantify our results. Section~\ref{sec:discussion} discusses implications, limitations, and connections to related work. Section~\ref{sec:conclusion} concludes.
+\begin{itemize}
+    \item \textbf{Training reduces ambiguity}: Untrained networks perform at chance level ($\sim$10\% for 10-class classification), confirming random weights are ambiguous. Trained networks achieve much higher decoding accuracy.
+
+    \item \textbf{Training method matters}: Networks trained with dropout regularization achieve \textit{perfect} 100\% decoding accuracy for output neurons using geometric matching, while standard backpropagation achieves only $\sim$40\%. Remarkably, both achieve nearly identical MNIST classification performance ($\sim$97\%), showing that representational ambiguity is independent of task performance.
+
+    \item \textbf{Spatial structure is encoded relationally}: Input neuron spatial positions can be decoded with $R^2 \approx 0.84$ for standard training, demonstrating that low-level sensory structure emerges in relational representations.
+
+    \item \textbf{Architecture invariance}: Relational structures generalize across different network architectures (varying layer sizes), suggesting they reflect properties of the learned distribution rather than architectural specifics.
+
+    \item \textbf{Context can be inferred}: We achieve $\sim$100\% accuracy distinguishing whether networks were trained on MNIST vs. Fashion-MNIST from relational structure alone, showing that even task context is partially encoded in representations.
+\end{itemize}
+
+\subsection*{Implications}
+
+These results demonstrate that neural networks \textit{can} achieve the unambiguous representations required for conscious content determination. The perfect decoding accuracy (ARS = 1.0) for dropout-trained networks shows that $H(I|R,C) = 0$ is achievable for categorical representations—the relational structure completely determines content with zero remaining ambiguity.
+
+While we measure context-conditioned ambiguity $H(I|R,C)$ rather than unconditional $H(I|R)$, our results suggest this is a practical rather than fundamental limitation. The architecture invariance and dataset classification results indicate that key components of context are actually encoded within the relational structure itself.
+
+The remainder of this paper develops the theoretical framework (Section~\ref{sec:theory}), describes the experimental methodology (Section~\ref{sec:methods}), presents detailed results for class identity (Section~\ref{sec:exp1}) and spatial position (Section~\ref{sec:exp2}) decoding, quantifies ambiguity reduction (Section~\ref{sec:ambiguity}), and discusses implications and connections to related work (Sections~\ref{sec:discussion} and~\ref{sec:conclusion}).
