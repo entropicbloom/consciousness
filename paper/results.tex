@@ -39,7 +39,9 @@ Geometric matching (directly comparing relational geometries without training) a
     \label{tab:gram-accuracy}
 \end{table}
 
-Dropout networks achieve perfect 100\% accuracy with zero variance, demonstrating that their relational geometries unambiguously specify class identity. Figure~\ref{fig:perm-distances} shows why: dropout creates a substantial gap between correct and incorrect permutations, while standard backpropagation shows only small margins.
+Dropout networks achieve perfect 100\% accuracy with zero variance, demonstrating that their relational geometries unambiguously specify class identity. This remarkable result shows that the relational structure alone—without any information about neuron ordering or training procedure—completely determines what each neuron represents.
+
+Figure~\ref{fig:perm-distances} reveals the underlying cause: dropout creates a substantial gap between the correct permutation and all incorrect alternatives, while standard backpropagation shows only small margins. This geometric clarity explains why both our learned decoder (75\%) and direct matching (100\%) achieve their best performance on dropout networks.
 
 \begin{figure}[htbp]
     \centering
@@ -58,7 +60,7 @@ Dropout networks achieve perfect 100\% accuracy with zero variance, demonstratin
 
 \subsubsection{Relational Structure Necessity}
 
-Providing only the target neuron's local neighborhood (masking other pairwise similarities) substantially reduces accuracy (Figure~\ref{fig:target-only-output}), confirming that full relational geometry is essential.
+To determine whether the entire relational geometry is necessary or if local neighborhoods suffice, we provided the decoder with only the target neuron's similarity vector to all other neurons, masking out pairwise similarities between non-target neurons. Figure~\ref{fig:target-only-output} shows that accuracy drops substantially when this broader geometric context is removed. This demonstrates that a neuron's representational content cannot be determined from its local relationships alone—the decoder requires information about how the entire output population is organized relative to each other.
 
 \begin{figure}[htbp]
     \centering
@@ -69,7 +71,7 @@ Providing only the target neuron's local neighborhood (masking other pairwise si
 
 \subsubsection{Architecture Invariance}
 
-Cross-architecture transfer (Figure~\ref{fig:cross-arch}) demonstrates that relational structure transcends specific architectures.
+A key question is whether relational structure depends on specific architectural choices or represents a more fundamental property. We evaluated cross-architecture transfer by using reference networks of one architecture to decode test networks with different hidden layer widths. Figure~\ref{fig:cross-arch} shows strong performance across architectural variations, demonstrating that the relational geometry encoding class identity is largely architecture-invariant. This suggests that representational content is encoded in a manner that transcends implementation details.
 
 \begin{figure}[htbp]
     \centering
@@ -84,7 +86,7 @@ Dataset identity (MNIST vs.\ Fashion-MNIST) can be classified from relational st
 
 \subsection{Experiment 2: Input Neuron Spatial Position Decoding}
 
-Spatial position can be decoded from relational structure (Figure~\ref{fig:input-distance}): $R^2 = 0.844$ (standard backpropagation), $R^2 = 0.695$ (dropout), both well above untrained baseline ($R^2 \approx 0$).
+While digit class identity is abstract, spatial position provides a more direct connection to phenomenal properties like visual field location. We asked whether input neurons encode their pixel positions through relational structure. Figure~\ref{fig:input-distance} shows that they do: the decoder achieves $R^2 = 0.844$ (standard backpropagation) and $R^2 = 0.695$ (dropout), both substantially above the untrained baseline ($R^2 \approx 0$).
 
 \begin{figure}[htbp]
     \centering
@@ -93,7 +95,7 @@ Spatial position can be decoded from relational structure (Figure~\ref{fig:input
     \label{fig:input-distance}
 \end{figure}
 
-Unlike output neurons, standard backpropagation yields higher spatial decoding than dropout. As in Experiment 1, full relational structure outperforms local neighborhoods alone (Figure~\ref{fig:target-only-input}).
+Interestingly, the pattern reverses compared to output neurons: standard backpropagation yields higher spatial decoding accuracy than dropout. This dissociation suggests that different layers and representational types may be subject to different optimization dynamics under dropout training. Nevertheless, as in Experiment 1, providing the decoder with the full relational structure substantially outperforms using only local neighborhoods (Figure~\ref{fig:target-only-input}), confirming that broader geometric context enhances decoding across different representational domains.
 
 \begin{figure}[htbp]
     \centering
@@ -125,4 +127,4 @@ Table~\ref{tab:ars-scores} summarizes the Ambiguity Reduction Scores (ARS) compu
     \label{tab:ars-scores}
 \end{table}
 
-The perfect ARS of 1.0 for dropout output neurons indicates $H(I|R,C) = 0$: relational structure completely determines representational content within context, quantitatively supporting the theoretical claim that neural representations can be unambiguous.
+The perfect ARS of 1.0 for dropout output neurons indicates $H(I|R,C) = 0$: relational structure completely determines representational content within the experimental context. Even for the more challenging spatial position task, we achieve ARS values of 0.419–0.654, demonstrating substantial ambiguity reduction. These results provide quantitative support for the theoretical claim that neural representations can approach the unambiguous encoding required by theories of consciousness.
