@@ -1,101 +1,52 @@
-We designed two complementary experiments to test whether neural networks can encode representational content unambiguously through relational structure. The first experiment (Experiment 1) examines whether output neurons in an MNIST classifier encode digit class identity through their relational positions. The second experiment (Experiment 2) investigates whether input neurons encode spatial position information through their connectivity patterns.
+We conducted two experiments testing whether neural networks encode representational content unambiguously through relational structure: (1) decoding digit class from output neuron connectivity, and (2) decoding spatial position from input neuron connectivity.
 
 \subsection{Experiment 1: Decoding Digit Class from Output Neurons}
 
 \subsubsection{Network Architecture and Training}
 
-We trained fully-connected feedforward networks to classify MNIST handwritten digits. Each network consisted of an input layer (784 neurons, one per pixel), two hidden layers (50 neurons each), and an output layer (10 neurons, one per digit class). During standard training, the network learns to activate the $n$-th output neuron when presented with digit class $n$.
-
-To generate datasets with varied representational characteristics, we employed three training paradigms:
-\begin{enumerate}
-    \item \textbf{Untrained}: Networks with random initialization, serving as a control condition
-    \item \textbf{Standard backpropagation}: Networks trained for 2 epochs using standard gradient descent
-    \item \textbf{Backpropagation with dropout}: Networks trained with 20\% dropout applied to hidden layers \citep{baldi2013understanding}
-\end{enumerate}
-
-For each training paradigm, we generated 1000 networks using different random seeds, creating diverse instantiations of the same task.
+We trained fully-connected networks (784-50-50-10 architecture) on MNIST digit classification under three paradigms: (1) untrained (random initialization, control), (2) standard backpropagation (2 epochs), and (3) backpropagation with 20\% dropout on hidden layers \citep{baldi2013understanding}. We generated 1000 networks per paradigm using different random seeds.
 
 \subsubsection{Decoding Task}
 
-The central question is: can we determine which digit class an output neuron represents based solely on the connectivity pattern of the output layer? To eliminate trivial solutions based on neuron ordering, we permuted the output neurons in each network. Formally, let $W \in \mathbb{R}^{10 \times 50}$ denote the weight matrix of the output layer, where row $i$ contains the incoming weights for output neuron $i$. We construct our dataset by:
-\begin{enumerate}
-    \item Randomly permuting the rows of $W$ to create $X$
-    \item Defining the label $y$ as the class index of the neuron in the first row of $X$
-\end{enumerate}
-
-This ensures that neuron position provides no information about class identity.
+Can we determine which digit class an output neuron represents from connectivity alone? Let $W \in \mathbb{R}^{10 \times 50}$ denote the output layer weight matrix (rows = neurons). We randomly permute rows to create $X$ and define label $y$ as the class of the first-row neuron, ensuring neuron position conveys no information about class identity.
 
 \subsubsection{Relational Structure Extraction}
 
-To emphasize relational information, we compute pairwise similarities between neurons. First, we normalize each row of $X$:
-\begin{equation}
-X_{\text{norm}} = \frac{X}{\|X\|_{\text{row}}}
-\end{equation}
-where the normalization is performed row-wise using L2 norms. We then compute the Gram matrix:
-\begin{equation}
-X' = X_{\text{norm}} X_{\text{norm}}^T
-\end{equation}
-Each element $(X')_{i,j}$ represents the cosine similarity between the incoming weight vectors of output neurons $i$ and $j$. This matrix encodes the relational structure: neurons representing similar digits (e.g., 3 and 8) should occupy similar positions in this geometry, while neurons representing dissimilar digits should be distant.
+We extract relational structure via cosine similarities. After L2-normalizing rows of $X$ to get $X_{\text{norm}}$, we compute the Gram matrix $X' = X_{\text{norm}} X_{\text{norm}}^T$, where $(X')_{i,j}$ is the cosine similarity between neurons $i$ and $j$. This encodes relational geometry: neurons representing similar digits occupy similar positions.
 
 \subsubsection{Decoding Methods}
 
-We employed two complementary decoding approaches:
-
-\paragraph{Geometric Matching.} This method directly compares relational geometries. We construct a reference Gram matrix by averaging the similarity matrices from multiple reference networks (trained with known neuron ordering). For each test network, we evaluate all possible permutations of its output neurons, finding the permutation that minimizes the Frobenius distance between the test Gram matrix and the reference:
+\paragraph{Geometric Matching.} We construct a reference Gram matrix from multiple networks with known ordering, then find the permutation $\hat{\sigma}$ minimizing Frobenius distance to each test network:
 \begin{equation}
 \hat{\sigma} = \arg\min_{\sigma} \|G_{\text{ref}} - P_{\sigma} G_{\text{test}} P_{\sigma}^T\|_F
 \end{equation}
-where $P_{\sigma}$ is the permutation matrix corresponding to ordering $\sigma$.
 
-\paragraph{Learned Decoder.} We trained a neural network decoder to predict class identity from relational structure. The decoder uses a transformer-like architecture with self-attention layers \citep{vaswani2017attention}, treating rows of $X'$ as tokens. This architecture is permutation-invariant (except for the first row, whose class we predict), ensuring it relies solely on relational information. We trained the decoder on 8000 data points from different networks and validated on 2000 held-out networks, ensuring the decoder learns general relational patterns rather than network-specific mappings.
+\paragraph{Learned Decoder.} We trained a transformer-based decoder \citep{vaswani2017attention} with self-attention layers, treating rows of $X'$ as tokens. The architecture is permutation-invariant except for the first row (target neuron). Training used 8000 data points, validation used 2000 held-out networks, ensuring the decoder learns general relational patterns.
 
 \subsection{Experiment 2: Decoding Spatial Position from Input Neurons}
 
-\subsubsection{Motivation and Task}
-
-While digit class identity is abstract, spatial position provides a more direct connection to phenomenal experience. In this experiment, we ask: can we determine which pixel position an input neuron represents based solely on its connectivity to the first hidden layer?
-
-\subsubsection{Dataset Construction}
-
-Using the same network architectures as Experiment 1, we now focus on the first layer weight matrix $W \in \mathbb{R}^{784 \times 50}$, where each column corresponds to one input neuron (pixel). We permute the columns to destroy positional information and attempt to decode the spatial position of the neuron in the first column.
-
-Specifically, we define target functions $f(i,j)$ that extract positional information from a pixel's coordinates $(i,j)$ in the $28 \times 28$ grid:
+Can we decode which pixel position an input neuron represents from its connectivity? Using the same networks, we focus on the first-layer weight matrix $W \in \mathbb{R}^{784 \times 50}$ (columns = input neurons). After permuting columns, we decode distance from center for the target neuron:
 \begin{equation}
 f(i,j) = \sqrt{(i-13.5)^2 + (j-13.5)^2}
 \end{equation}
-This measures distance from the center. The decoder must predict $f(i,j)$ for the target neuron without knowing its coordinates, using only relational structure.
 
-\subsubsection{Relational Structure for Input Neurons}
-
-Similar to Experiment 1, we compute cosine similarities, but now between column vectors (outgoing weights from input neurons):
-\begin{equation}
-X_{\text{norm}} = \frac{X}{\|X\|_{\text{col}}}, \quad X' = X_{\text{norm}}^T X_{\text{norm}}
-\end{equation}
-
-\subsubsection{Decoder Architecture}
-
-Given the larger number of input neurons (784 vs.\ 10 output neurons), exhaustive permutation search is computationally infeasible. We therefore used only the learned decoder approach, with the same transformer-based architecture as Experiment 1. The decoder performs regression rather than classification, predicting the continuous distance-from-center value. We evaluate performance using the $R^2$ score.
+Relational structure is extracted via column-wise cosine similarities: $X' = X_{\text{norm}}^T X_{\text{norm}}$. Due to the larger neuron count (784 vs.\ 10), we use only the learned decoder (same transformer architecture, now performing regression). Performance is evaluated using $R^2$ score.
 
 \subsection{Quantifying Ambiguity Reduction}
 
-To connect decoding accuracy with our formal definition of ambiguity, we compute an Ambiguity Reduction Score (ARS):
+We compute Ambiguity Reduction Scores (ARS) to connect decoding performance with our theoretical framework:
 \begin{equation}
 \text{ARS} = 1 - \frac{H(I|R,C)}{H_{\max}}
 \end{equation}
-where $H(I|R,C)$ is the conditional entropy of interpretations given both representation $R$ and context $C$, and $H_{\max}$ is the maximum entropy (uniform distribution over interpretations).
+where $H(I|R,C)$ is conditional entropy given representation $R$ and context $C$, and $H_{\max}$ is maximum entropy.
 
-For classification tasks with $K$ classes, we use Fano's inequality to bound the conditional entropy from top-1 accuracy $A$:
-\begin{equation}
-H(I|R,C) \leq h_b(1-A) + (1-A)\log_2(K-1)
-\end{equation}
-where $h_b(p) = -p\log_2(p) - (1-p)\log_2(1-p)$ is the binary entropy function. This yields:
+For classification with accuracy $A$ and $K$ classes, Fano's inequality yields:
 \begin{equation}
 \text{ARS} \geq 1 - \frac{h_b(1-A) + (1-A)\log_2(K-1)}{\log_2 K}
 \end{equation}
+where $h_b(p) = -p\log_2(p) - (1-p)\log_2(1-p)$.
 
-For regression tasks with $R^2$ score, assuming Gaussian residuals and standardized target ($\text{Var}(Y)=1$):
+For regression with $R^2$ score (assuming Gaussian residuals, $\text{Var}(Y)=1$):
 \begin{equation}
 \text{ARS} \geq \frac{\log_2[1/(1-R^2)]}{\log_2(2\pi e)} \approx \frac{\log_2[1/(1-R^2)]}{4.094}
 \end{equation}
-
-These bounds provide lower estimates of ambiguity reduction, offering a quantitative connection between empirical performance and our theoretical framework.
