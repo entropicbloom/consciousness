@@ -1,0 +1,49 @@
+\subsection{Implications for Consciousness Research}
+
+Our experimental results demonstrate that neural networks can encode information through relational structure in a way that allows unambiguous decoding of representational content. For dropout-trained networks, we achieved perfect (100\%) accuracy in identifying output neuron class identity from connectivity patterns alone. This operationalizes the theoretical claim that conscious representations must be unambiguous: the neural state itself specifies what it represents, without requiring an external decoder.
+
+How does this connect to consciousness? Recall our initial observation: if consciousness supervenes on brain states, then a neural state must unambiguously map to conscious contents. A brain state corresponding to perceiving a red square cannot alternatively encode perceiving a green square. According to representationalist theories of consciousness \citep{lycan2019representational,pennartz2018consciousness}, conscious experience is determined by intentional contents---what the brain represents. Our work adds a constraint on the \emph{manner} in which these contents must be represented: they must be represented unambiguously.
+
+This constraint resonates with Chalmers' notion of \emph{impure representationalism} \citep{chalmers2004representational}. Impure representational properties are properties of representing certain intentional content \emph{in a certain manner}. Not all representations give rise to consciousness---only those that satisfy particular conditions. We propose that unambiguity is one such condition: intentional contents must be represented in a manner that leaves no residual ambiguity about what is being represented.
+
+Importantly, this constraint emerges naturally from the intrinsic nature of consciousness. We need not invoke specifically representationalist frameworks. The same intuition can be expressed using terminology from Integrated Information Theory (IIT) \citep{tononi2016integrated}: consciousness is both \emph{informative} and \emph{intrinsic}. A conscious experience is informative in that it has specific content (seeing red rather than green), and it is intrinsic in that this content is determined by the system itself, not by external interpretation. These properties together imply that the neural substrate must unambiguously specify conscious contents.
+
+\subsection{Context Dependence and Universal Decoders}
+
+A potential limitation of our approach is that we measure $H(I|R,C)$ rather than $H(I|R)$, where $C$ represents context baked into the decoder. This context includes:
+\begin{itemize}
+    \item The neural network domain (as opposed to other physical systems)
+    \item The dataset (MNIST vs.\ other visual tasks)
+    \item The network architecture
+    \item The choice of what to decode (class identity vs.\ other properties)
+\end{itemize}
+
+Does this conditioning on $C$ fundamentally limit our conclusions? We argue that it reflects practical rather than fundamental constraints. Several lines of evidence support this:
+
+First, our dataset discrimination results show that a major component of $C$---namely, which dataset was used for training---can itself be inferred from relational structure $R$. We achieved near-perfect (99.8\%) accuracy distinguishing MNIST from Fashion-MNIST networks based solely on output layer geometry. This suggests that the distinction between content $I$ and context $C$ is somewhat artificial. Context is simply part of the interpretable information that we choose not to decode in specific experiments.
+
+Second, our cross-architecture transfer results demonstrate that network architecture is not a critical component of context. Relational geometries remain consistent across different layer widths, allowing decoders trained on one architecture to successfully decode another. The representational content transcends implementation details.
+
+Third, the theoretical path forward is clear: a universal decoder trained on relational structures across diverse, multi-modal neural networks could potentially approach true $H(I|R)$ rather than $H(I|R,C)$. Such a decoder would require only minimal context---perhaps just the physical domain (neural activity in our universe) and choice of measurement modalities. The more diverse the training distribution, the less explicit context is required, as the decoder learns to infer context from structure.
+
+\subsection{Relational Structure and Grounding}
+
+Our experiments focused on structural connectivity (synaptic weights) rather than functional connectivity (activity correlations). This choice was primarily pragmatic: it simplifies the experimental paradigm and provides stable, time-invariant relational structures. However, from a theoretical perspective, functional connectivity may be more relevant for consciousness.
+
+The reason is that functional connectivity directly links elements and relations of the mathematical structure through the same physical quantity: neural activity. Activity correlations represent actual causal interactions occurring in the moment, whereas structural connectivity represents only the \emph{potential} for interaction. If a synapse exists but is not currently modulating neural activity, what privileges it as part of the mathematical structure of conscious experience over any other arbitrary physical quantity? Functional connectivity avoids this ambiguity by grounding both elements (neuron activations) and relations (activity correlations) in the same substrate \citep{pennartz2009identification}.
+
+Nevertheless, our structural connectivity results remain relevant. We are primarily interested in whether networks that emerge from learning input distributions can encode information unambiguously in the first place, regardless of exact physical implementation. Moreover, structural connectivity and functional connectivity are intimately related: the former shapes the latter. Our results showing that structural connectivity encodes relational information suggest that the functional networks emerging from these structures would likely exhibit similar properties.
+
+\subsection{Training Paradigm Effects}
+
+A striking finding is that dropout training produces dramatically more unambiguous representations than standard backpropagation for output neurons (100\% vs.\ 38\% geometric matching accuracy), despite nearly identical task performance. This dissociation suggests that representational ambiguity is largely orthogonal to classification accuracy---a network can perform well while encoding information ambiguously.
+
+Intuitively, dropout encourages distributed representations by preventing reliance on single-neuron pathways \citep{baldi2013understanding}. This forces output neurons representing similar classes to have similar input weight patterns, as they must share overlapping features. The result is a more distinctive relational geometry where each class occupies a unique, well-separated position.
+
+Interestingly, the pattern reverses for input neurons: standard backpropagation yields higher spatial position decoding accuracy than dropout ($R^2 = 0.844$ vs.\ $R^2 = 0.695$). We do not speculate extensively on the mechanism, but note that different layers may be subject to different optimization dynamics. The key point is that training paradigm substantially affects representational ambiguity in ways that are not captured by task performance metrics.
+
+\subsection{Broader Connections}
+
+Our work connects to recent findings on representation alignment across neural networks. Huh et al.'s Platonic Representation Hypothesis \citep{huh2024platonic} proposes that different neural networks converge toward similar representations when trained on similar tasks. Their mutual k-NN kernel similarity metric, originally applied to large cross-modal models, correlates with our decoder accuracy in MNIST networks (see markdown report for details). This relationship suggests that kernel similarity may serve as a proxy for representational ambiguity: higher similarity across network instances indicates more consistent, less ambiguous encoding.
+
+This convergence is not coincidental. Both phenomena reflect the same underlying principle: neural networks that accurately model real-world distributions must capture the relational structure inherent in those distributions. Just as different maps of the same territory share common structure, different neural networks modeling the same data distribution develop similar relational geometries. This shared structure is what enables unambiguous representation---and what may be necessary for conscious experience.
