@@ -6,7 +6,7 @@ Output neuron class identity can be decoded from relational structure well above
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{../figures/decoder-validation-accuracy-training-paradigms.png}
+    \includegraphics[width=0.7\textwidth]{decoder-validation-accuracy-training-paradigms.png}
     \caption{Decoder validation accuracy across training paradigms. The decoder achieves approximately 25\% accuracy for standard backpropagation networks and 75\% accuracy for dropout networks, compared to 10\% chance level (observed for untrained networks). Error bars represent standard deviation across 5 random seeds.}
     \label{fig:decoder-accuracy}
 \end{figure}
@@ -15,7 +15,7 @@ Untrained networks achieve 10\% accuracy (chance level), validating our experime
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.65\textwidth]{../figures/mnist-model-validation-accuracies.png}
+    \includegraphics[width=0.65\textwidth]{mnist-model-validation-accuracies.png}
     \caption{Validation accuracies of underlying MNIST models. Despite similar classification performance, dropout and standard training produce dramatically different levels of representational ambiguity.}
     \label{fig:mnist-accuracy}
 \end{figure}
@@ -46,12 +46,12 @@ Figure~\ref{fig:perm-distances} reveals the underlying cause: dropout creates a 
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
-        \includegraphics[width=\textwidth]{../figures/perm_distances_no_dropout.png}
+        \includegraphics[width=\textwidth]{perm_distances_no_dropout.png}
         \caption{Standard backpropagation}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
-        \includegraphics[width=\textwidth]{../figures/perm_distances_dropout.png}
+        \includegraphics[width=\textwidth]{perm_distances_dropout.png}
         \caption{Dropout training}
     \end{subfigure}
     \caption{Frobenius distances between test and reference Gram matrices for all permutations. Red dots indicate the true permutation. Dropout training creates a clear separation between correct and incorrect permutations.}
@@ -64,7 +64,7 @@ To determine whether the entire relational geometry is necessary or if local nei
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.65\textwidth]{../figures/target-similarity-only-output-neurons.png}
+    \includegraphics[width=0.65\textwidth]{target-similarity-only-output-neurons.png}
     \caption{Decoder accuracy when provided only the target neuron's local neighborhood versus full relational structure. The complete geometry is essential for accurate decoding.}
     \label{fig:target-only-output}
 \end{figure}
@@ -75,7 +75,7 @@ A key question is whether relational structure depends on specific architectural
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{../figures/cross_architecture_heatmap_accuracy.png}
+    \includegraphics[width=0.7\textwidth]{cross_architecture_heatmap_accuracy.png}
     \caption{Cross-architecture transfer accuracy. Strong performance across different architectures demonstrates that relational structure is largely architecture-invariant.}
     \label{fig:cross-arch}
 \end{figure}
@@ -90,7 +90,7 @@ While digit class identity is abstract, spatial position provides a more direct 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{../figures/input-neuron-distance-prediction-accuracy.png}
+    \includegraphics[width=0.7\textwidth]{input-neuron-distance-prediction-accuracy.png}
     \caption{Decoder $R^2$ score for predicting input neuron distance from center. Unlike output neurons, standard backpropagation yields higher accuracy than dropout for this task.}
     \label{fig:input-distance}
 \end{figure}
@@ -99,7 +99,7 @@ Interestingly, the pattern reverses compared to output neurons: standard backpro
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.65\textwidth]{../figures/target-similarity-only-input-pixels.png}
+    \includegraphics[width=0.65\textwidth]{target-similarity-only-input-pixels.png}
     \caption{Decoder performance for input neurons when using only local neighborhood versus full relational structure.}
     \label{fig:target-only-input}
 \end{figure}
