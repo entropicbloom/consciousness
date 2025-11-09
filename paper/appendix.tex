@@ -1,0 +1,18 @@
+\appendix
+
+\section{Representational Alignment and Kernel Similarity}
+
+\subsection{Mutual k-NN Kernel Similarity}
+
+To further validate the connection between our work and the Platonic Representation Hypothesis \citep{huh2024platonic}, we computed the mutual k-NN kernel similarity metric on our MNIST networks. This metric, originally applied to large cross-modal models by Huh et al., measures the alignment of representations across different network instances.
+
+We computed the metric by comparing the weight matrices of output neurons across MNIST networks trained with different random seeds. Figure~\ref{fig:knn-similarity} shows the relationship between mutual k-NN kernel similarity and our decoder accuracy. The strong positive correlation demonstrates that kernel similarity serves as a proxy for representational ambiguity: networks with higher similarity across instances exhibit more consistent, less ambiguous encoding of class identity.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../figures/knn-kernel-similarity-vs-decoder-accuracy.png}
+    \caption{Mutual k-NN kernel similarity versus decoder accuracy across training paradigms. Higher kernel similarity correlates with better decoding performance, indicating that representational convergence across network instances reduces ambiguity.}
+    \label{fig:knn-similarity}
+\end{figure}
+
+This relationship suggests that the principles underlying representational convergence in large-scale models also operate in smaller networks. If this pattern generalizes, kernel similarity metrics could provide a computationally efficient proxy for measuring representational ambiguity in larger, multimodal systems where direct decoding approaches may be intractable.
