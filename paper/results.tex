@@ -11,7 +11,7 @@ Output neuron class identity can be decoded from relational structure well above
     \label{fig:decoder-accuracy}
 \end{figure}
 
-Untrained networks achieve 10\% accuracy (chance level), validating our experimental design. Standard backpropagation reaches 25\% (above chance), while dropout achieves 75\%---a threefold improvement. Notably, the underlying MNIST classifiers perform identically regardless of dropout (Figure~\ref{fig:mnist-accuracy}), showing that representational ambiguity is orthogonal to task performance.
+Untrained networks achieve 10\% accuracy (chance level), validating our experimental design. Standard backpropagation reaches 25\% (above chance), while dropout achieves 75\%, a threefold improvement. Notably, the underlying MNIST classifiers perform identically regardless of dropout (Figure~\ref{fig:mnist-accuracy}), showing that representational ambiguity is orthogonal to task performance.
 
 \begin{figure}[htbp]
     \centering
@@ -84,7 +84,7 @@ A key question is whether relational structure depends on specific architectural
 
 \subsubsection{Dataset Discrimination}
 
-Dataset identity (MNIST vs.\ Fashion-MNIST) can be classified from relational structure with near-perfect accuracy for dropout (99.8\% $\pm$ 0.1\%) and clearly above chance for standard training (84.3\% $\pm$ 0.8\%). This shows that dataset identity---a major component of context $C$---is encoded in relational geometry.
+Dataset identity (MNIST vs.\ Fashion-MNIST) can be classified from relational structure with near-perfect accuracy for dropout (99.8\% $\pm$ 0.1\%) and clearly above chance for standard training (84.3\% $\pm$ 0.8\%). This shows that dataset identity, a major component of context $C$, is encoded in relational geometry.
 
 \subsection{Experiment 2: Input Neuron Spatial Position Decoding}
 
@@ -125,7 +125,7 @@ Table~\ref{tab:ars-scores} summarizes the Ambiguity Reduction Scores (ARS) compu
         Input (position) & Untrained & $R^2 = -0.008$ & 0.000 \\
         \bottomrule
     \end{tabular}
-    \caption{Ambiguity Reduction Scores. An ARS of 1.0 indicates complete disambiguation---zero conditional entropy. Dropout networks achieve perfect disambiguation for output neuron class identity.}
+    \caption{Ambiguity Reduction Scores. An ARS of 1.0 indicates complete disambiguation, zero conditional entropy. Dropout networks achieve perfect disambiguation for output neuron class identity.}
     \label{tab:ars-scores}
 \end{table}
 
