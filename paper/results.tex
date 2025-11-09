@@ -54,7 +54,7 @@ Figure~\ref{fig:perm-distances} reveals the underlying cause: dropout creates a 
         \includegraphics[width=\textwidth]{../figures/perm_distances_dropout.png}
         \caption{Dropout training}
     \end{subfigure}
-    \caption{Frobenius distances between test and reference Gram matrices across all 10! = 3,628,800 possible permutations of the 10 output neurons, evaluated on each validation network. Each gray bar represents one permutation's distance (averaged across validation networks), while red dots indicate the true permutation. Dropout training (right) creates a substantial gap between the correct permutation and all alternatives, while standard backpropagation (left) shows only small margins, explaining the difference in geometric matching accuracy.}
+    \caption{Frobenius distances between test and reference Gram matrices for all permutations. Red dots indicate the true permutation. Dropout training creates a clear separation between correct and incorrect permutations.}
     \label{fig:perm-distances}
 \end{figure}
 
