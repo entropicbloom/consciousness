@@ -4,7 +4,7 @@ We conducted two experiments testing whether neural networks encode representati
 
 \subsubsection{Network Architecture and Training}
 
-We trained fully-connected networks (784-50-50-10 architecture) on MNIST digit classification under three paradigms: (1) untrained (random initialization, control), (2) standard backpropagation (2 epochs), and (3) backpropagation with 20\% dropout on hidden layers \citep{baldi2013understanding}. We generated 1000 networks per paradigm using different random seeds.
+We trained fully-connected networks (784-50-50-10 architecture) on MNIST digit classification under three paradigms: (1) untrained (random initialization, control), (2) standard backpropagation (2 epochs), and (3) backpropagation with 20\% dropout on hidden layers \citep{baldi2013understanding}. We used 2 epochs to ensure learning while avoiding overfitting on this simple task; 20\% dropout represents a standard rate balancing regularization and capacity. We generated 1000 networks per paradigm using different random seeds. All networks used Adam optimizer with learning rate 0.001 and batch size 256.
 
 \subsubsection{Decoding Task}
 
@@ -12,7 +12,7 @@ Can we determine which digit class an output neuron represents from connectivity
 
 \subsubsection{Relational Structure Extraction}
 
-We extract relational structure via cosine similarities. After L2-normalizing rows of $X$ to get $X_{\text{norm}}$, we compute the Gram matrix $X' = X_{\text{norm}} X_{\text{norm}}^T$, where $(X')_{i,j}$ is the cosine similarity between neurons $i$ and $j$. This encodes relational geometry: neurons representing similar digits occupy similar positions.
+We extract relational structure via cosine similarities, which measure directional alignment regardless of magnitude, making them robust to weight scale variations across networks. After L2-normalizing rows of $X$ to get $X_{\text{norm}}$, we compute the Gram matrix $X' = X_{\text{norm}} X_{\text{norm}}^T$, where $(X')_{i,j}$ is the cosine similarity between neurons $i$ and $j$. This encodes relational geometry: neurons representing similar digits occupy similar positions.
 
 \subsubsection{Decoding Methods}
 
@@ -20,15 +20,17 @@ We extract relational structure via cosine similarities. After L2-normalizing ro
 \begin{equation}
 \hat{\sigma} = \arg\min_{\sigma} \|G_{\text{ref}} - P_{\sigma} G_{\text{test}} P_{\sigma}^T\|_F
 \end{equation}
+where $\|A\|_F = \sqrt{\sum_{i,j} A_{i,j}^2}$ is the Frobenius norm, measuring the element-wise distance between matrices.
 
 \paragraph{Learned Decoder.} We trained a transformer-based decoder \citep{vaswani2017attention} with self-attention layers, treating rows of $X'$ as tokens. The architecture is permutation-invariant except for the first row (target neuron). Training used 8000 data points, validation used 2000 held-out networks, ensuring the decoder learns general relational patterns.
 
 \subsection{Experiment 2: Decoding Spatial Position from Input Neurons}
 
-Can we decode which pixel position an input neuron represents from its connectivity? Using the same networks, we focus on the first-layer weight matrix $W \in \mathbb{R}^{784 \times 50}$ (columns = input neurons). After permuting columns, we decode distance from center for the target neuron:
+Can we decode which pixel position an input neuron represents from its connectivity? Using the same networks, we focus on the first-layer weight matrix $W \in \mathbb{R}^{784 \times 50}$ (columns = input neurons). After permuting columns, we decode distance from center for the target neuron, where for a pixel at grid position $(i,j)$ in the $28 \times 28$ image:
 \begin{equation}
 f(i,j) = \sqrt{(i-13.5)^2 + (j-13.5)^2}
 \end{equation}
+This measures Euclidean distance from the image center at (13.5, 13.5).
 
 Relational structure is extracted via column-wise cosine similarities: $X' = X_{\text{norm}}^T X_{\text{norm}}$. Due to the larger neuron count (784 vs.\ 10), we use only the learned decoder (same transformer architecture, now performing regression). Performance is evaluated using $R^2$ score.
 

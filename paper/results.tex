@@ -54,7 +54,7 @@ Figure~\ref{fig:perm-distances} reveals the underlying cause: dropout creates a 
         \includegraphics[width=\textwidth]{../figures/perm_distances_dropout.png}
         \caption{Dropout training}
     \end{subfigure}
-    \caption{Frobenius distances between test and reference Gram matrices for all permutations. Red dots indicate the true permutation. Dropout training creates a clear separation between correct and incorrect permutations.}
+    \caption{Frobenius distances between test and reference Gram matrices across all 10! = 3,628,800 possible permutations of the 10 output neurons, evaluated on each validation network. Each gray bar represents one permutation's distance (averaged across validation networks), while red dots indicate the true permutation. Dropout training (right) creates a substantial gap between the correct permutation and all alternatives, while standard backpropagation (left) shows only small margins, explaining the difference in geometric matching accuracy.}
     \label{fig:perm-distances}
 \end{figure}
 
@@ -127,4 +127,6 @@ Table~\ref{tab:ars-scores} summarizes the Ambiguity Reduction Scores (ARS) compu
     \label{tab:ars-scores}
 \end{table}
 
-The perfect ARS of 1.0 for dropout output neurons indicates $H(I|R,C) = 0$: relational structure completely determines representational content within the experimental context. Even for the more challenging spatial position task, we achieve ARS values of 0.419–0.654, demonstrating substantial ambiguity reduction. These results provide quantitative support for the theoretical claim that neural representations can approach the unambiguous encoding required by theories of consciousness.
+The perfect ARS of 1.0 for dropout output neurons indicates $H(I|R,C) = 0$: relational structure completely determines representational content within the experimental context. Even for the more challenging spatial position task, we achieve ARS values of 0.419–0.654, demonstrating substantial ambiguity reduction.
+
+It is important to note that these are lower bounds based on Fano's inequality and Gaussian assumptions, which may be conservative. The true ambiguity reduction could be higher. For instance, an ARS of 0.654 (input neurons, standard backpropagation) indicates that we have reduced conditional entropy by at least 65.4\% relative to maximum entropy, but the actual reduction may be greater since the bounds can be loose. Nevertheless, even these conservative estimates demonstrate substantial disambiguation, providing quantitative support for the theoretical claim that neural representations can approach the unambiguous encoding required by theories of consciousness.
