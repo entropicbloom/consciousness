@@ -45,12 +45,14 @@ Figure~\ref{fig:perm-distances} reveals the underlying cause: dropout creates a 
 
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.7\textwidth}
         \includegraphics[width=\textwidth]{perm_distances_no_dropout.png}
         \caption{Standard backpropagation}
     \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
+
+    \vspace{1em}
+
+    \begin{subfigure}[b]{0.7\textwidth}
         \includegraphics[width=\textwidth]{perm_distances_dropout.png}
         \caption{Dropout training}
     \end{subfigure}
