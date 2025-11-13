@@ -22,7 +22,7 @@ We extract relational structure via cosine similarities, which measure direction
 \end{equation}
 where $\|A\|_F = \sqrt{\sum_{i,j} A_{i,j}^2}$ is the Frobenius norm, measuring the element-wise distance between matrices.
 
-\paragraph{Learned Decoder.} We trained a transformer-based decoder \citep{vaswani2017attention} with self-attention layers, treating rows of $X'$ as tokens. The architecture is permutation-invariant except for the first row (target neuron). Training used 8000 data points, validation used 2000 held-out networks, ensuring the decoder learns general relational patterns.
+\paragraph{Learned Decoder.} We trained a transformer-based decoder \citep{vaswani2017attention} with self-attention layers, treating rows of $X'$ as tokens. Crucially, we do not use positional encodings (as in the original transformer architecture) to ensure permutation invariance: the only positional information is which row corresponds to the target neuron. Training used 8000 data points, validation used 2000 held-out networks, ensuring the decoder learns general relational patterns.
 
 \subsection{Experiment 2: Decoding Spatial Position from Input Neurons}
 
