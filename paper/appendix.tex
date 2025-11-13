@@ -1,0 +1,33 @@
+\appendix
+
+\section{Representational Alignment and Kernel Similarity}
+
+\subsection{Mutual k-NN Kernel Similarity}
+
+To further validate the connection between our work and the Platonic Representation Hypothesis \citep{huh2024platonic}, we computed the mutual k-NN kernel similarity metric on our MNIST networks. This metric, originally applied to large cross-modal models by Huh et al., measures the alignment of representations across different network instances.
+
+We computed the metric by comparing the weight matrices of output neurons across MNIST networks trained with different random seeds. Figure~\ref{fig:knn-similarity} shows the relationship between mutual k-NN kernel similarity and our decoder accuracy. The positive trend suggests that kernel similarity may serve as a proxy for representational ambiguity: networks with higher similarity across instances tend to exhibit more consistent, less ambiguous encoding of class identity.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{knn-kernel-similarity-vs-decoder-accuracy.png}
+    \caption{Mutual k-NN kernel similarity versus decoder accuracy across training paradigms. Higher kernel similarity is associated with better decoding performance, suggesting that representational convergence across network instances may reduce ambiguity.}
+    \label{fig:knn-similarity}
+\end{figure}
+
+This relationship suggests that the principles underlying representational convergence in large-scale models also operate in smaller networks. If this pattern generalizes, kernel similarity metrics could provide a computationally efficient proxy for measuring representational ambiguity in larger, multimodal systems where direct decoding approaches may be intractable.
+
+\section{Ablation Study: Relational Structure Complexity}
+
+To investigate how relational structure complexity affects decoding accuracy, we conducted an ablation study by systematically varying the number of output neurons available to the decoder. This tests whether richer relational geometries enable more unambiguous representations.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ablation-study-neuron-count-performance.png}
+    \caption{Ablation study examining the impact of neuron count on decoder performance. The top panel compares validation accuracy (purple) to the random guessing baseline (green) for networks with 2-10 output neurons. Error bars represent standard deviation across 5 random seeds. The bottom panel shows performance relative to random guessing. The 2-neuron case achieves only random-level performance (1.0x), validating that asymmetric relational structures are necessary for decoding. Performance relative to chance increases with neuron count, reaching 7.36x better than random for the 10-neuron model.}
+    \label{fig:ablation-neuron-count}
+\end{figure}
+
+Our results confirm that asymmetric relational structures between output neurons are essential for the decoder to function. The 2-neuron case performs exactly at random chance level (50\%, or 1.0x relative to random), since asymmetric relations cannot exist between only two points. While the 5-neuron condition achieves the highest absolute validation accuracy (79.1\%), performance relative to random guessing increases consistently with neuron count, with the 10-neuron model performing 7.36x better than random (73.6\%).
+
+This pattern suggests that as the decoder gains access to more relational structure among output neurons, it becomes increasingly capable of disambiguating representational content. The consistent improvement with neuron count implies that decoder accuracy should continue to increase with more complex input distributions as the ambiguity of underlying representations decreases. This provides direct empirical support for the principle that richer relational geometries provide more constraints on possible interpretations, thereby reducing representational ambiguity.
