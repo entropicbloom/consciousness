@@ -71,6 +71,19 @@ To determine whether the entire relational geometry is necessary or if local nei
     \label{fig:target-only-output}
 \end{figure}
 
+\subsubsection{Relational Complexity Scaling}
+
+Beyond establishing that full relational geometry is necessary, we tested whether richer relational structures systematically reduce ambiguity. We varied the number of output neurons used to compute relational structure from 2 to 10, training the decoder on Gram matrices of varying complexity.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ablation-study-neuron-count-performance.png}
+    \caption{Decoder performance as a function of relational structure complexity. The top panel shows validation accuracy (purple) versus random guessing baseline (green) for 2-10 output neurons. Error bars represent standard deviation across 5 random seeds. The bottom panel shows performance relative to random chance. The 2-neuron case achieves only random-level performance (1.0x), since asymmetric relational structures cannot exist between two points. Performance relative to chance increases systematically with neuron count, reaching 7.36x better than random for the 10-neuron model.}
+    \label{fig:ablation-neuron-count}
+\end{figure}
+
+The 2-neuron case performs exactly at chance level (50\%, or 1.0x), confirming that asymmetric relational structures are essential for decoding. While the 5-neuron condition achieves the highest absolute accuracy (79.1\%), performance relative to random chance increases consistently with neuron count: the 10-neuron model performs 7.36x better than random (73.6\%). This systematic improvement demonstrates that richer relational geometries provide more constraints on possible interpretations, thereby reducing representational ambiguity. The pattern suggests that decoder accuracy should continue to improve with more complex relational structures as ambiguity decreases.
+
 \subsubsection{Architecture Invariance}
 
 A key question is whether relational structure depends on specific architectural choices or represents a more fundamental property. We evaluated cross-architecture transfer using geometric matching in a 3$\times$3 design, testing three different hidden layer architectures (50-50, 25-25, and 100) as both reference and test networks. Figure~\ref{fig:cross-arch} shows strong decoding performance across all architectural combinations, demonstrating that the relational geometry encoding class identity is largely architecture-invariant.

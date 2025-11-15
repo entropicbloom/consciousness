@@ -28,6 +28,10 @@ where $P_{\sigma}$ is a permutation matrix and $\|A\|_F = \sqrt{\sum_{i,j} A_{i,
 
 To determine whether the full relational geometry is necessary or if local neighborhoods suffice, we conducted an ablation by providing the decoder with only the first row of $X'$ (the target neuron's cosine similarities with all other neurons), while masking out all pairwise similarities that do not involve the target neuron. This tests whether a neuron's class identity can be determined from its local relationships alone or requires information about the broader geometric organization.
 
+\subsubsection{Relational Complexity and Neuron Count}
+
+To test whether richer relational structures enable more unambiguous representations, we systematically varied the number of output neurons used to compute relational structure. From the standard 10-output neuron networks, we selected subsets of $k$ neurons ($k = 2, 3, \ldots, 10$) and computed Gram matrices using only those neurons. For each subset size, we trained the transformer decoder to identify which class the target neuron represents. This tests whether increasing relational complexity—by adding more pairwise relations—systematically reduces representational ambiguity.
+
 \subsubsection{Architecture Invariance}
 
 To test whether relational structure depends on specific architectural choices, we evaluated cross-architecture transfer using the geometric matching approach. We tested three different hidden layer architectures (50-50, 25-25, and 100) in a 3$\times$3 design, constructing reference Gram matrices from networks of each architecture and decoding test networks of each architecture, yielding decoding accuracy for all nine combinations. This assesses whether representational content is encoded in an architecture-invariant manner.
