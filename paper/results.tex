@@ -73,7 +73,7 @@ To determine whether the entire relational geometry is necessary or if local nei
 
 \subsubsection{Architecture Invariance}
 
-A key question is whether relational structure depends on specific architectural choices or represents a more fundamental property. We evaluated cross-architecture transfer by using reference networks of one architecture to decode test networks with different hidden layer widths. Figure~\ref{fig:cross-arch} shows strong decoding performance across architectural variations, demonstrating that the relational geometry encoding class identity is largely architecture-invariant. This suggests that representational content is encoded in a manner that transcends implementation details.
+A key question is whether relational structure depends on specific architectural choices or represents a more fundamental property. We evaluated cross-architecture transfer using geometric matching in a 3$\times$3 design, testing three different hidden layer architectures (50-50, 25-25, and 100) as both reference and test networks. Figure~\ref{fig:cross-arch} shows strong decoding performance across all architectural combinations, demonstrating that the relational geometry encoding class identity is largely architecture-invariant.
 
 \begin{figure}[htbp]
     \centering
@@ -84,7 +84,7 @@ A key question is whether relational structure depends on specific architectural
 
 \subsubsection{Dataset Discrimination}
 
-Dataset identity (MNIST vs.\ Fashion-MNIST) can be classified from relational structure with near-perfect accuracy for dropout (99.8\% $\pm$ 0.1\%) and clearly above chance for standard training (84.3\% $\pm$ 0.8\%). This shows that dataset identity, a major component of context $C$, is encoded in relational geometry.
+Dataset identity (MNIST vs.\ Fashion-MNIST) can be classified from relational structure with near-perfect accuracy for dropout (99.8\% $\pm$ 0.1\%) and clearly above chance for standard training (84.3\% $\pm$ 0.8\%). This shows that dataset identity is encoded in relational geometry.
 
 \subsection{Experiment 2: Input Neuron Spatial Position Decoding}
 
