@@ -41,7 +41,7 @@ Geometric matching (directly comparing relational geometries without training) a
 
 Geometric matching achieves perfect 100\% decoding accuracy for dropout networks with zero variance, demonstrating that their relational geometries unambiguously specify class identity. This result shows that the relational structure alone—without any information about neuron ordering or training procedure—completely determines what each neuron represents.
 
-Figure~\ref{fig:perm-distances} reveals the underlying cause: dropout creates a substantial gap between the correct permutation and all incorrect alternatives, while standard backpropagation shows only small margins. This geometric clarity explains why both our learned decoder (75\% decoding accuracy) and direct matching (100\% decoding accuracy) achieve their best performance when applied to dropout networks.
+Figure~\ref{fig:perm-distances} reveals why geometric matching succeeds or fails. For two test networks (one trained with dropout, one trained with standard backpropagation), we compute the Frobenius distance between the reference Gram matrix and the test network's Gram matrix under all possible neuron permutations (10! = 3,628,800 permutations). If relational structure unambiguously encodes class identity, the true permutation (red dot) should yield a substantially lower distance than all incorrect permutations. For dropout networks, this is exactly what we observe: the true permutation is clearly separated from all alternatives, creating an unambiguous geometric signature. In contrast, for standard backpropagation networks, the true permutation shows only a small margin over many incorrect alternatives, making reliable identification difficult. This geometric clarity in dropout networks explains why both our learned decoder (75\% accuracy) and geometric matching (100\% accuracy) achieve their best performance on these networks.
 
 \begin{figure}[htbp]
     \centering
@@ -56,7 +56,7 @@ Figure~\ref{fig:perm-distances} reveals the underlying cause: dropout creates a 
         \includegraphics[width=\textwidth]{perm_distances_dropout.png}
         \caption{Dropout training}
     \end{subfigure}
-    \caption{Frobenius distances between test and reference Gram matrices for all permutations. Red dots indicate the true permutation. Dropout training creates a clear separation between correct and incorrect permutations.}
+    \caption{Frobenius distances between test and reference Gram matrices for all permutations of test network output neurons. Red dots indicate the true permutation. Dropout training creates a clear separation between correct and incorrect permutations.}
     \label{fig:perm-distances}
 \end{figure}
 
@@ -97,7 +97,7 @@ While digit class identity is abstract, spatial position provides a more direct 
     \label{fig:input-distance}
 \end{figure}
 
-Interestingly, the pattern reverses compared to output neurons: standard backpropagation networks yield higher spatial decoding accuracy than dropout networks. This dissociation suggests that different layers and representational types may be subject to different optimization dynamics under dropout training. Nevertheless, as in Experiment 1, providing the decoder with the full relational structure substantially outperforms using only local neighborhoods (Figure~\ref{fig:target-only-input}), confirming that broader geometric context enhances decoding across different representational domains.
+Interestingly, the pattern reverses compared to output neurons: standard backpropagation networks yield higher spatial decoding accuracy than dropout networks. The precise mechanism underlying this reversal remains unclear, though it may reflect different optimization dynamics affecting input versus output layers under dropout training. Nevertheless, as in Experiment 1, providing the decoder with the full relational structure substantially outperforms using only local neighborhoods (Figure~\ref{fig:target-only-input}), confirming that broader geometric context enhances decoding across different representational domains.
 
 \begin{figure}[htbp]
     \centering

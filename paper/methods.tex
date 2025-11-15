@@ -12,11 +12,11 @@ Can we determine which digit class an output neuron represents from connectivity
 
 \subsubsection{Relational Structure Extraction}
 
-We extract relational structure via cosine similarities, which measure directional alignment regardless of magnitude, making them robust to weight scale variations across networks. After L2-normalizing rows of $X$ to get $X_{\text{norm}}$, we compute the Gram matrix $X' = X_{\text{norm}} X_{\text{norm}}^T$, where $(X')_{i,j}$ is the cosine similarity between neurons $i$ and $j$. This encodes relational geometry: neurons representing similar digits occupy similar positions.
+We extract relational structure via cosine similarities, which measure directional alignment regardless of magnitude, making them robust to weight scale variations across networks. After L2-normalizing rows of $X$ to get $X_{\text{norm}}$, we compute the Gram matrix $X' = X_{\text{norm}} X_{\text{norm}}^T$, where $(X')_{i,j}$ is the cosine similarity between neurons $i$ and $j$.
 
 \subsubsection{Decoding Methods}
 
-\paragraph{Geometric Matching.} We construct a reference Gram matrix $G_{\text{ref}}$ by averaging the cosine similarity matrices from 5 networks with known class ordering. For each of 10 test networks with unknown ordering, we search over all possible permutations of its output neurons to find the class assignment $\hat{\sigma}$ that minimizes the Frobenius distance between the permuted test Gram matrix and the reference:
+\paragraph{Geometric Matching.} We construct a reference Gram matrix $G_{\text{ref}}$ by averaging the cosine similarity matrices from 5 networks with known class ordering. The logic is: if networks consistently encode the same relational structure across training runs, then a test network's Gram matrix should closely match the reference when its neurons are correctly aligned. For each of 10 test networks with unknown ordering, we search over all possible permutations of its output neurons to find the class assignment $\hat{\sigma}$ that minimizes the Frobenius distance between the permuted test Gram matrix and the reference:
 \begin{equation}
 \hat{\sigma} = \arg\min_{\sigma} \|G_{\text{ref}} - P_{\sigma} G_{\text{test}} P_{\sigma}^T\|_F
 \end{equation}
@@ -34,7 +34,7 @@ To test whether relational structure depends on specific architectural choices, 
 
 \subsubsection{Dataset Discrimination}
 
-Using the same decoder architecture and random output-neuron permutations, we trained a binary classifier to distinguish whether a network was trained on MNIST or Fashion-MNIST from output layer weights alone. This tests whether dataset identity is encoded in relational geometry.
+Using the transformer-based decoder architecture described above with random output-neuron permutations, we trained a binary classifier to distinguish whether a network was trained on MNIST or Fashion-MNIST from output layer weights alone. This tests whether dataset identity is encoded in relational geometry.
 
 \subsection{Experiment 2: Decoding Spatial Position from Input Neurons}
 
@@ -44,7 +44,7 @@ f(i,j) = \sqrt{(i-13.5)^2 + (j-13.5)^2}
 \end{equation}
 This measures Euclidean distance from the image center at (13.5, 13.5).
 
-Relational structure is extracted via column-wise cosine similarities: $X' = X_{\text{norm}}^T X_{\text{norm}}$. Due to the larger neuron count (784 vs.\ 10), we use only the learned decoder (same transformer architecture, now performing regression). Performance is evaluated using $R^2$ score. We apply the same local vs.\ global structure ablation as in Experiment 1 to assess whether the full relational geometry is necessary for spatial position decoding.
+Relational structure is extracted via column-wise cosine similarities: $X' = X_{\text{norm}}^T X_{\text{norm}}$. Due to the larger neuron count (784 vs.\ 10), we use only the learned decoder (same transformer architecture, now performing regression): searching through 784! permutations is computationally intractable. Performance is evaluated using $R^2$ score. We apply the same local vs.\ global structure ablation as in Experiment 1 to assess whether the full relational geometry is necessary for spatial position decoding.
 
 \subsection{Quantifying Ambiguity Reduction}
 
