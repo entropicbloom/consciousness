@@ -39,7 +39,7 @@ Geometric matching (directly comparing relational geometries without training) a
     \label{tab:gram-accuracy}
 \end{table}
 
-Geometric matching achieves perfect 100\% decoding accuracy for dropout networks with zero variance, demonstrating that their relational geometries unambiguously specify class identity. This remarkable result shows that the relational structure alone—without any information about neuron ordering or training procedure—completely determines what each neuron represents.
+Geometric matching achieves perfect 100\% decoding accuracy for dropout networks with zero variance, demonstrating that their relational geometries unambiguously specify class identity. This result shows that the relational structure alone—without any information about neuron ordering or training procedure—completely determines what each neuron represents.
 
 Figure~\ref{fig:perm-distances} reveals the underlying cause: dropout creates a substantial gap between the correct permutation and all incorrect alternatives, while standard backpropagation shows only small margins. This geometric clarity explains why both our learned decoder (75\% decoding accuracy) and direct matching (100\% decoding accuracy) achieve their best performance when applied to dropout networks.
 
