@@ -16,13 +16,25 @@ We extract relational structure via cosine similarities, which measure direction
 
 \subsubsection{Decoding Methods}
 
-\paragraph{Geometric Matching.} We construct a reference Gram matrix from multiple networks with known ordering, then find the permutation $\hat{\sigma}$ minimizing Frobenius distance to each test network:
+\paragraph{Geometric Matching.} We construct a reference Gram matrix $G_{\text{ref}}$ by averaging the cosine similarity matrices from 5 networks with known class ordering. For each of 10 test networks with unknown ordering, we search over all possible permutations of its output neurons to find the class assignment $\hat{\sigma}$ that minimizes the Frobenius distance between the permuted test Gram matrix and the reference:
 \begin{equation}
 \hat{\sigma} = \arg\min_{\sigma} \|G_{\text{ref}} - P_{\sigma} G_{\text{test}} P_{\sigma}^T\|_F
 \end{equation}
-where $\|A\|_F = \sqrt{\sum_{i,j} A_{i,j}^2}$ is the Frobenius norm, measuring the element-wise distance between matrices.
+where $P_{\sigma}$ is a permutation matrix and $\|A\|_F = \sqrt{\sum_{i,j} A_{i,j}^2}$ is the Frobenius norm. This approach tests whether relational geometry alone is sufficiently consistent across network instances to identify neuron class identity.
 
-\paragraph{Learned Decoder.} We trained a transformer-based decoder \citep{vaswani2017attention} with self-attention layers, treating rows of $X'$ as tokens. Crucially, we do not use positional encodings (as in the original transformer architecture) to ensure permutation invariance: the only positional information is which row corresponds to the target neuron. Training used 8000 data points, validation used 2000 held-out networks, ensuring the decoder learns general relational patterns.
+\paragraph{Learned Decoder.} We trained a transformer-based decoder \citep{vaswani2017attention} with self-attention layers, treating rows of $X'$ as tokens. Crucially, we do not use positional encodings (as in the original transformer architecture) to ensure permutation invariance: the only positional information is which row corresponds to the target neuron. Training used 800 networks (8000 data points), validation used 200 held-out networks (2000 data points), ensuring the decoder learns general relational patterns. We trained 5 decoder instances with different random seeds to assess variance.
+
+\subsubsection{Relational Structure Necessity}
+
+To determine whether the full relational geometry is necessary or if local neighborhoods suffice, we conducted an ablation by providing the decoder with only the first row of $X'$ (the target neuron's cosine similarities with all other neurons), while masking out all pairwise similarities that do not involve the target neuron. This tests whether a neuron's class identity can be determined from its local relationships alone or requires information about the broader geometric organization.
+
+\subsubsection{Architecture Invariance}
+
+To test whether relational structure depends on specific architectural choices, we evaluated cross-architecture transfer using the geometric matching approach. We tested three different hidden layer architectures (50-50, 25-25, and 100) in a 3$\times$3 design, constructing reference Gram matrices from networks of each architecture and decoding test networks of each architecture, yielding decoding accuracy for all nine combinations. This assesses whether representational content is encoded in an architecture-invariant manner.
+
+\subsubsection{Dataset Discrimination}
+
+Using the same decoder architecture and random output-neuron permutations, we trained a binary classifier to distinguish whether a network was trained on MNIST or Fashion-MNIST from output layer weights alone. This tests whether dataset identity is encoded in relational geometry.
 
 \subsection{Experiment 2: Decoding Spatial Position from Input Neurons}
 
@@ -32,7 +44,7 @@ f(i,j) = \sqrt{(i-13.5)^2 + (j-13.5)^2}
 \end{equation}
 This measures Euclidean distance from the image center at (13.5, 13.5).
 
-Relational structure is extracted via column-wise cosine similarities: $X' = X_{\text{norm}}^T X_{\text{norm}}$. Due to the larger neuron count (784 vs.\ 10), we use only the learned decoder (same transformer architecture, now performing regression). Performance is evaluated using $R^2$ score.
+Relational structure is extracted via column-wise cosine similarities: $X' = X_{\text{norm}}^T X_{\text{norm}}$. Due to the larger neuron count (784 vs.\ 10), we use only the learned decoder (same transformer architecture, now performing regression). Performance is evaluated using $R^2$ score. We apply the same local vs.\ global structure ablation as in Experiment 1 to assess whether the full relational geometry is necessary for spatial position decoding.
 
 \subsection{Quantifying Ambiguity Reduction}
 
@@ -40,7 +52,7 @@ We compute Ambiguity Reduction Scores (ARS) to connect decoding performance with
 \begin{equation}
 \text{ARS} = 1 - \frac{H(I|R,C)}{H_{\max}}
 \end{equation}
-where $H(I|R,C)$ is conditional entropy given representation $R$ and context $C$, and $H_{\max}$ is maximum entropy.
+where $H(I|R,C)$ is conditional entropy given representation $R$ and context $C$, and $H_{\max}$ is maximum entropy. For output neuron class decoding (Experiment 1), we use geometric matching accuracies; for input neuron position decoding (Experiment 2), we use learned decoder $R^2$ scores.
 
 For classification with accuracy $A$ and $K$ classes, Fano's inequality yields:
 \begin{equation}
