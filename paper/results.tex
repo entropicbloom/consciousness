@@ -22,22 +22,14 @@ When decoding from untrained networks, the decoder achieves 10\% accuracy (chanc
 
 \subsubsection{Geometric Matching Results}
 
-Geometric matching (directly comparing relational geometries without training) achieves even higher accuracies (Table~\ref{tab:gram-accuracy}).
+Geometric matching (directly comparing relational geometries without training) achieves even higher accuracies (Figure~\ref{fig:gram-accuracy}).
 
-\begin{table}[htbp]
+\begin{figure}[htbp]
     \centering
-    \begin{tabular}{lcc}
-        \toprule
-        Training Paradigm & Accuracy & Std Dev \\
-        \midrule
-        Untrained & 0.100 & 0.155 \\
-        Standard backpropagation & 0.383 & 0.441 \\
-        Dropout & \textbf{1.000} & \textbf{0.000} \\
-        \bottomrule
-    \end{tabular}
-    \caption{Geometric matching accuracies for decoding output neuron class identity across 10 validation networks. Standard deviations reflect variance across network instances. Decoding from dropout networks achieves perfect 100\% accuracy with zero variance, indicating completely unambiguous relational encoding of class identity.}
-    \label{tab:gram-accuracy}
-\end{table}
+    \includegraphics[width=0.65\textwidth]{gram-matrix-decoder-performance.png}
+    \caption{Geometric matching accuracies for decoding output neuron class identity across validation networks. Error bars reflect variance across network instances. Decoding from dropout networks achieves perfect 100\% accuracy with zero variance, indicating completely unambiguous relational encoding of class identity.}
+    \label{fig:gram-accuracy}
+\end{figure}
 
 Geometric matching achieves perfect 100\% decoding accuracy for dropout networks with zero variance, demonstrating that their relational geometries unambiguously specify class identity. This result shows that the relational structure alone—without any information about neuron ordering or training procedure—completely determines what each neuron represents.
 
