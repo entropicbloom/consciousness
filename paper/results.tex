@@ -48,7 +48,7 @@ Figure~\ref{fig:perm-distances} reveals why geometric matching succeeds or fails
         \includegraphics[width=\textwidth]{perm_distances_dropout.png}
         \caption{Dropout training}
     \end{subfigure}
-    \caption{Frobenius distances between test and reference Gram matrices for all permutations of test network output neurons. Red dots indicate the true permutation. Dropout training creates a clear separation between correct and incorrect permutations.}
+    \caption{Frobenius distances between test and reference Gram matrices for all permutations of test network output neurons. Red dots indicate the true permutation. For standard backpropagation (a), even when the true permutation achieves the lowest distance, it does so by only a small margin. Dropout training (b) creates clear separation.}
     \label{fig:perm-distances}
 \end{figure}
 
