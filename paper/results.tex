@@ -27,7 +27,7 @@ Geometric matching (directly comparing relational geometries without training) a
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.65\textwidth]{gram-matrix-decoder-performance.png}
-    \caption{Geometric matching accuracies for decoding output neuron class identity across validation networks. Error bars reflect variance across network instances. Decoding from dropout networks achieves perfect 100\% accuracy with zero variance, indicating completely unambiguous relational encoding of class identity.}
+    \caption{Geometric matching accuracies for decoding output neuron class identity across validation networks. Error bars reflect variance across network instances. Decoding from dropout networks achieves perfect 100\% accuracy with zero variance, indicating completely unambiguous relational encoding of class identity. Larger error bars for standard backpropagation reflect geometric ambiguity: multiple permutations achieve near-identical distances to the reference.}
     \label{fig:gram-accuracy}
 \end{figure}
 
