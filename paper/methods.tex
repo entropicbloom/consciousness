@@ -4,7 +4,7 @@ We conducted two experiments testing whether neural networks encode representati
 
 \subsubsection{Network Architecture and Training}
 
-We trained fully-connected networks (784-50-50-10 architecture) on MNIST digit classification under three paradigms: (1) untrained (random initialization, control), (2) standard backpropagation (2 epochs), and (3) backpropagation with 20\% dropout on hidden layers \citep{baldi2013understanding}. We used 2 epochs to ensure learning while avoiding overfitting on this simple task; 20\% dropout represents a standard rate balancing regularization and capacity. We generated 1000 networks per paradigm using different random seeds. All networks used Adam optimizer with learning rate 0.001 and batch size 256.
+We trained fully-connected networks (784-50-50-10 architecture) on MNIST digit classification under three paradigms: (1) untrained (random initialization, control), (2) standard backpropagation, and (3) backpropagation with 20\% dropout on hidden layers \citep{baldi2013understanding}. Both trained paradigms used 2 epochs to ensure learning while avoiding overfitting on this simple task; 20\% dropout represents a standard rate balancing regularization and capacity. We generated 1000 networks per paradigm using different random seeds. All networks used Adam optimizer with learning rate 0.001 and batch size 256.
 
 \subsubsection{Decoding Task}
 
