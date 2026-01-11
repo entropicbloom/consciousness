@@ -56,7 +56,7 @@ We compute Ambiguity Reduction Scores (ARS) to connect decoding performance with
 \begin{equation}
 \text{ARS} = 1 - \frac{H(I|R,C)}{H_{\max}}
 \end{equation}
-where $H(I|R,C)$ is conditional entropy given representation $R$ and context $C$, and $H_{\max}$ is maximum entropy. For output neuron class decoding (Experiment 1), we use geometric matching accuracies; for input neuron position decoding (Experiment 2), we use learned decoder $R^2$ scores.
+where $H(I|R,C)$ is conditional entropy given representation $R$ and context $C$, and $H_{\max}$ is maximum entropy. For discrete variables (Experiment 1), $H$ denotes Shannon entropy with $H_{\max} = \log_2 K$ for $K$ classes; for continuous variables (Experiment 2), $H$ denotes differential entropy with $H_{\max} = \frac{1}{2}\log_2(2\pi e \cdot \text{Var}(Y))$. While these entropy types have different mathematical properties, the normalized ratio $H/H_{\max}$ provides a comparable measure of residual uncertainty in both settings. For output neuron class decoding, we use geometric matching accuracies; for input neuron position decoding, we use learned decoder $R^2$ scores.
 
 For classification with accuracy $A$ and $K$ classes, Fano's inequality yields:
 \begin{equation}
@@ -64,7 +64,7 @@ For classification with accuracy $A$ and $K$ classes, Fano's inequality yields:
 \end{equation}
 where $h_b(p) = -p\log_2(p) - (1-p)\log_2(1-p)$.
 
-For regression with $R^2$ score (assuming Gaussian residuals, $\text{Var}(Y)=1$):
+For regression with $R^2$ score, we assume residuals are approximately Gaussian and standardize the target variable to unit variance ($\text{Var}(Y)=1$). Under these assumptions, the residual variance equals $1-R^2$, and the differential entropy of Gaussian residuals yields:
 \begin{equation}
 \text{ARS} \geq \frac{\log_2[1/(1-R^2)]}{\log_2(2\pi e)} \approx \frac{\log_2[1/(1-R^2)]}{4.094}
 \end{equation}
