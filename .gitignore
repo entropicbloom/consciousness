@@ -10,6 +10,9 @@ paper/*.fdb_latexmk
 paper/*.synctex.gz
 paper/main.pdf
 
+# Editor
+.vscode/
+
 # macOS
 .DS_Store
 
