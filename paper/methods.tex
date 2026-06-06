@@ -30,7 +30,7 @@ To determine whether the full relational geometry is necessary or if local neigh
 
 \subsubsection{Relational Complexity and Neuron Count}
 
-To test whether richer relational structures enable more unambiguous representations, we systematically varied the number of output neurons used to compute relational structure. From the standard 10-output neuron networks, we selected subsets of $k$ neurons ($k = 2, 3, \ldots, 10$) and computed Gram matrices using only those neurons. For each subset size, we applied geometric matching over all $k!$ permutations of the selected neurons, scoring how strongly the true permutation is favored over the alternatives relative to the $1/k$ chance level. This tests whether increasing relational complexity—by adding more pairwise relations—systematically reduces representational ambiguity.
+To test whether richer relational structures enable more unambiguous representations, we systematically varied the number of output neurons used to compute relational structure. From the dropout-trained 10-output-neuron networks, we selected subsets of $k$ neurons ($k = 2, 3, \ldots, 10$) and computed Gram matrices using only those neurons. For each subset size, we applied geometric matching over all $k!$ permutations of the selected neurons, scoring the position-wise accuracy of the distance-minimizing permutation exactly as in the main geometric-matching analysis, against a $1/k$ chance level. This tests whether increasing relational complexity---by adding more pairwise relations---systematically reduces representational ambiguity.
 
 \subsubsection{Architecture Invariance}
 

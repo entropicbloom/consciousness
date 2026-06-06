@@ -65,16 +65,16 @@ To determine whether the entire relational geometry is necessary or if local nei
 
 \subsubsection{Relational Complexity Scaling}
 
-Beyond establishing that full relational geometry is necessary, we tested whether richer relational structures systematically reduce ambiguity. We varied the number of output neurons used to compute relational structure from 2 to 10, applying geometric matching to Gram matrices of varying complexity (Figure~\ref{fig:ablation-neuron-count}).
+Beyond establishing that full relational geometry is necessary, we tested whether richer relational structures systematically reduce ambiguity. Using the dropout networks from the main geometric-matching result, we varied the number of output neurons used to compute relational structure from 2 to 10, applying geometric matching to Gram matrices of varying complexity and scoring the same way as in \S3.1.2 (Figure~\ref{fig:ablation-neuron-count}).
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{ablation-study-neuron-count-performance.png}
-    \caption{Geometric matching performance as a function of relational structure complexity. The top panel shows validation accuracy (blue) versus random guessing baseline (green) for 2-10 output neurons. Error bars represent standard deviation across 5 random seeds. The bottom panel shows performance relative to random chance (purple). The 2-neuron case achieves only random-level performance (1.0x), since asymmetric relational structures cannot exist between two points. Both absolute accuracy and relative performance increase systematically with neuron count, reaching 99.8\% accuracy and 9.98x better than random for the 10-neuron model.}
+    \caption{Geometric matching performance as a function of relational structure complexity, using the dropout networks and the same accuracy metric as Figure~\ref{fig:gram-accuracy}. The top panel shows validation accuracy (blue) versus random guessing baseline (teal) for 2-10 output neurons. Error bars represent standard deviation across 5 random seeds. The bottom panel shows performance relative to random chance (purple). The 2-neuron case achieves only random-level performance (1.0x), since asymmetric relational structures cannot exist between two points. Performance increases systematically with neuron count, reaching 100\% accuracy and 10x better than random for the 10-neuron model.}
     \label{fig:ablation-neuron-count}
 \end{figure}
 
-The 2-neuron case performs exactly at chance level (50\%, or 1.0x), confirming that asymmetric relational structures are essential for decoding. Performance relative to chance then increases monotonically with neuron count, from 1.0x (2 neurons) to 9.98x (10 neurons), and the 10-neuron model also achieves the highest absolute accuracy (99.8\%). This systematic improvement demonstrates that richer relational geometries provide more constraints on possible interpretations, thereby reducing representational ambiguity. The pattern suggests that matching accuracy should continue to improve with more complex relational structures as ambiguity decreases.
+The 2-neuron case performs exactly at chance level (50\%, or 1.0x), confirming that asymmetric relational structures are essential for decoding. Performance relative to chance then increases monotonically with neuron count, from 1.0x (2 neurons) to 10x (10 neurons), where absolute accuracy reaches 100\%---matching the unambiguous encoding observed for the full 10-neuron dropout networks in \S3.1.2. This systematic improvement demonstrates that richer relational geometries provide more constraints on possible interpretations, thereby reducing representational ambiguity.
 
 \subsubsection{Architecture Invariance}
 
