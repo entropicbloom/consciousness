@@ -4,7 +4,7 @@ We conducted two experiments testing whether neural networks encode representati
 
 \subsubsection{Network Architecture and Training}
 
-We trained fully-connected networks (784-50-50-10 architecture) on MNIST digit classification under three paradigms: (1) untrained (random initialization, control), (2) standard backpropagation (2 epochs), and (3) backpropagation with 20\% dropout on hidden layers \citep{baldi2013understanding}. We used 2 epochs to ensure learning while avoiding overfitting on this simple task; 20\% dropout represents a standard rate balancing regularization and capacity. We generated 1000 networks per paradigm using different random seeds. All networks used Adam optimizer with learning rate 0.001 and batch size 256.
+We trained fully-connected networks (784-50-50-10 architecture) on MNIST digit classification under three paradigms: (1) untrained (random initialization, control), (2) standard backpropagation, and (3) backpropagation with 20\% dropout on hidden layers \citep{baldi2013understanding}. Both trained paradigms used 2 epochs to ensure learning while avoiding overfitting on this simple task; 20\% dropout represents a standard rate balancing regularization and capacity. We generated 1000 networks per paradigm using different random seeds. All networks used Adam optimizer with learning rate 0.001 and batch size 256.
 
 \subsubsection{Decoding Task}
 
@@ -22,7 +22,7 @@ We extract relational structure via cosine similarities, which measure direction
 \end{equation}
 where $P_{\sigma}$ is a permutation matrix and $\|A\|_F = \sqrt{\sum_{i,j} A_{i,j}^2}$ is the Frobenius norm. This approach tests whether relational geometry alone is sufficiently consistent across network instances to identify neuron class identity.
 
-\paragraph{Learned Decoder.} We trained a transformer-based decoder \citep{vaswani2017attention} with self-attention layers, treating rows of $X'$ as tokens. Crucially, we do not use positional encodings (as in the original transformer architecture) to ensure permutation invariance: the only positional information is which row corresponds to the target neuron. Training used 800 networks (8000 data points), validation used 200 held-out networks (2000 data points), ensuring the decoder learns general relational patterns. We trained 5 decoder instances with different random seeds to assess variance.
+\paragraph{Learned Decoder.} We trained a transformer-based decoder \citep{vaswani2017attention} with self-attention layers, treating rows of $X'$ as tokens. The decoder architecture consists of 2 multi-head self-attention layers with 4 attention heads and hidden dimensionality 128, followed by a single fully-connected output layer. Crucially, we do not use positional encodings (as in the original transformer architecture) to ensure permutation invariance: the only positional information is which row corresponds to the target neuron. Training used 800 networks (8000 data points), validation used 200 held-out networks (2000 data points), ensuring the decoder learns general relational patterns. We trained for 200 epochs with batch size 64, learning rate 0.001, and cross-entropy loss. We trained 5 decoder instances with different random seeds in each setup to assess variance.
 
 \subsubsection{Relational Structure Necessity}
 
@@ -56,7 +56,7 @@ We compute Ambiguity Reduction Scores (ARS) to connect decoding performance with
 \begin{equation}
 \text{ARS} = 1 - \frac{H(I|R,C)}{H_{\max}}
 \end{equation}
-where $H(I|R,C)$ is conditional entropy given representation $R$ and context $C$, and $H_{\max}$ is maximum entropy. For output neuron class decoding (Experiment 1), we use geometric matching accuracies; for input neuron position decoding (Experiment 2), we use learned decoder $R^2$ scores.
+where $H(I|R,C)$ is conditional entropy given representation $R$ and context $C$, and $H_{\max}$ is maximum entropy. For discrete variables (Experiment 1), $H$ denotes Shannon entropy with $H_{\max} = \log_2 K$ for $K$ classes; for continuous variables (Experiment 2), $H$ denotes differential entropy with $H_{\max} = \frac{1}{2}\log_2(2\pi e \cdot \text{Var}(Y))$. While these entropy types have different mathematical properties, the normalized ratio $H/H_{\max}$ provides a comparable measure of residual uncertainty in both settings. For output neuron class decoding, we use geometric matching accuracies; for input neuron position decoding, we use learned decoder $R^2$ scores.
 
 For classification with accuracy $A$ and $K$ classes, Fano's inequality yields:
 \begin{equation}
@@ -64,7 +64,7 @@ For classification with accuracy $A$ and $K$ classes, Fano's inequality yields:
 \end{equation}
 where $h_b(p) = -p\log_2(p) - (1-p)\log_2(1-p)$.
 
-For regression with $R^2$ score (assuming Gaussian residuals, $\text{Var}(Y)=1$):
+For regression with $R^2$ score, we assume residuals are approximately Gaussian and standardize the target variable to unit variance ($\text{Var}(Y)=1$). Under these assumptions, the residual variance equals $1-R^2$, and the differential entropy of Gaussian residuals yields:
 \begin{equation}
 \text{ARS} \geq \frac{\log_2[1/(1-R^2)]}{\log_2(2\pi e)} \approx \frac{\log_2[1/(1-R^2)]}{4.094}
 \end{equation}
