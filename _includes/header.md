@@ -1,6 +1,6 @@
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script id="MathJax-script" async src="/assets/mathjax/tex-mml-chtml.js"></script>
 
 
 ### Links
