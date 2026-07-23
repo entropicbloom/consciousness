@@ -10,6 +10,12 @@ paper/*.fdb_latexmk
 paper/*.synctex.gz
 paper/main.pdf
 
+# Jekyll build artifacts
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
 # Editor
 .vscode/
 

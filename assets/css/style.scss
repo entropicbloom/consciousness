@@ -2,6 +2,11 @@
 ---
 @import "{{ site.theme }}";
 
+// Force light rendering; disables browser auto-darkening of the page.
+:root {
+  color-scheme: light only;
+}
+
 // Add your custom CSS rules here
 body {
   font-family: Helvetica, sans-serif;

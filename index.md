@@ -1,3 +1,6 @@
+---
+layout: default
+---
 {% include header.md %}
 
 {% include theory.md %}
