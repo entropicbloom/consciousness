@@ -10,6 +10,10 @@
 // Add your custom CSS rules here
 body {
   font-family: Helvetica, sans-serif;
+  // Paint the canvas explicitly. Without this the browser keeps the previous
+  // document's base background colour across a navigation (paint holding),
+  // so arriving from an off-site link leaves that page's background showing.
+  background-color: #ffffff;
 }
 
 h1, h2, h3 {
