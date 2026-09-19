@@ -12,6 +12,12 @@ Two public datasets. The [MICrONS](https://www.microns-explorer.org/cortical-mm3
 
 The decoder is a transformer whose input is the correlation matrix of a sampled population of 512 neurons, one row per neuron, and nothing else. Labels enter only the loss. As in Exhibit 1, the decoder is trained on one set of neurons and scored on neurons it never saw, and on Allen on animals it never saw. It cannot memorise which neuron is which, because every population is a fresh random sample and the rows carry no identity.
 
+On Allen two choices define a run: whether the test neurons come from the training animals (each halved into training and test neurons) or from animals held out entirely, and whether a sampled population is drawn from one animal or from several. The four combinations are shown below. In a single-animal population the correlation matrix is a within-circuit matrix; in a mixed population most entries are correlations between neurons of different animals.
+
+<p align="center">
+  <img src="figures/allen-decoder-regimes.png" alt="The four Allen decoder regimes: test neurons from training or held-out animals, populations drawn from one animal or mixed across animals" width="800"/>
+</p>
+
 ## Results
 
 <p align="center">
