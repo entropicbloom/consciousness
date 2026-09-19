@@ -11,6 +11,8 @@ layout: default
 
 {% include exhibit2.md %}
 
+{% include exhibit3.md %}
+
 {% include ambiguity-analysis.md %}
 
 {% include related-work.md %}
