@@ -13,6 +13,10 @@ conversion happens, so the includes pass through as literal markdown.
 
 Relative figure/asset paths are rewritten to absolute URLs so the mirror
 resolves correctly wherever it is copied to.
+
+Both spellings occur in the includes -- figures/x.png and /figures/x.png --
+so the root-relative form is normalised first and then rewritten with the
+rest. Matching only one spelling silently leaves those images relative.
 {%- endcomment -%}
 {%- capture md_fig %}]({{ site.url }}/figures/{% endcapture -%}
 {%- capture html_fig %}src="{{ site.url }}/figures/{% endcapture -%}
@@ -53,4 +57,8 @@ numerically in the surrounding prose.
 
 {% include references.md %}
 {%- endcapture -%}
-{{ body | replace: '](figures/', md_fig | replace: 'src="figures/', html_fig | replace: 'src="assets/', html_asset }}
+{{ body
+  | replace: '](/figures/', '](figures/'
+  | replace: 'src="/figures/', 'src="figures/'
+  | replace: 'src="/assets/', 'src="assets/'
+  | replace: '](figures/', md_fig | replace: 'src="figures/', html_fig | replace: 'src="assets/', html_asset }}
