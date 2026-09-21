@@ -1,5 +1,15 @@
 title: Consciousness and Unambiguous Representations
 description: Thoughts and experiments about necessary physical correlates of phenomenal consciousness.
+
+# Full abstract. Single source of truth: consumed by the citation_abstract meta
+# tag, the schema.org JSON-LD, and the /paper.md mirror. `description` above
+# stays the short tagline used for the HTML meta description and social cards.
+abstract: >-
+  This article argues that conscious brain states must unambiguously determine
+  their representational content, formalizing ambiguity as conditional entropy.
+  Neural network experiments with MNIST show that relational connectivity
+  structures support measurable reductions in ambiguity, linking theoretical
+  constraints on consciousness to empirical evidence.
 author: Francesco Lässig
 url: https://consciousness-is-unambiguous.com
 baseurl: ""
