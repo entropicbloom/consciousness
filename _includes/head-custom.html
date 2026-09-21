@@ -11,8 +11,8 @@
 <meta name="citation_fulltext_html_url" content="https://consciousness-is-unambiguous.com/">
 <meta name="citation_pdf_url" content="https://consciousness-is-unambiguous.com/consciousness-is-unambiguous.pdf">
 <meta name="citation_language" content="en">
-<meta name="citation_abstract" content="This article argues that conscious brain states must unambiguously determine their representational content, formalizing ambiguity as conditional entropy. Neural network experiments with MNIST show that relational connectivity structures support measurable reductions in ambiguity, linking theoretical constraints on consciousness to empirical evidence.">
-<meta name="citation_keywords" content="consciousness; neural networks; ambiguity; unambiguous; intentionality; representational content; entropy">
+<meta name="citation_abstract" content="{{ site.abstract | xml_escape }}">
+<meta name="citation_keywords" content="consciousness; neural networks; ambiguity; unambiguous; intentionality; representational content; entropy; visual cortex; functional connectivity; relational structure">
 <meta name="citation_author_institution" content="(independent)">
 
 <!-- Schema.org JSON-LD -->
@@ -40,10 +40,11 @@
       }
     },
     "datePublished": "2025-04-15",
-    "dateModified": "2025-08-06",
+    "dateModified": "{{ site.time | date: '%Y-%m-%d' }}",
     "url": "https://consciousness-is-unambiguous.com/",
-    "description": "This article investigates the intentionality constraint on neural correlates of consciousness and how unambiguous representations emerge in neural networks.",
-    "keywords": "consciousness, neural networks, ambiguity, representationalism, representations, entropy, intentionality, philosophy of mind",
+    "description": "This article investigates the intentionality constraint on neural correlates of consciousness and how unambiguous representations emerge in artificial networks and in mouse visual cortex.",
+    "abstract": {{ site.abstract | jsonify }},
+    "keywords": "consciousness, neural networks, ambiguity, representationalism, representations, entropy, intentionality, philosophy of mind, visual cortex, functional connectivity, relational structure",
     "inLanguage": "en"
   }
   </script>

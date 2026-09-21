@@ -1,5 +1,23 @@
 title: Consciousness and Unambiguous Representations
 description: Thoughts and experiments about necessary physical correlates of phenomenal consciousness.
+
+# Full abstract. Single source of truth: consumed by the citation_abstract meta
+# tag, the schema.org JSON-LD, and the /paper.md mirror. `description` above
+# stays the short tagline used for the HTML meta description and social cards.
+abstract: >-
+  This article argues that conscious brain states must unambiguously determine
+  their representational content, formalizing ambiguity as conditional entropy.
+  In artificial networks trained on MNIST, relational connectivity structures
+  support measurable reductions in ambiguity: both the class an output neuron
+  encodes and the position of an input pixel can be decoded from relations
+  between neurons alone. Applied to mouse visual cortex, using the MICrONS and
+  Allen Brain Observatory datasets, functional correlations alone locate a
+  neuron on the orientation circle to a mean error of 25 degrees against 45
+  degrees for chance, recover receptive-field position at R² = 0.23, and
+  transfer to animals the decoder never saw. What remains ambiguous is the
+  symmetry of the relational structure itself: a near-circulant correlation
+  matrix orders the orientations but leaves the absolute frame to be fixed by
+  a small, consistent asymmetry in cortex.
 author: Francesco Lässig
 url: https://consciousness-is-unambiguous.com
 baseurl: ""
