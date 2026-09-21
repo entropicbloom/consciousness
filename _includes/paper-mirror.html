@@ -1,0 +1,56 @@
+{%- comment -%}
+Body of the plain-markdown mirror, shared by /paper.md and /paper.txt.
+
+Two paths serve these identical bytes because GitHub Pages picks the response
+Content-Type from the extension and offers no way to override it. .md is served
+as text/markdown, which some agent fetchers reject outright as an unsupported
+content type; .txt is served as text/plain, which they accept. Keeping both
+means the self-describing URL still works wherever text/markdown is understood.
+
+Neither generator may carry a .md extension -- kramdown would convert it and
+emit HTML into the permalink. With .html, Liquid runs but no markdown
+conversion happens, so the includes pass through as literal markdown.
+
+Relative figure/asset paths are rewritten to absolute URLs so the mirror
+resolves correctly wherever it is copied to.
+{%- endcomment -%}
+{%- capture md_fig %}]({{ site.url }}/figures/{% endcapture -%}
+{%- capture html_fig %}src="{{ site.url }}/figures/{% endcapture -%}
+{%- capture html_asset %}src="{{ site.url }}/assets/{% endcapture -%}
+{%- capture body -%}
+# {{ site.title }}
+
+- **Author:** {{ site.author }}
+- **Canonical URL:** {{ site.url }}/
+- **PDF:** {{ site.url }}/consciousness-is-unambiguous.pdf
+- **arXiv:** https://arxiv.org/abs/2512.11000
+- **Code:** https://github.com/entropicbloom/intentionality
+- **Video:** https://youtu.be/2BGzn22B5J8
+- **Last built:** {{ site.time | date: '%Y-%m-%d' }}
+
+**Abstract.** {{ site.abstract }}
+
+This is a plain-markdown mirror of the full article, generated from the same
+sources as the HTML page. Mathematics is written in LaTeX between `$$`
+delimiters. Figures are referenced by absolute URL; several results are stated
+numerically in the surrounding prose.
+
+---
+
+{% include theory.md %}
+
+---
+
+{% include exhibit1.md %}
+
+{% include exhibit2.md %}
+
+{% include exhibit3.md %}
+
+{% include ambiguity-analysis.md %}
+
+{% include related-work.md %}
+
+{% include references.md %}
+{%- endcapture -%}
+{{ body | replace: '](figures/', md_fig | replace: 'src="figures/', html_fig | replace: 'src="assets/', html_asset }}
