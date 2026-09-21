@@ -29,6 +29,20 @@ h1, h2, h3 {
 }
 
 
+// MathJax display equations can be wider than a phone viewport. Left alone,
+// the widest equation on the page sets the width of the document and every
+// paragraph scrolls sideways with it. Scroll the equation itself instead.
+mjx-container[jax="CHTML"][display="true"] {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  // MathJax sets an inline min-width on display containers, which would
+  // otherwise keep the box from shrinking below its natural width.
+  min-width: initial !important;
+  // Keep the scrollbar off the glyphs.
+  padding-bottom: 0.25em;
+}
+
 .page-header {
     background-color: #000000;
     background-image: url('../images/background.png');
