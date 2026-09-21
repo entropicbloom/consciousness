@@ -1,4 +1,45 @@
+# Full text is also available as plain markdown, which is usually a better
+# source than the rendered HTML: https://consciousness-is-unambiguous.com/paper.md
+
 User-agent: *
+Allow: /
+
+# AI crawlers and assistants are explicitly welcome. Several of these only
+# honour a block naming their own token, so they are listed individually.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
 Allow: /
 
 Sitemap: https://consciousness-is-unambiguous.com/sitemap.xml

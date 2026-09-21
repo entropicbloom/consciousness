@@ -62,7 +62,7 @@ $$
            }\approx\frac{\log_{2}[1/(1-R^{2})]}{4.094}
 $$
 
-## Results
+## Results {#ambiguity-results}
 
 ### Exhibit 1 - Class-ID decoding (Gram matrix matching)
 

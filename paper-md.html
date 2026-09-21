@@ -1,0 +1,57 @@
+---
+permalink: /paper.md
+layout: null
+sitemap: false
+---
+{%- comment -%}
+Generates a plain-markdown mirror of the site at /paper.md.
+
+Kept in sync automatically: it pulls the same _includes as index.md, so the
+mirror can never drift from the rendered page. This file must NOT have a .md
+extension -- a .md generator would be run through kramdown and would emit HTML
+into the permalink. With a .html extension Liquid still runs but no markdown
+conversion happens, so the includes pass through as literal markdown.
+
+Relative figure/asset paths are rewritten to absolute URLs so the mirror
+resolves correctly wherever it is copied to.
+{%- endcomment -%}
+{%- capture md_fig %}]({{ site.url }}/figures/{% endcapture -%}
+{%- capture html_fig %}src="{{ site.url }}/figures/{% endcapture -%}
+{%- capture html_asset %}src="{{ site.url }}/assets/{% endcapture -%}
+{%- capture body -%}
+# {{ site.title }}
+
+- **Author:** {{ site.author }}
+- **Canonical URL:** {{ site.url }}/
+- **PDF:** {{ site.url }}/consciousness-is-unambiguous.pdf
+- **arXiv:** https://arxiv.org/abs/2512.11000
+- **Code:** https://github.com/entropicbloom/intentionality
+- **Video:** https://youtu.be/2BGzn22B5J8
+- **Last built:** {{ site.time | date: '%Y-%m-%d' }}
+
+{{ site.description }}
+
+This is a plain-markdown mirror of the full article, generated from the same
+sources as the HTML page. Mathematics is written in LaTeX between `$$`
+delimiters. Figures are referenced by absolute URL; several results are stated
+numerically in the surrounding prose.
+
+---
+
+{% include theory.md %}
+
+---
+
+{% include exhibit1.md %}
+
+{% include exhibit2.md %}
+
+{% include exhibit3.md %}
+
+{% include ambiguity-analysis.md %}
+
+{% include related-work.md %}
+
+{% include references.md %}
+{%- endcapture -%}
+{{ body | replace: '](figures/', md_fig | replace: 'src="figures/', html_fig | replace: 'src="assets/', html_asset }}
