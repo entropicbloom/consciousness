@@ -1,6 +1,6 @@
 # Exhibit 2: Input Neuron Representation
 
-## Idea
+## Idea {#exhibit-2-idea}
 
 In the previous exhibit we showed strong evidence for abstract digits being represented in an unambiguous relational structure that can be leveraged to identify class identity from randomly shuffled output neurons. However, because of the abstract nature of class identity, the link to phenomenal consciousness might be unintuitive. This is especially true if one thinks of phenomenal consciousness as applying more to the sensory than the abstract.
 
@@ -19,7 +19,7 @@ Preliminary visualizations using UMAP on the cosine similarity matrix between in
   <img src="figures/umap-input-neuron-similarity.png" alt="UMAP of input neuron cosine similarity vectors" width="600"/>
 </p>
 
-## Machine learning setup
+## Machine learning setup {#exhibit-2-setup}
 
 To operationalize this idea, we cast it as a supervised learning problem. We define a function $$f(i, j)$$ that extracts some form of positional information from an input neuron's location $$(i, j)$$ in the 28x28 grid. The decoder's task is not to learn the function $$f$$ itself, but to predict the value of $$f(i, j)$$ **given only the relational representation** of that neuron relative to all other neurons. In other words, the decoder must infer $$f(i, j)$$ **without knowing the values of $$i$$ or $$j$$**, purely from the context provided by connectivity structure.
 
@@ -36,7 +36,7 @@ We again use a Set Transformer architecture that is invariant to permutations of
 
 Note that this contrasts with Exhibit 1, where the decoder predicted output neuron class based on incoming weight **rows**; here, we operate on **columns** representing outgoing weights of input neurons.
 
-## Dataset
+## Dataset {#exhibit-2-dataset}
 
 To create training examples, we generate multiple neural networks with the same architecture but different initialization seeds. For each network, we extract the input weight matrix $$W$$ of shape (784, H), where 784 corresponds to input neurons (pixels), and H is the number of hidden units in the first layer.
 
@@ -49,7 +49,7 @@ To build one training example:
 
 Crucially, the decoder is never given access to the coordinates $$(i, j)$$ directly—it only sees the connectivity patterns between neurons (encoded in the similarity matrix), and must infer positional information from those alone.
 
-## Preprocessing
+## Preprocessing {#exhibit-2-preprocessing}
 
 To make the decoder task explicitly relational, we compute a cosine similarity matrix $$X'$$ from the **column vectors** of $$W$$. This differs from Exhibit 1, where similarities were computed between row vectors (i.e., incoming weights to output neurons). Here, each column represents the outgoing weights of an input neuron into the hidden layer, and their pairwise similarities define a relational structure over input neurons:
 
@@ -59,7 +59,7 @@ $$
 
 We feed the similarity matrix $$X'$$ to a Set Transformer-based decoder. This preprocessing emphasizes relational structure by encoding how similar each input neuron is to every other in terms of their effect on the next layer.
 
-## Results
+## Results {#exhibit-2-results}
 ![Input neuron distance prediction accuracy](figures/input-neuron-distance-prediction-accuracy.png)
 First, we can establish that this task is also solvable, suggesting that relational information encoded in the input neuron outgoing weights is sufficient to determine distance from the center of the pixel they represent (except for the untrained control networks, which serve as a sanity check for our experimental setup). The next most salient observation is that, unlike in the output layer experiment, adding dropout to the underlying network degrades decoding performance in this case. 
 
