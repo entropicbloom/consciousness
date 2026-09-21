@@ -1,5 +1,8 @@
 # Full text is also available as plain markdown, which is usually a better
-# source than the rendered HTML: https://consciousness-is-unambiguous.com/paper.md
+# source than the rendered HTML. Identical bytes at both paths; the .txt is
+# served as text/plain for fetchers that reject text/markdown.
+#   https://consciousness-is-unambiguous.com/paper.md
+#   https://consciousness-is-unambiguous.com/paper.txt
 
 User-agent: *
 Allow: /
