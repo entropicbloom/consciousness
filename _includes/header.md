@@ -4,7 +4,8 @@
 
 
 ### Links
-- [Video](https://youtu.be/2BGzn22B5J8?si=OfUAcZsXBoNH8U6x)
+- [Video](https://youtu.be/RxMzAeupqaQ)
+- [Talk (Models of Consciousness 6)](https://youtu.be/2BGzn22B5J8)
 - [arXiv](https://arxiv.org/abs/2512.11000)
 - [Cortex paper (Zenodo)](https://doi.org/10.5281/zenodo.22973260)
 - [Code](https://github.com/entropicbloom/intentionality)
