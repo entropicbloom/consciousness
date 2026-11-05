@@ -4,7 +4,7 @@
 
 
 ### Links
-- [Video](https://youtu.be/RxMzAeupqaQ)
+- [Video](https://youtu.be/0xjy6Bswu2Q)
 - [Talk (Models of Consciousness 6)](https://youtu.be/2BGzn22B5J8)
 - [arXiv](https://arxiv.org/abs/2512.11000)
 - [Cortex paper (Zenodo)](https://doi.org/10.5281/zenodo.22973260)
